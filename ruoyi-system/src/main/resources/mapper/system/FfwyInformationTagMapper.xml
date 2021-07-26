@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyInformationTagMapper">
+    
+    <resultMap type="FfwyInformationTag" id="FfwyInformationTagResult">
+        <result property="informationId"    column="information_id"    />
+        <result property="tagId"    column="tag_id"    />
+    </resultMap>
+
+    <sql id="selectFfwyInformationTagVo">
+        select information_id, tag_id from ffwy_information_tag
+    </sql>
+
+    <select id="selectFfwyInformationTagList" parameterType="FfwyInformationTag" resultMap="FfwyInformationTagResult">
+        <include refid="selectFfwyInformationTagVo"/>
+        <where>  
+            <if test="informationId != null "> and information_id = #{informationId}</if>
+            <if test="tagId != null "> and tag_id = #{tagId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyInformationTagById" parameterType="Long" resultMap="FfwyInformationTagResult">
+        <include refid="selectFfwyInformationTagVo"/>
+        where information_id = #{informationId}
+    </select>
+        
+    <insert id="insertFfwyInformationTag" parameterType="FfwyInformationTag">
+        insert into ffwy_information_tag
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="informationId != null">information_id,</if>
+            <if test="tagId != null">tag_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="informationId != null">#{informationId},</if>
+            <if test="tagId != null">#{tagId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyInformationTag" parameterType="FfwyInformationTag">
+        update ffwy_information_tag
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tagId != null">tag_id = #{tagId},</if>
+        </trim>
+        where information_id = #{informationId}
+    </update>
+
+    <delete id="deleteFfwyInformationTagById" parameterType="Long">
+        delete from ffwy_information_tag where information_id = #{informationId}
+    </delete>
+
+    <delete id="deleteFfwyInformationTagByIds" parameterType="String">
+        delete from ffwy_information_tag where information_id in 
+        <foreach item="informationId" collection="array" open="(" separator="," close=")">
+            #{informationId}
+        </foreach>
+    </delete>
+</mapper>

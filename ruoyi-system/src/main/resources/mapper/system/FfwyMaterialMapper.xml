@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.combomealorders.FfwyMaterialMapper">
+    
+    <resultMap type="FfwyMaterial" id="FfwyMaterialResult">
+        <result property="materialId"    column="material_id"    />
+        <result property="materialName"    column="material_name"    />
+        <result property="materialNumber"    column="material_number"    />
+        <result property="materialPrice"    column="material_price"    />
+        <result property="brand"    column="brand"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="orderCombomealId"    column="order_combomeal_id"    />
+        <result property="skuId"    column="sku_id"    />
+        <result property="tagId" column="tag_id"></result>
+        <association property="sku" javaType="FfwyProductSku">
+            <result property="skuId" column="sku_id"></result>
+            <result property="skuName" column="sku_name"></result>
+            <result property="skuSpec" column="sku_spec"></result>
+            <result property="price" column="price"></result>
+        </association>
+    </resultMap>
+
+    <sql id="selectFfwyMaterialVo">
+        select material_id, material_name, material_number, material_price, brand, create_time, update_time, order_combomeal_id,
+         sku_id,tag_id
+          from ffwy_material
+    </sql>
+    <sql id="SELECT_ORDER_SKU">
+         select material_id, material_name, material_number, material_price, brand,
+         create_time, update_time, order_combomeal_id,fm.sku_id,fps.sku_name,fps.sku_spec,fps.price
+        from ffwy_material fm LEFT JOIN ffwy_product_sku fps on fm.sku_id=fps.sku_id
+
+
+    </sql>
+    <select id="selectFfwyMaterialList" parameterType="FfwyMaterial" resultMap="FfwyMaterialResult">
+        <include refid="SELECT_ORDER_SKU"/>
+        <where>  
+            <if test="materialName != null  and materialName != ''"> and material_name like concat('%', #{materialName}, '%')</if>
+            <if test="materialNumber != null "> and material_number = #{materialNumber}</if>
+            <if test="materialPrice != null "> and material_price = #{materialPrice}</if>
+            <if test="tagId != null "> and tag_id = #{tagId}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="orderCombomealId != null "> and order_combomeal_id = #{orderCombomealId}</if>
+            <if test="skuId != null "> and fm.sku_id = #{skuId}</if>
+            <if test="sku!=null">
+                <if test="sku.catalogId!=null">and fps.catalog_id=#{sku.catalogId}</if>
+            </if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyMaterialById" parameterType="Long" resultMap="FfwyMaterialResult">
+        <include refid="selectFfwyMaterialVo"/>
+        where material_id = #{materialId}
+    </select>
+        
+    <insert id="insertFfwyMaterial" parameterType="FfwyMaterial" useGeneratedKeys="true" keyProperty="materialId">
+        insert into ffwy_material
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="materialName != null">material_name,</if>
+            <if test="materialNumber != null">material_number,</if>
+            <if test="materialPrice != null">material_price,</if>
+            <if test="brand != null">brand,</if>
+            <if test="tagId != null">tag_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="orderCombomealId != null">order_combomeal_id,</if>
+            <if test="skuId != null">sku_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="materialName != null">#{materialName},</if>
+            <if test="materialNumber != null">#{materialNumber},</if>
+            <if test="materialPrice != null">#{materialPrice},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="tagId != null">#{tagId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="orderCombomealId != null">#{orderCombomealId},</if>
+            <if test="skuId != null">#{skuId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyMaterial" parameterType="FfwyMaterial">
+        update ffwy_material
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="materialName != null">material_name = #{materialName},</if>
+            <if test="materialNumber != null">material_number = #{materialNumber},</if>
+            <if test="materialPrice != null">material_price = #{materialPrice},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="tagId != null">tag_id = #{tagId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="orderCombomealId != null">order_combomeal_id = #{orderCombomealId},</if>
+            <if test="skuId != null">sku_id = #{skuId},</if>
+        </trim>
+        where material_id = #{materialId}
+    </update>
+
+    <delete id="deleteFfwyMaterialById" parameterType="Long">
+        delete from ffwy_material where material_id = #{materialId}
+    </delete>
+
+    <delete id="deleteFfwyMaterialByIds" parameterType="String">
+        delete from ffwy_material where material_id in 
+        <foreach item="materialId" collection="array" open="(" separator="," close=")">
+            #{materialId}
+        </foreach>
+    </delete>
+</mapper>

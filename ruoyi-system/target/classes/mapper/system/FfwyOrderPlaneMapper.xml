@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.order.FfwyOrderPlaneMapper">
+    
+    <resultMap type="FfwyOrderPlaneVo" id="FfwyOrderPlaneResult">
+        <result property="planeId"    column="plane_id"    />
+        <result property="planeAmountpayable"    column="plane_amountpayable"    />
+        <result property="planeTheamountpayable"    column="plane_theamountpayable"    />
+        <result property="paymentId"    column="payment_id"    />
+        <result property="planeRealpaytime"    column="plane_Realpaytime"    />
+        <result property="planeCombomealId"    column="plane_combomeal_id"    />
+        <result property="combomealId"    column="combomeal_id"    />
+        <result property="orderClientId"    column="order_client_id"    />
+        <result property="planeStatus"    column="plane_status"    />
+    </resultMap>
+
+    <sql id="selectFfwyOrderPlaneVo">
+        select plane_id, plane_amountpayable, plane_theamountpayable, payment_id, plane_Realpaytime, plane_combomeal_id, combomeal_id, order_client_id, plane_status from ffwy_order_plane
+    </sql>
+
+    <select id="selectFfwyOrderPlaneList" parameterType="FfwyOrderPlane" resultMap="FfwyOrderPlaneResult">
+        SELECT
+        t1.plane_id,
+        t1.plane_theamountpayable,
+        t1.plane_status,
+        t1.plane_amountpayable,
+        t1.plane_Realpaytime,
+        t2.combomeal_name,
+        t3.patment_type,
+        t4.order_client_type,
+        t4.order_client_phone,
+        t4.order_client_status,
+        t4.order_client_addr,
+        t5.user_name
+        FROM
+        ffwy_order_plane t1,
+        ffwy_combomeal t2,
+        ffwy_payment t3,
+        ffwy_order_client t4,
+        ffwy_user t5
+        <where>  
+            <if test="planeAmountpayable != null "> and plane_amountpayable = #{planeAmountpayable}</if>
+            <if test="planeTheamountpayable != null "> and plane_theamountpayable = #{planeTheamountpayable}</if>
+            <if test="paymentId != null "> and payment_id = #{paymentId}</if>
+            <if test="planeRealpaytime != null "> and plane_Realpaytime = #{planeRealpaytime}</if>
+            <if test="planeCombomealId != null "> and plane_combomeal_id = #{planeCombomealId}</if>
+            <if test="combomealId != null "> and combomeal_id = #{combomealId}</if>
+            <if test="orderClientId != null "> and order_client_id = #{orderClientId}</if>
+            <if test="planeStatus != null "> and plane_status = #{planeStatus}</if>
+            t1.combomeal_id = t2.combomeal_id
+            and
+            t1.payment_id = t3.payment_id
+            and
+            t1.order_client_id = t4.order_client_id
+            and
+            t4.user_id = t5.user_id
+        </where>
+    </select>
+    
+    <select id="selectFfwyOrderPlaneById" parameterType="Long" resultMap="FfwyOrderPlaneResult">
+        <include refid="selectFfwyOrderPlaneVo"/>
+        where plane_id = #{planeId}
+    </select>
+        
+    <insert id="insertFfwyOrderPlane" parameterType="FfwyOrderPlane">
+        insert into ffwy_order_plane
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="planeId != null">plane_id,</if>
+            <if test="planeAmountpayable != null">plane_amountpayable,</if>
+            <if test="planeTheamountpayable != null">plane_theamountpayable,</if>
+            <if test="paymentId != null">payment_id,</if>
+            <if test="planeRealpaytime != null">plane_Realpaytime,</if>
+            <if test="planeCombomealId != null">plane_combomeal_id,</if>
+            <if test="combomealId != null">combomeal_id,</if>
+            <if test="orderClientId != null">order_client_id,</if>
+            <if test="planeStatus != null">plane_status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="planeId != null">#{planeId},</if>
+            <if test="planeAmountpayable != null">#{planeAmountpayable},</if>
+            <if test="planeTheamountpayable != null">#{planeTheamountpayable},</if>
+            <if test="paymentId != null">#{paymentId},</if>
+            <if test="planeRealpaytime != null">#{planeRealpaytime},</if>
+            <if test="planeCombomealId != null">#{planeCombomealId},</if>
+            <if test="combomealId != null">#{combomealId},</if>
+            <if test="orderClientId != null">#{orderClientId},</if>
+            <if test="planeStatus != null">#{planeStatus},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyOrderPlane" parameterType="FfwyOrderPlane">
+        update ffwy_order_plane
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="planeAmountpayable != null">plane_amountpayable = #{planeAmountpayable},</if>
+            <if test="planeTheamountpayable != null">plane_theamountpayable = #{planeTheamountpayable},</if>
+            <if test="paymentId != null">payment_id = #{paymentId},</if>
+            <if test="planeRealpaytime != null">plane_Realpaytime = #{planeRealpaytime},</if>
+            <if test="planeCombomealId != null">plane_combomeal_id = #{planeCombomealId},</if>
+            <if test="combomealId != null">combomeal_id = #{combomealId},</if>
+            <if test="orderClientId != null">order_client_id = #{orderClientId},</if>
+            <if test="planeStatus != null">plane_status = #{planeStatus},</if>
+        </trim>
+        where plane_id = #{planeId}
+    </update>
+
+    <delete id="deleteFfwyOrderPlaneById" parameterType="Long">
+        delete from ffwy_order_plane where plane_id = #{planeId}
+    </delete>
+
+    <delete id="deleteFfwyOrderPlaneByIds" parameterType="String">
+        delete from ffwy_order_plane where plane_id in 
+        <foreach item="planeId" collection="array" open="(" separator="," close=")">
+            #{planeId}
+        </foreach>
+    </delete>
+    
+    <update id="updateFfwyOrderPlanestutas" parameterType="FfwyOrderPlane">
+        update ffwy_order_plane set plane_status = #{planeStatus} where plane_id = #{planeId}
+    </update>
+    
+    <select id="selectFfwyOrderPlaneLists" resultMap="FfwyOrderPlaneResult">
+        SELECT
+t1.plane_id,
+t1.plane_theamountpayable,
+t1.plane_status,
+t1.plane_amountpayable,
+t1.plane_Realpaytime,
+t2.combomeal_name,
+t3.patment_type,
+t4.order_client_type,
+t4.order_client_phone,
+t4.order_client_status,
+t4.order_client_addr,
+t5.user_name
+FROM
+ffwy_order_plane t1,
+ffwy_combomeal t2,
+ffwy_payment t3,
+ffwy_order_client t4,
+ffwy_user t5
+WHERE
+t1.combomeal_id = t2.combomeal_id
+and
+t1.payment_id = t3.payment_id
+and
+t1.order_client_id = t4.order_client_id
+and
+t4.user_id = t5.user_id
+    </select>
+</mapper>

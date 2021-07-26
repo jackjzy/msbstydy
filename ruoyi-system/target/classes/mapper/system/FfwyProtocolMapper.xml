@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.protocol.FfwyProtocolMapper">
+    
+    <resultMap type="FfwyProtocol" id="FfwyProtocolResult">
+        <result property="protocolId"    column="protocol_id"    />
+        <result property="protocolMsg"    column="protocol_msg"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyProtocolVo">
+        select protocol_id, protocol_msg, create_time, update_time from ffwy_protocol
+    </sql>
+
+    <select id="selectFfwyProtocolList" parameterType="FfwyProtocol" resultMap="FfwyProtocolResult">
+        <include refid="selectFfwyProtocolVo"/>
+        <where>  
+            <if test="protocolMsg != null  and protocolMsg != ''"> and protocol_msg = #{protocolMsg}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyProtocolById" parameterType="Integer" resultMap="FfwyProtocolResult">
+        <include refid="selectFfwyProtocolVo"/>
+        where protocol_id = #{protocolId}
+    </select>
+        
+    <insert id="insertFfwyProtocol" parameterType="FfwyProtocol" useGeneratedKeys="true" keyProperty="protocolId">
+        insert into ffwy_protocol
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="protocolMsg != null">protocol_msg,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="protocolMsg != null">#{protocolMsg},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyProtocol" parameterType="FfwyProtocol">
+        update ffwy_protocol
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="protocolMsg != null">protocol_msg = #{protocolMsg},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where protocol_id = #{protocolId}
+    </update>
+
+    <delete id="deleteFfwyProtocolById" parameterType="Integer">
+        delete from ffwy_protocol where protocol_id = #{protocolId}
+    </delete>
+
+    <delete id="deleteFfwyProtocolByIds" parameterType="String">
+        delete from ffwy_protocol where protocol_id in 
+        <foreach item="protocolId" collection="array" open="(" separator="," close=")">
+            #{protocolId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.combomeal.FfwyCombomealCategoryMapper">
+
+
+    <resultMap type="FfwyCombomealCategory" id="FfwyCombomealCategoryResult">
+        <result property="categoryId"    column="category_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="combomaealName"    column="combomaeal_name"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="price"    column="price"    />
+        <result property="wiringProductId"    column="wiring_product_id"    />
+        <result property="softProductId"    column="soft_product_id"    />
+        <result property="slideshowImg"    column="slideshow_img"    />
+        <result property="dityProductId"    column="dity_product_id"    />
+        <result property="categoryNote"    column="category_note"    />
+        <result property="coverFile"    column="cover_file"    />
+        <result property="categoryFile"    column="category_file"    />
+        <result property="hardId"    column="hard_id"    />
+        <result property="smartId"    column="smart_id"    />
+        <result property="spaceLayout"    column="space_layout"    />
+    </resultMap>
+
+
+
+    <sql id="selectFfwyCombomealCategoryVo">
+--         select category_id, parent_id, combomaeal_name, create_time, update_time from ffwy_combomeal_category
+        select category_id, parent_id, combomaeal_name, create_time, update_time,
+         price, wiring_product_id, soft_product_id, dity_product_id, cover_file, category_note,category_file, hard_id, smart_id, space_layout,slideshow_img
+         from ffwy_combomeal_category
+    </sql>
+
+    <select id="selectFfwyCombomealCategoryList" parameterType="FfwyCombomealCategory" resultMap="FfwyCombomealCategoryResult">
+        <include refid="selectFfwyCombomealCategoryVo"/>
+        <where>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="combomaealName != null  and combomaealName != ''"> and combomaeal_name like concat('%', #{combomaealName}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectFfwyCombomealCategoryById" parameterType="Long" resultMap="FfwyCombomealCategoryResult">
+        <include refid="selectFfwyCombomealCategoryVo"/>
+        where category_id = #{categoryId}
+    </select>
+
+    <select id="selectFfwyCombomealCategoryByCombomaealName" parameterType="String" resultMap="FfwyCombomealCategoryResult">
+        <include refid="selectFfwyCombomealCategoryVo"/>
+        where combomaeal_name = #{combomaealName}
+    </select>
+
+    <insert id="insertFfwyCombomealCategory" parameterType="FfwyCombomealCategory">
+        insert into ffwy_combomeal_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">category_id,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="combomaealName != null">combomaeal_name,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="price != null">price,</if>
+            <if test="wiringProductId != null">wiring_product_id,</if>
+            <if test="softProductId != null">soft_product_id,</if>
+            <if test="slideshowImg != null">slideshow_img,</if>
+            <if test="dityProductId != null">dity_product_id,</if>
+            <if test="categoryNote != null">category_note,</if>
+            <if test="coverFile != null">cover_file,</if>
+            <if test="categoryFile != null">category_file,</if>
+            <if test="hardId != null">hard_id,</if>
+            <if test="smartId != null">smart_id,</if>
+            <if test="spaceLayout != null">space_layout,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">#{categoryId},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="combomaealName != null">#{combomaealName},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="price != null">#{price},</if>
+            <if test="wiringProductId != null">#{wiringProductId},</if>
+            <if test="softProductId != null">#{softProductId},</if>
+            <if test="slideshowImg != null">#{slideshowImg},</if>
+            <if test="dityProductId != null">#{dityProductId},</if>
+            <if test="categoryNote != null">#{categoryNote},</if>
+            <if test="coverFile != null">#{coverFile},</if>
+            <if test="categoryFile != null">#{categoryFile},</if>
+            <if test="hardId != null">#{hardId},</if>
+            <if test="smartId != null">#{smartId},</if>
+            <if test="spaceLayout != null">#{spaceLayout},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyCombomealCategory" parameterType="FfwyCombomealCategory">
+        update ffwy_combomeal_category
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="combomaealName != null">combomaeal_name = #{combomaealName},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="wiringProductId != null">wiring_product_id = #{wiringProductId},</if>
+            <if test="softProductId != null">soft_product_id = #{softProductId},</if>
+            <if test="slideshowImg != null">slideshow_img = #{slideshowImg},</if>
+            <if test="dityProductId != null">dity_product_id = #{dityProductId},</if>
+            <if test="categoryNote != null">category_note = #{categoryNote},</if>
+            <if test="coverFile != null">cover_file = #{coverFile},</if>
+            <if test="categoryFile != null">category_file = #{categoryFile},</if>
+            <if test="hardId != null">hard_id = #{hardId},</if>
+            <if test="smartId != null">smart_id = #{smartId},</if>
+            <if test="spaceLayout != null">space_layout = #{spaceLayout},</if>
+        </trim>
+        where category_id = #{categoryId}
+    </update>
+
+    <delete id="deleteFfwyCombomealCategoryById" parameterType="Long">
+        delete from ffwy_combomeal_category where category_id = #{categoryId}
+    </delete>
+
+    <delete id="deleteFfwyCombomealCategoryByIds" parameterType="String">
+        delete from ffwy_combomeal_category where category_id in
+        <foreach item="categoryId" collection="array" open="(" separator="," close=")">
+            #{categoryId}
+        </foreach>
+    </delete>
+</mapper>

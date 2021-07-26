@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.admin.FfwyUserFansMapper">
+    
+    <resultMap type="FfwyUserFans" id="FfwyUserFansResult">
+        <result property="userId"    column="user_id"    />
+        <result property="fansId"    column="fans_id"    />
+    </resultMap>
+
+    <sql id="selectFfwyUserFansVo">
+        select DISTINCT user_id, fans_id from ffwy_user_fans
+    </sql>
+
+    <select id="selectFfwyUserFansList" parameterType="FfwyUserFans" resultMap="FfwyUserFansResult">
+        <include refid="selectFfwyUserFansVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="fansId != null "> and fans_id = #{fansId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyUserFansById" parameterType="Long" resultMap="FfwyUserFansResult">
+        <include refid="selectFfwyUserFansVo"/>
+        where user_id = #{userId}
+    </select>
+    <select id="selectFfwyUserFansByIdCount" parameterType="FfwyUserFans" resultMap="FfwyUserFansResult">
+    select  COUNT(user_id)user_id  FROM ffwy_user_fans
+    where user_id = #{userId}
+</select>
+
+    <insert id="insertFfwyUserFans" parameterType="FfwyUserFans">
+        insert into ffwy_user_fans
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="fansId != null">fans_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="fansId != null">#{fansId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyUserFans" parameterType="FfwyUserFans">
+        update ffwy_user_fans
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fansId != null">fans_id = #{fansId},</if>
+        </trim>
+        where user_id = #{userId}
+    </update>
+
+    <delete id="deleteFfwyUserFansById" parameterType="Long">
+        delete from ffwy_user_fans where user_id = #{userId}
+    </delete>
+
+    <delete id="deleteFfwyUserFansByIds" parameterType="String">
+        delete from ffwy_user_fans where user_id in 
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+</mapper>

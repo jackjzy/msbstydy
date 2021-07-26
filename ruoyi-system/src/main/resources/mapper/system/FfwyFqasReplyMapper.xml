@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyFqasReplyMapper">
+    
+    <resultMap type="FfwyFqasReply" id="FfwyFqasReplyResult">
+        <result property="relpyId"    column="relpy_id"    />
+        <result property="replyMsg"    column="reply_msg"    />
+        <result property="replyTime"    column="reply_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyFqasReplyVo">
+        select relpy_id, reply_msg, reply_time, update_time from ffwy_fqas_reply
+    </sql>
+
+    <select id="selectFfwyFqasReplyList" resultMap="FfwyFqasReplyResult">
+        <include refid="selectFfwyFqasReplyVo"/>
+        <where>  
+            <if test="replyMsg != null  and replyMsg != ''"> and reply_msg = #{replyMsg}</if>
+            <if test="replyTime != null "> and reply_time = #{replyTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyFqasReplyById" parameterType="Long" resultMap="FfwyFqasReplyResult">
+        <include refid="selectFfwyFqasReplyVo"/>
+        where relpy_id = #{relpyId}
+    </select>
+        
+    <insert id="insertFfwyFqasReply" parameterType="FfwyFqasReply" useGeneratedKeys="true" keyProperty="relpyId">
+        insert into ffwy_fqas_reply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="replyMsg != null">reply_msg,</if>
+            <if test="replyTime != null">reply_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="faqsId != null">faqs_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="replyMsg != null">#{replyMsg},</if>
+            <if test="replyTime != null">#{replyTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="faqsId != null">#{faqsId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyFqasReply" parameterType="FfwyFqasReply">
+        update ffwy_fqas_reply
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="replyMsg != null">reply_msg = #{replyMsg},</if>
+            <if test="replyTime != null">reply_time = #{replyTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where faqs_id = #{faqsId}
+    </update>
+
+    <delete id="deleteFfwyFqasReplyById" parameterType="Long">
+        delete from ffwy_fqas_reply where relpy_id = #{relpyId}
+    </delete>
+
+    <delete id="deleteFfwyFqasReplyByFaqsId" parameterType="Long">
+        delete from ffwy_fqas_reply where faqs_id = #{fqasId}
+    </delete>
+    <delete id="deleteFfwyFqasReplyByIds" parameterType="String">
+        delete from ffwy_fqas_reply where relpy_id in 
+        <foreach item="relpyId" collection="array" open="(" separator="," close=")">
+            #{relpyId}
+        </foreach>
+    </delete>
+</mapper>

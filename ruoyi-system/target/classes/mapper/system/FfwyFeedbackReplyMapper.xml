@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyFeedbackReplyMapper">
+    
+    <resultMap type="FfwyFeedbackReply" id="FfwyFeedbackReplyResult">
+        <result property="replyId"    column="reply_id"    />
+        <result property="replyMsg"    column="reply_msg"    />
+        <result property="replyTime"    column="reply_time"    />
+        <result property="userId"    column="user_id"    />
+        <result property="adminId"    column="admin_id"    />
+        <result property="feedBackId" column="feedback_id"></result>
+    </resultMap>
+
+    <sql id="selectFfwyFeedbackReplyVo">
+        select reply_id, reply_msg, reply_time, user_id, admin_id,feedback_id from ffwy_feedback_reply
+    </sql>
+
+    <select id="selectFfwyFeedbackReplyList" parameterType="FfwyFeedbackReply" resultMap="FfwyFeedbackReplyResult">
+        <include refid="selectFfwyFeedbackReplyVo"/>
+        <where>  
+            <if test="replyMsg != null  and replyMsg != ''"> and reply_msg = #{replyMsg}</if>
+            <if test="replyTime != null "> and reply_time = #{replyTime}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="adminId != null "> and admin_id = #{adminId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyFeedbackReplyById" parameterType="Long" resultMap="FfwyFeedbackReplyResult">
+        <include refid="selectFfwyFeedbackReplyVo"/>
+        where reply_id = #{replyId}
+    </select>
+
+    <select id="selectFfwyFeedbackReplyByFeedbackId" parameterType="Long" resultMap="FfwyFeedbackReplyResult">
+        <include refid="selectFfwyFeedbackReplyVo"/>
+        where feedback_id = #{feedBackId}
+    </select>
+        
+    <insert id="insertFfwyFeedbackReply" parameterType="FfwyFeedbackReply">
+        insert into ffwy_feedback_reply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="replyMsg != null">reply_msg,</if>
+            <if test="replyTime != null">reply_time,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="adminId != null">admin_id,</if>
+            <if test="feedBackId != null">feedback_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+            <if test="replyMsg != null">#{replyMsg},</if>
+            <if test="replyTime != null">#{replyTime},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="adminId != null">#{adminId},</if>
+            <if test="feedBackId != null">#{feedBackId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyFeedbackReply" parameterType="FfwyFeedbackReply">
+        update ffwy_feedback_reply
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="replyMsg != null">reply_msg = #{replyMsg},</if>
+            <if test="replyTime != null">reply_time = #{replyTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="adminId != null">admin_id = #{adminId},</if>
+        </trim>
+        where reply_id = #{replyId}
+    </update>
+
+    <delete id="deleteFfwyFeedbackReplyById" parameterType="Long">
+        delete from ffwy_feedback_reply where reply_id = #{replyId}
+    </delete>
+
+    <delete id="deleteFfwyFeedbackReplyByIds" parameterType="String">
+        delete from ffwy_feedback_reply where reply_id in 
+        <foreach item="replyId" collection="array" open="(" separator="," close=")">
+            #{replyId}
+        </foreach>
+    </delete>
+</mapper>

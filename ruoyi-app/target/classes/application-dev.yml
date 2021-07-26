@@ -1,0 +1,129 @@
+cos:
+    bucketName: ffwy-1305725175
+    secretKey: tc9RUIsAHA3gHelhjc3HxOn1qlW5RjcH
+    secretId: AKIDGKABwTCphzvcMqA2pPjmbQ0MdnhUuLXU
+    prefixUrl: https://ffwy-1305725175.cos.ap-beijing.myqcloud.com/
+sass:
+    #   host: https://openapi.esign.cn #正式环境域名
+    host: https://smlopenapi.esign.cn #沙箱环境域名
+    projectId: 7438866430
+    projectScert: b9f3eb85f1aab0b2df793b09dd2eb45e
+    idNumberOrg: 91110105MA0038GH6Y
+message:
+    #  短信 SdkAppId，在 短信控制台 添加应用后生成的实际 SdkAppId，示例如1400006666。
+    sdkAppId : 1400520231
+    #  短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，例如：腾讯云，签名信息可登录 短信控制台 查看。 注：国内短信为必填参数。
+    signName : 北京嗅美科技有限公司
+
+
+#配置环信
+EN:
+    appKey: 1105210510094844#decoration
+    clientId: YXA6hkjfGA3aRQqhNwSH564xxg
+    clientSecret: YXA6dhPXBkOpQv9HzzbUkMTO_Wsso-k
+    orgName: 1105210510094844
+    appName: decoration
+    apiUrl: http://a31.easemob.com
+    endNum: 3
+
+# 数据源配置
+spring:
+    # redis 配置
+    redis:
+        host: 127.0.0.1
+        port: 6379
+        # 数据库索引
+        database: 0
+        # 密码
+        password:
+        #    password: QianTaiKeJi20151qaz!QAZ
+        # 连接超时时间
+        timeout: 20s
+
+        lettuce:
+            pool:
+                # 连接池中的最小空闲连接
+                min-idle: 0
+                # 连接池中的最大空闲连接
+                max-idle: 8
+                # 连接池的最大数据库连接数
+                max-active: 8
+                # #连接池最大阻塞等待时间（使用负值表示没有限制）
+                max-wait: -1ms
+        #es配置
+    elasticsearch:
+        rest:
+            uris: 192.168.1.101:9200
+        # RabbitMQ配置
+    rabbitmq:
+        #    host: 152.136.100.173
+        host: 192.168.1.107
+        port: 5672
+
+        virtual-host: / # 虚拟主机配置
+        publisher-returns: true  # 开启发送端消息抵达Queue确认
+        template:
+            mandatory: true  # 只要消息抵达Queue，就会异步发送优先回调returnfirm
+        listener:
+            simple:
+                acknowledge-mode: manual  # 手动ack消息，不使用默认的消费端确认
+                concurrency: 1 #指定最小的消费者数量
+                max-concurrency: 1 #指定最大的消费者数量
+        publisher-confirm-type: correlated
+    #数据库配置
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        druid:
+            # 主库数据源
+            master:
+                #                url: jdbc:mysql://www.wemem.com:3306/ffwy_decorate?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT&autoReconnect=true
+                url: jdbc:mysql://www.wemem.com:3306/ffwy_decorate?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+                username: wmoa
+                password: wmoa2019@
+            # 从库数据源
+            slave:
+                # 从数据源开关/默认关闭
+                enabled: false
+                url:
+                username:
+                password:
+            # 初始连接数
+            initialSize: 5
+            # 最小连接池数量
+            minIdle: 10
+            # 最大连接池数量
+            maxActive: 20
+            # 配置获取连接等待超时的时间
+            maxWait: 60000
+            # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+            timeBetweenEvictionRunsMillis: 60000
+            # 配置一个连接在池中最小生存的时间，单位是毫秒
+            minEvictableIdleTimeMillis: 300000
+            # 配置一个连接在池中最大生存的时间，单位是毫秒
+            maxEvictableIdleTimeMillis: 900000
+            # 配置检测连接是否有效
+            validationQuery: SELECT 1 FROM DUAL
+            testWhileIdle: true
+            testOnBorrow: false
+            testOnReturn: false
+            webStatFilter:
+                enabled: true
+            statViewServlet:
+                enabled: true
+                # 设置白名单，不填则允许所有访问
+                allow:
+                url-pattern: /druid/*
+                # 控制台管理用户名和密码
+                login-username: systemmanagement
+                login-password: 123456
+            filter:
+                stat:
+                    enabled: true
+                    # 慢SQL记录
+                    log-slow-sql: true
+                    slow-sql-millis: 1000
+                    merge-sql: true
+                wall:
+                    config:
+                        multi-statement-allow: true

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyTagMapper">
+    
+    <resultMap type="FfwyTag" id="FfwyTagResult">
+        <result property="tagId"    column="tag_id"    />
+        <result property="tagParentid"    column="tag_parentid"    />
+        <result property="tagName"    column="tag_name"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="tagCount"    column="tag_count"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyTagVo">
+        select tag_id, tag_parentid, tag_name, create_time, tag_count, update_time from ffwy_tag
+    </sql>
+
+    <select id="selectFfwyTagList" parameterType="FfwyTag" resultMap="FfwyTagResult">
+        select  * from ffwy_tag
+        <where>  
+            <if test="tagName != null  and tagName != ''"> and tag_name like concat('%', #{tagName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyTagById" parameterType="Long" resultMap="FfwyTagResult">
+        <include refid="selectFfwyTagVo"/>
+        where tag_id = #{tagId}
+    </select>
+        
+    <insert id="insertFfwyTag" parameterType="FfwyTag" useGeneratedKeys="true" keyProperty="tagId">
+        insert into ffwy_tag(tag_parentid,tag_name,create_time,tag_count,update_time) values (#{tagParentid},#{tagName},#{createTime},#{tagCount},#{updateTime})
+    </insert>
+
+    <update id="updateFfwyTag" parameterType="FfwyTag">
+        update ffwy_tag set tag_parentid = #{tagParentid},tag_name = #{tagName},create_time = #{createTime},tag_count
+        = #{tagCount},update_time = #{updateTime} where tag_id = #{tagId}
+    </update>
+
+    <delete id="deleteFfwyTagById" parameterType="Long">
+        delete from ffwy_tag where tag_id = #{tagId}
+    </delete>
+
+    <delete id="deleteFfwyTagByIds" parameterType="String">
+        delete from ffwy_tag where tag_id in 
+        <foreach item="tagId" collection="array" open="(" separator="," close=")">
+            #{tagId}
+        </foreach>
+    </delete>
+
+    <select id="selectFfwyTagListSum" parameterType="FfwyTag" resultMap="FfwyTagResult">
+        SELECT
+        ft.tag_id,
+        ft.tag_name,
+        count(fvt.ffwy_video_tag_id) as tag_count
+        FROM
+        ffwy_tag ft
+        LEFT JOIN ffwy_video_tag fvt ON ft.tag_id = fvt.tag_id
+        <where>
+            <if test="tagName != null  and tagName != ''">and tag_name like concat('%', #{tagName}, '%')</if>
+        </where>
+        GROUP BY
+        ft.tag_id
+    </select>
+</mapper>

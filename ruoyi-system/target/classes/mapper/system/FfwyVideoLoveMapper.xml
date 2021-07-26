@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyVideoLoveMapper">
+    
+    <resultMap type="FfwyVideoLove" id="FfwyVideoLoveResult">
+        <result property="userId"    column="user_id"    />
+        <result property="videoId"    column="video_id"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyVideoLoveVo">
+        select user_id, video_id, create_time from ffwy_video_love
+    </sql>
+
+    <select id="selectFfwyVideoLoveList" parameterType="FfwyVideoLove" resultMap="FfwyVideoLoveResult">
+        <include refid="selectFfwyVideoLoveVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="videoId != null "> and video_id = #{videoId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyVideoLoveById" parameterType="Long" resultMap="FfwyVideoLoveResult">
+        <include refid="selectFfwyVideoLoveVo"/>
+        where user_id = #{userId}
+    </select>
+        
+    <insert id="insertFfwyVideoLove" parameterType="FfwyVideoLove">
+        insert into ffwy_video_love
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="videoId != null">video_id,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="videoId != null">#{videoId},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyVideoLove" parameterType="FfwyVideoLove">
+        update ffwy_video_love
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="videoId != null">video_id = #{videoId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where user_id = #{userId}
+    </update>
+
+    <delete id="deleteFfwyVideoLoveById" parameterType="Long">
+        delete from ffwy_video_love where user_id = #{userId}
+    </delete>
+
+    <delete id="deleteFfwyVideoLoveByIds" parameterType="String">
+        delete from ffwy_video_love where user_id in 
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
+    <select id="selectFfwyvideoCount" resultType="com.ruoyi.system.domain.video.FfwyVideoNotlove">
+
+        SELECT COUNT(user_id) countId FROM   ffwy_video_love WHERE   video_id=#{id}
+    </select>
+</mapper>

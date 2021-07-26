@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.shop.FfwyShopMapper">
+    
+    <resultMap type="FfwyShop" id="FfwyShopResult">
+        <result property="shopId"    column="shop_id"    />
+        <result property="shopName"    column="shop_name"    />
+        <result property="shopLogo"    column="shop_logo"    />
+        <result property="shopNumber"    column="shop_number"    />
+        <result property="introduction"    column="introduction"    />
+        <result property="coreProdect"    column="core_prodect"    />
+        <result property="shopLocation"    column="shop_location"    />
+        <result property="userId"    column="user_id"    />
+        <result property="score"    column="score"    />
+        <result property="rating"    column="rating"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="disableTime"    column="disable_time"    />
+        <result property="licence"    column="licence"    />
+        <result property="idCard"    column="id_card"    />
+        <result property="income"    column="income"    />
+        <result property="balance"    column="balance"    />
+        <result property="shopSales"    column="shop_sales"    />
+        <result property="collect"    column="collect"    />
+        <result property="shopStatus"    column="shop_status"    />
+        <result property="shopType"    column="shop_type"    />
+        <result property="userName"    column="user_name"    />
+        <result property="phone" column="phonenumber"></result>
+        <result property="passTime" column="pass_time"></result>
+        <result property="licensePhoto"    column="license_photo"    />
+        <result property="shopLink"    column="shop_link"    />
+        <result property="cardPhoto"    column="card_photo"    />
+        <result property="email"    column="email"    />
+        <result property="terraceRatio" column="terrace_ratio"></result>
+        <result property="shopRetio" column="shop_retio"></result>
+        <result property="bankCard" column="bank_card"></result>
+        <result property="shopDefaultAddr" column="shop_default_addr"></result>
+        <association property="ffwyAuditStatuss" javaType="FfwyAuditStatuss">
+            <result property="auditStatusId" column="audit_status_id"></result>
+            <result property="auditName" column="audit_name"></result>
+        </association>
+
+    </resultMap>
+
+
+    <sql id="selectFfwyShopVo">
+        select shop_id, shop_name, shop_logo, shop_number, introduction,
+        core_prodect, shop_location, user_id, score, rating, create_time,
+         update_time, licence, id_card, income, balance, shop_sales, collect,
+          shop_status, shop_type, user_name, license_photo, shop_link, card_photo, email,
+          terrace_ratio,shop_retio,phonenumber,bank_card,shop_default_addr,disable_time
+           from ffwy_shop
+    </sql>
+
+    <sql id="SELECT_STORE_SHOP">
+         select  fs.shop_id, shop_name, shop_logo, shop_number, introduction,
+        core_prodect, shop_location, fs.user_id, score, rating, create_time,
+         update_time, licence, id_card, income, balance, shop_sales, collect,
+          shop_status, shop_type, user_name, license_photo, shop_link, card_photo, email
+           ,terrace_ratio,shop_retio,disable_time
+           from ffwy_store_shop fss left JOIN ffwy_shop fs on fss.shop_id = fs.shop_id
+    </sql>
+
+    <sql id="SELECT_BY_SHOP_AUDIT_STATUS">
+        select shop_id, shop_name, shop_logo, shop_number, introduction, core_prodect,
+        shop_location, fs.user_id, score, rating, fs.create_time, fs.update_time, licence,
+        id_card, income, balance, shop_sales, collect, shop_status, shop_type, fs.user_name ,
+        audit_status_id,audit_name,fu.phonenumber,pass_time,license_photo, shop_link,
+        card_photo, email,terrace_ratio,shop_retio,disable_time
+
+        from ffwy_shop fs LEFT JOIN ffwy_audit_status fas on fs.audit_status =fas.audit_status_id
+        LEFT JOIN ffwy_user fu on fs.user_id =fu.user_id
+
+    </sql>
+
+    <select id="selectShopListLimit"  resultMap="FfwyShopResult">
+     select * from ffwy_shop LIMIT #{num},#{size}
+    </select>
+
+    <select id="selectFfwyShopList" parameterType="FfwyShop" resultMap="FfwyShopResult">
+        <include refid="selectFfwyShopVo"/>
+        <where>  
+            <if test="shopName != null  and shopName != ''"> and shop_name like concat('%', #{shopName}, '%')</if>
+            <if test="shopLogo != null  and shopLogo != ''"> and shop_logo = #{shopLogo}</if>
+            <if test="shopId != null"> and shop_id = #{shopId}</if>
+            <if test="shopNumber != null  and shopNumber != ''"> and shop_number = #{shopNumber}</if>
+            <if test="introduction != null  and introduction != ''"> and introduction = #{introduction}</if>
+            <if test="coreProdect != null  and coreProdect != ''"> and core_prodect = #{coreProdect}</if>
+            <if test="shopLocation != null  and shopLocation != ''"> and shop_location = #{shopLocation}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="shopId != null "> and ffwy_shop.shop_id = #{shopId}</if>
+            <if test="shopDefaultAddr != null "> and shop_default_addr = #{shopDefaultAddr}</if>
+            <if test="score != null "> and score = #{score}</if>
+            <if test="rating != null "> and rating = #{rating}</if>
+            <if test="licence != null  and licence != ''"> and licence = #{licence}</if>
+            <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="income != null "> and income = #{income}</if>
+            <if test="balance != null "> and balance = #{balance}</if>
+            <if test="shopSales != null "> and shop_sales = #{shopSales}</if>
+            <if test="collect != null "> and collect = #{collect}</if>
+            <if test="shopStatus != null "> and shop_status = #{shopStatus}</if>
+            <if test="shopType != null "> and shop_type = #{shopType}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="licensePhoto != null  and licensePhoto != ''"> and license_photo = #{licensePhoto}</if>
+            <if test="shopLink != null  and shopLink != ''"> and shop_link = #{shopLink}</if>
+            <if test="cardPhoto != null  and cardPhoto != ''"> and card_photo = #{cardPhoto}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="searchField!=null and searchField!=''">
+                AND
+                CONCAT(shop_name,user_name,phonenumber) LIKE CONCAT ('%', #{searchField},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByShopAdudtiStatus" parameterType="QueryShop" resultMap="FfwyShopResult">
+        <include refid="SELECT_BY_SHOP_AUDIT_STATUS"/>
+        <where>
+            <if test="shopName != null  and shopName != ''"> and shop_name like concat('%', #{shopName}, '%')</if>
+            <if test="shopId != null "> and shop_id = #{shopId}</if>
+            <if test="phone != null  and phone != ''"> and phonenumber like concat('%', #{phone}, '%')</if>
+            <if test="userName != null  and userName != ''"> and fs.user_name like concat('%', #{userName}, '%')</if>
+            <if test="beginTime != null "> and pass_time &gt;=#{beginTime} </if>
+            <if test="endTime != null "> and pass_time &lt;= #{endTime} </if>
+            <if test="searchStr!=null and searchStr!=''">
+                AND
+                CONCAT(shop_user_name,phone) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectStroeShop" parameterType="Long" resultMap="FfwyShopResult">
+        <include refid="SELECT_STORE_SHOP"/>
+         WHERE fss.user_id =#{userId}
+    </select>
+
+
+    <select id="selectStroeShopByuserIdAndShopId" parameterType="Long" resultMap="FfwyShopResult">
+        <include refid="SELECT_STORE_SHOP"/>
+        WHERE fss.user_id =#{userId} and fss.shop_id=#{shopId}
+    </select>
+
+    <select id="selectFfwyShopById" parameterType="Long" resultMap="FfwyShopResult">
+        <include refid="selectFfwyShopVo"/>
+        where shop_id = #{shopId}
+    </select>
+
+    <select id="selectFfwyByUserId" parameterType="Long" resultMap="FfwyShopResult">
+        <include refid="selectFfwyShopVo"/>
+        where user_id = #{userId}
+    </select>
+    <select id="selectFfwyStoreShopList" parameterType="FfwyShop"  resultMap="FfwyShopResult">
+               select ffwy_store_shop.user_id
+           from ffwy_shop INNER JOIN ffwy_store_shop on
+					 ffwy_shop.shop_id=ffwy_store_shop.shop_id
+					 WHERE ffwy_shop.shop_id=#{shopId} and ffwy_store_shop.user_id=#{userId}
+    </select>
+
+
+    <select id="selectFfwyStoreShopCount" parameterType="FfwyShop"  resultMap="FfwyShopResult">
+              SELECT COUNT(shop_id)  collect FROM  ffwy_store_shop  WHERE shop_id=#{shopId}
+
+    </select>
+    <select id="selectFfwyShopIdList" parameterType="Long" resultMap="FfwyShopResult">
+        <include refid="selectFfwyShopVo"/>
+        where shop_id = #{shopId}
+    </select>
+
+    <select id="sCount" resultType="int">
+         select count(*) from ffwy_shop
+    </select>
+
+    <insert id="insertFfwyShop" parameterType="FfwyShop" useGeneratedKeys="true" keyProperty="shopId">
+        insert into ffwy_shop
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="shopName != null">shop_name,</if>
+            <if test="shopLogo != null">shop_logo,</if>
+            <if test="shopNumber != null">shop_number,</if>
+            <if test="introduction != null">introduction,</if>
+            <if test="coreProdect != null">core_prodect,</if>
+            <if test="shopLocation != null">shop_location,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="score != null">score,</if>
+            <if test="rating != null">rating,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="licence != null">licence,</if>
+            <if test="idCard != null">id_card,</if>
+            <if test="income != null">income,</if>
+            <if test="balance != null">balance,</if>
+            <if test="shopSales != null">shop_sales,</if>
+            <if test="collect != null">collect,</if>
+            <if test="shopStatus != null">shop_status,</if>
+            <if test="shopType != null">shop_type,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="licensePhoto != null">license_photo,</if>
+            <if test="shopLink != null">shop_link,</if>
+            <if test="cardPhoto != null">card_photo,</if>
+            <if test="email != null">email,</if>
+            <if test="shopDefaultAddr != null">shop_default_addr,</if>
+            <if test="disableTime != null">disable_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="shopName != null">#{shopName},</if>
+            <if test="shopLogo != null">#{shopLogo},</if>
+            <if test="shopNumber != null">#{shopNumber},</if>
+            <if test="introduction != null">#{introduction},</if>
+            <if test="coreProdect != null">#{coreProdect},</if>
+            <if test="shopLocation != null">#{shopLocation},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="score != null">#{score},</if>
+            <if test="rating != null">#{rating},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="licence != null">#{licence},</if>
+            <if test="idCard != null">#{idCard},</if>
+            <if test="income != null">#{income},</if>
+            <if test="balance != null">#{balance},</if>
+            <if test="shopSales != null">#{shopSales},</if>
+            <if test="collect != null">#{collect},</if>
+            <if test="shopStatus != null">#{shopStatus},</if>
+            <if test="shopType != null">#{shopType},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="licensePhoto != null">#{licensePhoto},</if>
+            <if test="shopLink != null">#{shopLink},</if>
+            <if test="cardPhoto != null">#{cardPhoto},</if>
+            <if test="email != null">#{email},</if>
+            <if test="shopDefaultAddr != null">#{shopDefaultAddr},</if>
+            <if test="disableTime != null">#{disableTime},</if>
+
+         </trim>
+    </insert>
+
+    <insert id="insertStroeShop">
+        INSERT INTO ffwy_store_shop( shop_id, user_id) VALUES (#{shopId}, #{userId})
+    </insert>
+
+    <update id="updateFfwyShop" parameterType="FfwyShop">
+        update ffwy_shop
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopName != null">shop_name = #{shopName},</if>
+            <if test="shopLogo != null">shop_logo = #{shopLogo},</if>
+            <if test="shopNumber != null">shop_number = #{shopNumber},</if>
+            <if test="introduction != null">introduction = #{introduction},</if>
+            <if test="coreProdect != null">core_prodect = #{coreProdect},</if>
+            <if test="shopLocation != null">shop_location = #{shopLocation},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="score != null">score = #{score},</if>
+            <if test="rating != null">rating = #{rating},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="licence != null">licence = #{licence},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="income != null">income = #{income},</if>
+            <if test="balance != null">balance = #{balance},</if>
+            <if test="shopSales != null">shop_sales = #{shopSales},</if>
+            <if test="collect != null">collect = #{collect},</if>
+            <if test="shopStatus != null">shop_status = #{shopStatus},</if>
+            <if test="shopType != null">shop_type = #{shopType},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="ffwyAuditStatuss != null ">
+                <if test="ffwyAuditStatuss.auditStatusId != null">audit_status=#{ffwyAuditStatuss.auditStatusId},</if>
+            </if>
+            <if test="passTime != null">pass_time=#{passTime},</if>
+
+            <if test="licensePhoto != null">license_photo = #{licensePhoto},</if>
+            <if test="shopLink != null">shop_link = #{shopLink},</if>
+            <if test="cardPhoto != null">card_photo = #{cardPhoto},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="phone != null">phonenumber = #{phone},</if>
+            <if test="bankCard != null">bank_card = #{bankCard},</if>
+            <if test="shopDefaultAddr != null "> shop_default_addr = #{shopDefaultAddr},</if>
+            <if test="disableTime != null "> disable_time = #{disableTime},</if>
+        </trim>
+        where shop_id = #{shopId}
+    </update>
+
+    <update id="updateShopDisable">
+        update ffwy_shop
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopStatus != null">shop_status = #{shopStatus},</if>
+            <if test="disableTime != null "> disable_time = #{disableTime},</if>
+        </trim>
+        where shop_id = #{shopId}
+    </update>
+
+    <update id="updateShop">
+        update ffwy_shop set terrace_ratio= #{terraceRatio},shop_retio =#{shopRetio}
+             where shop_id = #{shopId}
+    </update>
+    <update id="updateShopDefaultAdd" parameterType="FfwyShop">
+            update ffwy_shop set shop_default_addr = NULL
+             where shop_id = #{shopId}
+    </update>
+    <delete id="deleteFfwyShopById" parameterType="Long">
+        delete from ffwy_shop where shop_id = #{shopId}
+    </delete>
+
+    <delete id="deleteStroeShop" parameterType="Long">
+        delete from ffwy_store_shop where shop_id = #{shopId} and user_id=#{userId}
+    </delete>
+
+    <delete id="deleteFfwyShopByIds" parameterType="String">
+        delete from ffwy_shop where shop_id in 
+        <foreach item="shopId" collection="array" open="(" separator="," close=")">
+            #{shopId}
+        </foreach>
+    </delete>
+</mapper>

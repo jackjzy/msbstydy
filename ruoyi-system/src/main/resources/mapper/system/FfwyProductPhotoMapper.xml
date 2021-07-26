@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.product.FfwyProductPhotoMapper">
+    <resultMap type="FfwyProductPhoto" id="FfwyProductPhotoResult">
+        <result property="id" column="id"/>
+        <result property="productId" column="product_id"/>
+        <result property="productPhotopath" column="product_photopath"/>
+        <result property="imgSort" column="img_sort"/>
+        <result property="productStatus" column="product_status"/>
+        <result property="photoType"    column="photo_type"    />
+        <result property="photoStatus"    column="photo_status"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyProductPhotoVo">
+        select id, product_id, product_photopath, img_sort,photo_type,photo_status,create_time from ffwy_product_photo
+    </sql>
+
+    <select id="selectFfwyProductPhotoList" parameterType="FfwyProductPhoto" resultMap="FfwyProductPhotoResult">
+        <include refid="selectFfwyProductPhotoVo"/>
+        <where>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="productId != null "> and product_id = #{productId}</if>
+            <if test="productPhotopath != null  and productPhotopath != ''"> and product_photopath = #{productPhotopath}</if>
+            <if test="photoType != null  and photoType != ''"> and photo_type = #{photoType}</if>
+            <if test="photoStatus != null  and photoStatus != ''"> and photo_status = #{photoStatus}</if>
+            <if test="imgSort != null "> and img_sort = #{imgSort}</if>
+            <if test="beginTime != null  and endTime != null"> and create_time  between #{beginTime} and #{endTime}</if>
+        </where>
+    </select>
+
+    <select id="selectproductPhotoListBySort"  resultMap="FfwyProductPhotoResult">
+        <include refid="selectFfwyProductPhotoVo"/>
+        <where>
+            <if test="productId != null "> and product_id = #{productId}</if>
+            <if test="photoType != null  and photoType != ''"> and photo_type = #{photoType}</if>
+            <if test="photoStatus != null  and photoStatus != ''"> and photo_status = #{photoStatus}</if>
+            <if test="imgSort != null "> and img_sort > #{imgSort}</if>
+        </where>
+    </select>
+
+    <select id="selectFfwyProductPhotoListByProductId" parameterType="Long" resultMap="FfwyProductPhotoResult">
+        <include refid="selectFfwyProductPhotoVo"/>
+        where product_id = #{productId} and (photo_status=0 and photo_type=1 or  photo_type=2 or photo_type=4)
+    </select>
+    <select id="selectFfwyProductPhotoListParticulars" parameterType="Long" resultMap="FfwyProductPhotoResult">
+        <include refid="selectFfwyProductPhotoVo"/>
+        where product_id = #{productId} and photo_type=3 and  photo_status=0
+    </select>
+
+    <select id="selectFfwyProductPhotoById" parameterType="Long" resultMap="FfwyProductPhotoResult">
+        <include refid="selectFfwyProductPhotoVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectFfwyProductPhotoByType"  resultMap="FfwyProductPhotoResult">
+        <include refid="selectFfwyProductPhotoVo"/>
+        <where>
+            <if test="productId != null "> and product_id = #{productId}</if>
+            <if test="photoType != null  and photoType != ''"> and photo_type = #{photoType}</if>
+            <if test="photoStatus != null  and photoStatus != ''"> and photo_status = #{photoStatus}</if>
+        </where>
+    </select>
+        
+    <insert id="insertFfwyProductPhoto" parameterType="FfwyProductPhoto">
+        insert into ffwy_product_photo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="productId != null">product_id,</if>
+            <if test="productPhotopath != null">product_photopath,</if>
+            <if test="imgSort != null">img_sort,</if>
+            <if test="photoType != null">photo_type,</if>
+            <if test="photoStatus != null">photo_status,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="productId != null">#{productId},</if>
+            <if test="productPhotopath != null">#{productPhotopath},</if>
+            <if test="imgSort != null">#{imgSort},</if>
+            <if test="photoType != null">#{photoType},</if>
+            <if test="photoStatus != null">#{photoStatus},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyProductPhoto" parameterType="FfwyProductPhoto">
+        update ffwy_product_photo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productId != null">
+                product_id = #{productId},
+            </if>
+            <if test="productPhotopath != null">
+                product_photopath = #{productPhotopath},
+            </if>
+            <if test="imgSort != null">
+                img_sort = #{imgSort},
+            </if>
+            <if test="photoType != null">photo_type = #{photoType},</if>
+            <if test="photoStatus != null">photo_Status = #{photoStatus},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFfwyProductPhotoById" parameterType="Long">
+                delete from ffwy_product_photo where id = #{id}
+    </delete>
+
+
+    <select id="selectFfwyProductPhotoListByDescs" parameterType="Long" resultMap="FfwyProductPhotoResult">
+        <include refid="selectFfwyProductPhotoVo"/>
+        where product_id = #{productId} and photo_type=3 and  photo_status=0
+    </select>
+    <delete id="deleteFfwyProductPhotoByIds" parameterType="String">
+        delete from ffwy_product_photo where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <delete id="deleteFfwyProductPhotoByProductId">
+         delete from ffwy_product_photo where product_id = #{productId}
+    </delete>
+</mapper>

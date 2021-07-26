@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.aftersale.FfwyAfterTypeMapper">
+    
+    <resultMap type="FfwyAfterType" id="FfwyAfterTypeResult">
+        <result property="afterSaleid"    column="after_saleid"    />
+        <result property="afterType"    column="after_type"    />
+        <result property="orderNumber"  column="order_number"/>
+        <result property="problemDescription" column="problem_description"/>
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyAfterTypeVo" >
+        SELECT fas.after_saleid,fas.order_number,fas.after_status,fas.create_time,fas.pass_time,fas.reject_time,fas.problem_description,fat.after_type
+         FROM ffwy_after_sale fas LEFT JOIN
+        ffwy_after_type fat on fas.after_type = fat.after_type_id
+    </sql>
+
+    <select id="selectFfwyAfterTypeList" parameterType="FfwyAfterType" resultMap="FfwyAfterTypeResult">
+        <include refid="selectFfwyAfterTypeVo"/>
+        <where>  
+            <if test="afterType != null  and afterType != ''"> and after_type = #{afterType}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyAfterTypeById" parameterType="Long" resultMap="FfwyAfterTypeResult">
+        <include refid="selectFfwyAfterTypeVo"/>
+        where after_type_id = #{afterTypeId}
+    </select>
+        
+    <insert id="insertFfwyAfterType" parameterType="FfwyAfterType">
+        insert into ffwy_after_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="afterTypeId != null">after_type_id,</if>
+            <if test="afterType != null">after_type,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="afterTypeId != null">#{afterTypeId},</if>
+            <if test="afterType != null">#{afterType},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyAfterType" parameterType="FfwyAfterType">
+        update ffwy_after_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="afterType != null">after_type = #{afterType},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where after_type_id = #{afterTypeId}
+    </update>
+
+    <delete id="deleteFfwyAfterTypeById" parameterType="Long">
+        delete from ffwy_after_type where after_type_id = #{afterTypeId}
+    </delete>
+
+    <delete id="deleteFfwyAfterTypeByIds" parameterType="String">
+        delete from ffwy_after_type where after_type_id in 
+        <foreach item="afterTypeId" collection="array" open="(" separator="," close=")">
+            #{afterTypeId}
+        </foreach>
+    </delete>
+
+    <select id="selectFfwyAfterTypeLists"  resultType="com.ruoyi.system.domain.aftersale.FfwyAfterType">
+            SELECT after_type_id as afterTypeId,after_type as afterType FROM ffwy_after_type
+    </select>
+
+    <select id="selectFfwyAfterStatus" resultType="com.ruoyi.system.domain.aftersale.FfwyAfterStatus">
+        SELECT a.create_time as createTime, b.status_name as auditName   FROM ffwy_after_status a
+         LEFT JOIN ffwy_order_status  b on  a.audit_status_id = b.status_id
+         where a.sale_id = #{saleId} ORDER BY a.create_time DESC
+    </select>
+
+    <select id="selectFfwyOrderDetailsByorderDetailsId"   resultType="com.ruoyi.system.domain.vo.FfwyAftersaletypeVo">
+        SELECT fas.after_saleid as afterSaleId,fas.order_number as orderNumber,
+        fas.after_status as afterStatus,fas.merchant_leave as merchantLeave,fas.create_time as createTime,
+        fas.kddh as kddh,fas.kdgs as kdgs,
+        fas.problem_description as problemDescription,fat.after_type as afterType ,fod.phone
+        FROM ffwy_after_sale fas LEFT JOIN
+        ffwy_after_type fat on fas.after_type = fat.after_type_id
+        LEFT JOIN ffwy_order_details fod on fas.order_details_id = fod.order_details_id
+        <where>
+            <if test="afterSaleid != null  and afterSaleid != ''"> and fas.after_saleid = #{afterSaleid}</if>
+        </where>
+    </select>
+</mapper>

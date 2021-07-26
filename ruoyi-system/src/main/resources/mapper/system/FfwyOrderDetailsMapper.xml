@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.order.FfwyOrderDetailsMapper">
+    <resultMap type="FfwyOrderDetails" id="FfwyOrderDetailsResult">
+        <result property="orderDetailsId" column="order_details_id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="orderNumber" column="order_number"/>
+        <result property="productSkuId" column="product_sku_id"/>
+        <result property="specificationId" column="specification_id"/>
+        <result property="number" column="number"/>
+        <result property="price" column="price"/>
+        <result property="priceSum" column="price_sum"/>
+        <result property="productSkuName" column="product_sku_name"/>
+        <result property="productSkuSpec" column="product_sku_spec"/>
+        <result property="createTime" column="create_time"/>
+        <result property="categoryLevel" column="category_level"/>
+        <result property="num" column="num"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="phone" column="phone"/>
+        <result property="productPhoto" column="product_photo"/>
+        <result property="freight" column="freight"/>
+        <result property="trackIngNumber" column="trackIng_number"/>
+        <result property="trackIngName" column="trackIng_name"></result>
+        <result property="orderStatus" column="order_status"/>
+        <result property="addrId" column="addr_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="payment" column="payment"/>
+        <result property="shipments" column="shipments"/>
+        <result property="receiving" column="receiving"/>
+        <result property="evaluate" column="evaluate"/>
+        <result property="after" column="after"/>
+        <result property="payId"    column="pay_id"    />
+        <result property="backTrackIngNumber" column="back_trackIng_number"></result>
+        <result property="rejectMsg" column="reject_msg"></result>
+        <result property="afterSaleId" column="after_sale_id"></result>
+        <result property="shopAddrId" column="shop_addr_id"></result>
+        <association property="addr" javaType="FfwyConsigneeAddr">
+            <result property="consigneeAddrid" column="addr_id"/>
+            <result property="administrative" column="administrative"/>
+            <result property="consigneeName" column="consignee_name"/>
+            <result property="consigneePhone" column="consignee_phone"/>
+            <result property="consigneeAddress" column="consignee_address"/>
+        </association>
+    </resultMap>
+
+    <resultMap type="FfwyOrderDetails" id="FfwyOrderDetails">
+        <result property="orderDetailsId" column="order_details_id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="orderNumber" column="order_number"/>
+        <result property="productSkuId" column="product_sku_id"/>
+        <result property="specificationId" column="specification_id"/>
+        <result property="number" column="number"/>
+        <result property="price" column="price"/>
+        <result property="priceSum" column="price_sum"/>
+        <result property="productSkuName" column="product_sku_name"/>
+        <result property="productSkuSpec" column="product_sku_spec"/>
+        <result property="createTime" column="create_time"/>
+        <result property="categoryLevel" column="category_level"/>
+        <result property="num" column="num"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="phone" column="phone"/>
+        <result property="productPhoto" column="product_photo"/>
+        <result property="freight" column="freight"/>
+        <result property="trackIngNumber" column="trackIng_number"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="addrId" column="addr_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="payment" column="payment"/>
+        <result property="shipments" column="shipments"/>
+        <result property="receiving" column="receiving"/>
+        <result property="evaluate" column="evaluate"/>
+        <result property="after" column="after"/>
+        <result property="knockdownTime" column="knockdown_time"/>
+        <result property="payId"    column="pay_id"    />
+        <result property="trackIngName" column="trackIng_name"></result>
+        <result property="backTrackIngNumber" column="back_trackIng_number"/>
+        <result property="rejectMsg" column="reject_msg"/>
+        <result property="shopAddrId" column="shop_addr_id"/>
+        <result property="message" column="message"/>
+        <result property="paymentTime" column="payment_time"/>
+        <result property="deliverTime" column="deliver_time"/>
+        <result property="afterTime" column="after_time"/>
+        <result property="isDel" column="is_del"/>
+    </resultMap>
+
+    <sql id="selectFfwyOrderDetailsVo">
+
+        select knockdown_time,trackIng_name,product_id,order_details_id, order_id,order_number, product_sku_id, specification_id,product_sku_spec, number, price, price_sum, product_sku_name, create_time, category_level, shop_id, category_name, user_id, user_name, phone, product_photo, trackIng_number, order_status, addr_id, freight,pay_id,message,payment_time,deliver_time,trackIng_number from ffwy_order_details
+
+    </sql>
+    <sql id="SELECT_ORDER_DETAILS">
+
+                select knockdown_time,trackIng_name,product_id,order_details_id, fod.order_id,fod.order_number,
+                 product_sku_id, specification_id,product_sku_spec, number, fod.price, price_sum, product_sku_name,
+                 fod.create_time, category_level, fod.shop_id, category_name, fod.user_id, fod.user_name, fod.phone,
+                 product_photo, trackIng_number, order_status, fod.addr_id, fod.freight,pay_id,fod.message,fod.payment_time,
+                 deliver_time,trackIng_number,fo.status_id from ffwy_order_details fod
+             LEFT JOIN ffwy_order fo on fo.order_id = fod.order_id
+    </sql>
+    <sql id="SELECT_ORDER_DETAILS_ADDR">
+               select order_details_id, order_id,order_number, product_sku_id, specification_id,
+                number, price, price_sum, product_sku_name, fod.create_time, category_level,
+                fca.shop_id, category_name, fod.user_id, user_name, phone, product_photo,
+                trackIng_number, order_status, addr_id, freight,consignee_name,consignee_phone,administrative,
+                consignee_address,shop_addr_id,after_sale_id,fod.product_sku_spec,fod.pay_id,trackIng_name
+
+                 from ffwy_order_details fod
+                LEFT join ffwy_consignee_addr fca on fod.addr_id =fca.consignee_addrid
+
+    </sql>
+    <select id="selectFfwyOrderDetailsList" parameterType="FfwyOrderDetails" resultMap="FfwyOrderDetailsResult">
+        <include refid="SELECT_ORDER_DETAILS_ADDR"/>
+
+        <where>
+            <if test="orderDetailsId != null "> and order_details_id = #{orderDetailsId}</if>
+            <if test="orderId != null "> and order_id = #{orderId}</if>
+            <if test="shopAddrId != null "> and shop_addr_id = #{shopAddrId}</if>
+            <if test="productSkuId != null "> and product_sku_id = #{productSkuId}</if>
+            <if test="specificationId != null "> and specification_id = #{specificationId}</if>
+            <if test="number != null "> and number = #{number}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="priceSum != null "> and price_sum = #{priceSum}</if>
+            <if test="productSkuName != null  and productSkuName != ''"> and product_sku_name like concat('%', #{productSkuName}, '%')</if>
+            <if test="productSkuSpec != null  and productSkuSpec != ''"> and product_sku_spec like concat('%', #{productSkuSpec}, '%')</if>
+            <if test="categoryLevel != null "> and category_level = #{categoryLevel}</if>
+            <if test="shopId != null "> and fod.shop_id = #{shopId}</if>
+            <if test="categoryName != null  and categoryName != ''"> and category_name like concat('%', #{categoryName}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="productPhoto != null  and productPhoto != ''"> and product_photo = #{productPhoto}</if>
+            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
+            <if test="addrId != null "> and addr_id = #{addrId}</if>
+            <if test="freight != null "> and freight = #{freight}</if>
+            <if test="trackIngNumber != null and trackIngNumber != '' "> and trackIng_number = #{trackIngNumber}</if>
+            <if test="backTrackIngNumber != null and backTrackIngNumber != '' "> and back_trackIng_number = #{backTrackIngNumber}</if>
+            <if test="rejectMsg != null and rejectMsg != '' "> and reject_msg = #{rejectMsg}</if>
+            <if test="beginTime != null ">
+                and fod.create_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null ">
+                and fod.create_time &lt;= #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="backOrderDetailsList" parameterType="FfwyOrderDetails" resultMap="FfwyOrderDetailsResult">
+        <include refid="SELECT_ORDER_DETAILS_ADDR"/>
+
+        <where>
+            <if test="orderDetailsId != null "> and order_details_id = #{orderDetailsId}</if>
+            <if test="orderId != null "> and order_id = #{orderId}</if>
+            <if test="shopAddrId != null "> and shop_addr_id = #{shopAddrId}</if>
+            <if test="productSkuId != null "> and product_sku_id = #{productSkuId}</if>
+            <if test="specificationId != null "> and specification_id = #{specificationId}</if>
+            <if test="number != null "> and number = #{number}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="priceSum != null "> and price_sum = #{priceSum}</if>
+            <if test="productSkuName != null  and productSkuName != ''"> and product_sku_name like concat('%', #{productSkuName}, '%')</if>
+            <if test="productSkuSpec != null  and productSkuSpec != ''"> and product_sku_spec like concat('%', #{productSkuSpec}, '%')</if>
+            <if test="categoryLevel != null "> and category_level = #{categoryLevel}</if>
+            <if test="shopId != null "> and fod.shop_id = #{shopId}</if>
+            <if test="categoryName != null  and categoryName != ''"> and category_name like concat('%', #{categoryName}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="productPhoto != null  and productPhoto != ''"> and product_photo = #{productPhoto}</if>
+            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
+            <if test="addrId != null "> and addr_id = #{addrId}</if>
+            <if test="freight != null "> and freight = #{freight}</if>
+            <if test="trackIngNumber != null and trackIngNumber != '' "> and trackIng_number = #{trackIngNumber}</if>
+            <if test="backTrackIngNumber != null and backTrackIngNumber != '' "> and back_trackIng_number = #{backTrackIngNumber}</if>
+            <if test="rejectMsg != null and rejectMsg != '' "> and reject_msg = #{rejectMsg}</if>
+            <if test="beginTime != null ">
+                and fod.create_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null ">
+                and fod.create_time &lt;= #{endTime}
+            </if>
+            and order_status !=1 and order_status !=7 and order_status !=5
+        </where>
+        ORDER BY order_details_id desc
+    </select>
+
+
+    <select id="selectFfwyOrderDetails" parameterType="FfwyOrderDetails" resultMap="FfwyOrderDetails">
+        <include refid="SELECT_ORDER_DETAILS"/>
+        <where>
+            <if test="orderDetailsId != null "> and order_details_id = #{orderDetailsId}</if>
+            <if test="orderId != null "> and fod.order_id = #{orderId}</if>
+            <if test="shopAddrId != null "> and shop_addr_id = #{shopAddrId}</if>
+            <if test="productSkuId != null "> and product_sku_id = #{productSkuId}</if>
+            <if test="specificationId != null "> and specification_id = #{specificationId}</if>
+            <if test="number != null "> and number = #{number}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="priceSum != null "> and price_sum = #{priceSum}</if>
+            <if test="productSkuName != null  and productSkuName != ''"> and product_sku_name like concat('%', #{productSkuName}, '%')</if>
+            <if test="productSkuSpec != null  and productSkuSpec != ''"> and product_sku_spec like concat('%', #{productSkuSpec}, '%')</if>
+            <if test="categoryLevel != null "> and category_level = #{categoryLevel}</if>
+            <if test="shopId != null "> and fod.shop_id = #{shopId}</if>
+            <if test="categoryName != null  and categoryName != ''"> and category_name like concat('%', #{categoryName}, '%')</if>
+            <if test="userId != null "> and fod.user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="productPhoto != null  and productPhoto != ''"> and product_photo = #{productPhoto}</if>
+            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
+            <if test="addrId != null "> and addr_id = #{addrId}</if>
+            <if test="freight != null "> and freight = #{freight}</if>
+            <if test="trackIngNumber != null and trackIngNumber != '' "> and trackIng_number = #{trackIngNumber}</if>
+            <if test="backTrackIngNumber != null and backTrackIngNumber != '' "> and back_trackIng_number = #{backTrackIngNumber}</if>
+            <if test="rejectMsg != null and rejectMsg != '' "> and reject_msg = #{rejectMsg}</if>
+            <if test="beginTime != null ">
+                and fod.create_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null ">
+                and fod.create_time &lt;= #{endTime}
+            </if>
+        </where>
+    </select>
+    <select id="selectFfwyOrderDetailsById" parameterType="Long" resultMap="FfwyOrderDetailsResult">
+        <include refid="selectFfwyOrderDetailsVo"/>
+        where order_details_id = #{orderDetailsId}
+    </select>
+
+    <insert id="insertFfwyOrderDetails" parameterType="FfwyOrderDetails" useGeneratedKeys="true"
+            keyProperty="orderDetailsId">
+        insert into ffwy_order_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">order_id,</if>
+            <if test="shopAddrId != null">shop_addr_id,</if>
+            <if test="orderNumber != null">order_number,</if>
+            <if test="productSkuId != null">product_sku_id,</if>
+            <if test="specificationId != null">specification_id,</if>
+            <if test="number != null">number,</if>
+            <if test="price != null">price,</if>
+            <if test="priceSum != null">price_sum,</if>
+            <if test="productSkuName != null">product_sku_name,</if>
+            <if test="productSkuSpec != null">product_sku_spec,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="categoryLevel != null">category_level,</if>
+            <if test="shopId != null">shop_id,</if>
+            <if test="categoryName != null">category_name,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="phone != null">phone,</if>
+            <if test="productPhoto != null">product_photo,</if>
+            <if test="trackIngNumber != null">trackIng_number,</if>
+            <if test="trackIngName != null">trackIng_name,</if>
+            <if test="orderStatus != null">order_status,</if>
+            <if test="addrId != null">addr_id,</if>
+            <if test="freight != null">freight,</if>
+            <if test="payId != null">pay_id,</if>
+            <if test="backTrackIngNumber != null">back_trackIng_number,</if>
+            <if test="rejectMsg != null">reject_msg,</if>
+            <if test="afterSaleId != null">after_sale_id,</if>
+            <if test="message != null">message,</if>
+            <if test="deliverTime != null">deliver_time,</if>
+            <if test="productId != null">product_id,</if>
+            <if test="isDel != null">is_del,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">#{orderId},</if>
+            <if test="shopAddrId != null">#{shopAddrId},</if>
+            <if test="orderNumber != null">#{orderNumber},</if>
+            <if test="productSkuId != null">#{productSkuId},</if>
+            <if test="specificationId != null">#{specificationId},</if>
+            <if test="number != null">#{number},</if>
+            <if test="price != null">#{price},</if>
+            <if test="priceSum != null">#{priceSum},</if>
+            <if test="productSkuName != null">#{productSkuName},</if>
+            <if test="productSkuSpec != null">#{productSkuSpec},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="categoryLevel != null">#{categoryLevel},</if>
+            <if test="shopId != null">#{shopId},</if>
+            <if test="categoryName != null">#{categoryName},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="productPhoto != null">#{productPhoto},</if>
+            <if test="trackIngNumber != null">#{trackIngNumber},</if>
+            <if test="trackIngName != null">#{trackIngName},</if>
+            <if test="orderStatus != null">#{orderStatus},</if>
+            <if test="addrId != null">#{addrId},</if>
+            <if test="freight != null">#{freight},</if>
+            <if test="payId != null">#{payId},</if>
+            <if test="backTrackIngNumber != null">#{backTrackIngNumber},</if>
+            <if test="rejectMsg != null">#{rejectMsg},</if>
+            <if test="afterSaleId != null">#{afterSaleId},</if>
+            <if test="message != null">#{message},</if>
+            <if test="deliverTime != null">#{deliverTime},</if>
+            <if test="productId != null">#{productId},</if>
+            <if test="isDel != null">#{isDel},</if>
+        </trim>
+    </insert>
+
+    <update id="updateFfwyOrderDetails" parameterType="FfwyOrderDetails">
+        update ffwy_order_details
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="shopAddrId != null ">shop_addr_id = #{shopAddrId},</if>
+            <if test="orderNumber != null">order_number = #{orderNumber},</if>
+            <if test="productSkuId != null">product_sku_id = #{productSkuId},</if>
+            <if test="specificationId != null">specification_id = #{specificationId},</if>
+            <if test="number != null">number = #{number},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="priceSum != null">price_sum = #{priceSum},</if>
+            <if test="productSkuName != null">product_sku_name = #{productSkuName},</if>
+            <if test="productSkuSpec != null">product_sku_spec = #{productSkuSpec},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="categoryLevel != null">category_level = #{categoryLevel},</if>
+            <if test="shopId != null">shop_id = #{shopId},</if>
+            <if test="categoryName != null">category_name = #{categoryName},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="productPhoto != null">product_photo = #{productPhoto},</if>
+            <if test="trackIngNumber != null">trackIng_number = #{trackIngNumber},</if>
+            <if test="trackIngName != null">trackIng_name = #{trackIngName},</if>
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+            <if test="addrId != null">addr_id = #{addrId},</if>
+            <if test="freight != null">freight = #{freight},</if>
+            <if test="payId != null">pay_id = #{payId},</if>
+            <if test="backTrackIngNumber != null">back_trackIng_number = #{backTrackIngNumber},</if>
+            <if test="rejectMsg != null">reject_msg = #{rejectMsg},</if>
+            <if test="afterSaleId != null">after_sale_id = #{afterSaleId},</if>
+            <if test="message != null">message = #{message},</if>
+            <if test="knockdownTime != null">knockdown_time = #{knockdownTime},</if>
+            <if test="deliverTime != null">deliver_time = #{deliverTime},</if>
+        </trim>
+        <where>order_details_id = #{orderDetailsId}</where>
+    </update>
+
+
+    <update id="updateFfwyOrderDetailsId" parameterType="FfwyOrderDetails">
+        update ffwy_order_details
+        <trim prefix="SET" suffixOverrides=",">
+
+            <if test="shopAddrId != null ">shop_addr_id = #{shopAddrId},</if>
+            <if test="orderNumber != null">order_number = #{orderNumber},</if>
+            <if test="productSkuId != null">product_sku_id = #{productSkuId},</if>
+            <if test="specificationId != null">specification_id = #{specificationId},</if>
+            <if test="number != null">number = #{number},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="priceSum != null">price_sum = #{priceSum},</if>
+            <if test="productSkuName != null">product_sku_name = #{productSkuName},</if>
+            <if test="productSkuSpec != null">product_sku_spec = #{productSkuSpec},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="categoryLevel != null">category_level = #{categoryLevel},</if>
+            <if test="shopId != null">shop_id = #{shopId},</if>
+            <if test="categoryName != null">category_name = #{categoryName},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="productPhoto != null">product_photo = #{productPhoto},</if>
+            <if test="trackIngNumber != null">trackIng_number = #{trackIngNumber},</if>
+            <if test="trackIngName != null">trackIng_name = #{trackIngName},</if>
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+            <if test="addrId != null">addr_id = #{addrId},</if>
+            <if test="freight != null">freight = #{freight},</if>
+            <if test="payId != null">pay_id = #{payId},</if>
+            <if test="backTrackIngNumber != null">back_trackIng_number = #{backTrackIngNumber},</if>
+            <if test="rejectMsg != null">reject_msg = #{rejectMsg},</if>
+            <if test="afterSaleId != null">after_sale_id = #{afterSaleId},</if>
+            <if test="message != null">message = #{message},</if>
+            <if test="knockdownTime != null">knockdown_time = #{knockdownTime},</if>
+            <if test="paymentTime != null">payment_time =#{paymentTime},</if>
+        </trim>
+        <where>order_id = #{orderId}</where>
+    </update>
+    <delete id="deleteFfwyOrderDetailsById" parameterType="Long">
+
+
+                        delete from ffwy_order_details where order_details_id = #{orderDetailsId}
+
+
+    </delete>
+
+
+    <update id="deleteFfwyOrderDetailsByIds" parameterType="java.util.List">
+        update ffwy_order_details
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="isDel != null">
+                is_del = 1,
+            </if>
+        </trim>
+        where order_id = #{orderId}
+    </update>
+
+    <select id="selectFfwyOrderDetailsRepertory" parameterType="FfwyOrderDetails" resultMap="FfwyOrderDetailsResult">
+
+
+                     select  SUM(fod.number)AS num, fod.product_sku_id  product_sku_id from ffwy_order_details as fod
+                 INNER JOIN ffwy_order as fo on  fod.order_id=fo.order_id
+                 WHERE  (fo.status_id=1 or fo.status_id=2 or fo.status_id=3 or fo.status_id=4 or fo.status_id=6 )
+                 and fod.product_sku_id=#{skuId}
+
+
+    </select>
+    <select id="selectFfwyOrderDetailsRepertorys" parameterType="FfwyOrderDetails" resultMap="FfwyOrderDetailsResult">
+
+
+                     select  SUM(fod.number)AS num, fod.product_sku_id  product_sku_id from ffwy_order_details as fod
+                 INNER JOIN ffwy_order as fo on  fod.order_id=fo.order_id
+                 WHERE  (fo.status_id=1 or fo.status_id=2 or fo.status_id=3 or fo.status_id=4 or fo.status_id=6 )
+                 and fod.product_sku_id=#{skuId} and fod.is_del=0 and
+                 fo.is_del=0
+
+
+    </select>
+
+    <select id="selectFfwyOrderallList" parameterType="FfwyOrderDetails" resultMap="FfwyOrderDetailsResult">
+
+
+                    select fod.order_details_id, fod.order_id, fod.product_sku_id, fod.specification_id, fod.number,
+         fod.price, fod.price_sum, fod.product_sku_name, fod.create_time, fps.sku_spec,
+         fod.category_level from ffwy_order_details fod
+        INNER JOIN ffwy_product_sku fps
+        on  fod.product_sku_id=fps.sku_id
+        where  fod.order_id=#{orderId}
+
+
+    </select>
+
+
+    <select id="selectFfwyOrderById" parameterType="FfwyOrderDetails" resultMap="FfwyOrderDetailsResult">
+        <include refid="selectFfwyOrderDetailsVo"/>
+        <where>order_id = #{orderId}</where>
+    </select>
+
+    <select id="selectFfwyOrderCombomaealUnlockStock" parameterType="FfwyOrderDetails"
+            resultMap="FfwyOrderDetailsResult">
+        <include refid="selectFfwyOrderDetailsVo"/>
+        where order_number = #{orderNumber}
+    </select>
+
+    <select id="selectFfwyOrderStatusList" parameterType="FfwyOrderDetails" resultMap="FfwyOrderDetailsResult">
+
+                               SELECT SUM(k.payment) as payment ,SUM(k.shipments) as shipments,SUM(k.receiving) as receiving,SUM(k.evaluate) as evaluate,SUM(k.after) as after FROM
+                ( select COUNT(order_status) as payment,0 as shipments,0 as receiving,0 as evaluate, 0 as after
+                 from ffwy_order_details  WHERE user_id=#{userId}   and order_status=1
+                 UNION
+                  select 0 as payment,COUNT(order_status) as shipments,0 as receiving,0 as evaluate, 0 as after
+                 from ffwy_order_details
+                    WHERE user_id=#{userId}   and order_status=2
+                    UNION
+                          select 0 as payment,0 as shipments,COUNT(order_status) as receiving,0 as evaluate, 0 as after
+                 from ffwy_order_details
+                    WHERE user_id=#{userId}   and order_status=4
+                UNION
+                                  select 0 as payment,0 as shipments,0 as receiving,COUNT(order_status) as evaluate, 0 as after
+                 from ffwy_order_details
+                    WHERE user_id=#{userId}   and order_status=3
+                        UNION
+                                  select 0 as payment,0 as shipments,0 as receiving,0 as evaluate, COUNT(order_status) as after
+                 from ffwy_order_details
+                    WHERE user_id=#{userId}   and order_status=8
+                ) as  k
+
+
+    </select>
+    <select id="selectFfwyOrderAllList" parameterType="FfwyOrderDetails" resultMap="FfwyOrderDetails">
+        <include refid="SELECT_ORDER_DETAILS"/>
+        <where>
+            <if test="userId != null ">
+                and fod.user_id = #{userId}
+            </if>
+            <if test="orderStatus != null ">
+                and order_status = #{orderStatus}
+            </if> <if test="orderNumber != null ">
+                and fod.order_number = #{orderNumber}
+            </if>
+            <if test="orderId != null ">
+                and fod.order_id = #{orderId}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectpublishEvaluate"  parameterType="FfwyOrderDetails" resultMap="FfwyOrderDetails">
+        <include refid="SELECT_ORDER_DETAILS"/>
+        <where>
+            <if test="orderId != null "> and order_id = #{orderId}</if>
+            <if test="orderStatus != null "> and order_status = #{orderStatus}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="orderDetailsId != null"> and order_details_id = #{orderDetailsId}</if>
+        </where>
+    </select>
+
+    <update id="updateFfwyAfterSaleBysuatus" parameterType="FfwyOrderDetails">
+        update ffwy_order_details set order_status = #{orderStatus} <where>order_details_id = #{orderDetailsId}</where>
+    </update>
+
+    <select id="selectFfwyOrderDetailsSku" parameterType="FfwyOrderDetails" resultMap="FfwyOrderDetailsResult">
+        SELECT fod.product_sku_spec FROM ffwy_product_comment  fpc INNER JOIN ffwy_order_details fod on  fpc.order_id=fod.order_id
+         WHERE  fpc.order_id=#{orderId}
+        GROUP BY fpc.combomeal_id
+    </select>
+
+    <select id="selectFfwyOrderExpressById" parameterType="FfwyOrderDetails" resultMap="FfwyOrderDetailsResult">
+        <include refid="SELECT_ORDER_DETAILS"/>
+        <where>
+            <if test="orderId != null "> and order_details_id = #{orderId}</if>
+        </where>
+
+    </select>
+
+    <select id="selectFfwyOrderDetailsByOrderId" resultType="integer">
+        SELECT
+        order_status
+        FROM
+        ffwy_order_details
+        <where>
+            <if test="orderId != null "> and order_id = #{orderId}</if>
+            <if test="orderDetailId != null "> and order_details_id = #{orderDetailId}</if>
+        </where>
+
+    </select>
+</mapper>

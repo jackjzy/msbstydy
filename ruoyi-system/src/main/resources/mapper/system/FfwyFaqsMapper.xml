@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyFaqsMapper">
+    
+    <resultMap type="FfwyFaqsVo" id="FfwyFaqsResult">
+        <result property="faqsId"    column="faqs_id"    />
+        <result property="faqsMsg"    column="faqs_msg"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="replyMsg"    column="reply_msg"    />
+    </resultMap>
+
+    <resultMap type="FfwyFaqs" id="FfwyFaqsAndReply">
+        <result property="faqsId"    column="faqs_id"    />
+        <result property="faqsMsg"    column="faqs_msg"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="replyMsg"    column="reply_msg"></result>
+        <association property="reply" javaType="FfwyFqasReply">
+            <result property="relpyId" column="relpy_id"></result>
+            <result property="replyMsg" column="reply_msg"></result>
+        </association>
+    </resultMap>
+
+    <sql id="selectFfwyFaqsVo">
+        select faqs_id, faqs_msg, create_time, update_time from ffwy_faqs
+    </sql>
+
+    <sql id="SELECT_BY_REPLY">
+        select ff.faqs_id, faqs_msg, ff.create_time, ff.update_time ,ffr.relpy_id,ffr.reply_msg
+        from ffwy_faqs ff left JOIN ffwy_fqas_reply ffr
+        on ff.faqs_id=ffr.faqs_id
+    </sql>
+    <select id="selectFfwyFaqsList" parameterType="FfwyFaqs" resultMap="FfwyFaqsResult">
+        <include refid="selectFfwyFaqsVo"/>
+        <where>  
+            <if test="faqsMsg != null  and faqsMsg != ''"> and faqs_msg = #{faqsMsg}</if>
+            <if test="bgecreateTime != null"> and create_time = #{bgecreateTime}</if>
+            <if test="actcreateTime != null"> and create_time = #{actcreateTime}</if>
+            <if test="searchStr!=null and searchStr!=''">
+                AND
+                CONCAT(faqsMsg) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+            t1.faqs_id = t2.relpy_id
+        </where>
+    </select>
+
+    <select id="selectFfwyFaqsAndReplyList" parameterType="FfwyFaqs" resultMap="FfwyFaqsAndReply">
+        <include refid="SELECT_BY_REPLY"/>
+        <where>
+            <if test="faqsMsg != null  and faqsMsg != ''"> and faqs_msg = #{faqsMsg}</if>
+            <if test="beginTime != null"> and ff.create_time &gt;= #{beginTime}</if>
+            <if test="endTime != null"> and ff.create_time &lt;= #{endTime}</if>
+            <if test="searchStr!=null and searchStr!=''">
+                AND
+                CONCAT(faqs_msg) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+        </where>
+    </select>
+    <select id="selectFfwyFaqsById" parameterType="Long" resultMap="FfwyFaqsResult">
+        <include refid="selectFfwyFaqsVo"/>
+        where faqs_id = #{faqsId}
+    </select>
+        
+    <insert id="insertFfwyFaqs" parameterType="FfwyFaqs" useGeneratedKeys="true" keyProperty="faqsId">
+        insert into ffwy_faqs
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="faqsMsg != null">faqs_msg,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="faqsMsg != null">#{faqsMsg},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyFaqs" parameterType="FfwyFaqs">
+        update ffwy_faqs
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="faqsMsg != null">faqs_msg = #{faqsMsg},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where faqs_id = #{faqsId}
+    </update>
+
+    <delete id="deleteFfwyFaqsById" parameterType="Integer">
+        delete from ffwy_faqs where faqs_id = #{faqId}
+    </delete>
+    
+    <select id="selectFfwyFaqsLists" resultMap="FfwyFaqsResult">
+      SELECT
+	t1.faqs_id,
+	t1.faqs_msg,
+	t1.create_time,
+	t2.reply_msg
+FROM
+	`ffwy_faqs` t1,
+	ffwy_fqas_reply t2
+	<where>
+	t1.faqs_id = t2.relpy_id
+    </where>
+    </select>
+</mapper>

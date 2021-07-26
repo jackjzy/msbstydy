@@ -1,0 +1,209 @@
+# 项目相关配置
+ruoyi:
+  # 名称
+  name: RuoYi
+  # 版本
+  version: 3.4.0
+  # 版权年份
+  copyrightYear: 2021
+  # 实例演示开关
+  demoEnabled: true
+  # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
+  profile: D:/ffwy/uploadPath
+  # 获取ip地址开关
+  addressEnabled: false
+  # 验证码类型 math 数组计算 char 字符验证
+  captchaType: math
+
+
+#配置读取银联证书的环境 不填默认开发 ;只有填写prod  才会切换正式环境  ***切记
+UNIONPAY_ACTIVE:
+
+
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为8080
+  port: 8080
+  servlet:
+    # 应用的访问路径
+    context-path: /
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # tomcat最大线程数，默认为200
+    max-threads: 800
+    # Tomcat启动初始化的线程数，默认值25
+    min-spare-threads: 30
+
+# 日志配置
+logging:
+  level:
+    com.ruoyi: debug
+    org.springframework: warn
+
+# Spring配置
+spring:
+
+  # 资源信息
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+  profiles:
+    active: druid
+  # 文件上传
+  servlet:
+     multipart:
+       # 单个文件大小
+       max-file-size:  10MB
+       # 设置总上传的文件大小
+       max-request-size:  20MB
+  # 服务模块
+  devtools:
+    restart:
+      # 热部署开关
+      enabled: true
+  # redis 配置
+  redis:
+    # 地址
+    host: 152.136.100.173
+   # host: www.wemem.com
+#    host: localhost
+   # host: www.wemem.com
+   # host: 101.200.165.27
+#    host: 101.200.165.27
+    # 端口，默认为6379
+    port: 6379
+    # 数据库索引
+    database: 0
+    # 密码
+    password:
+#    password: QianTaiKeJi20151qaz!QAZ
+    # 连接超时时间
+    timeout: 10s
+
+    lettuce:
+      pool:
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池的最大数据库连接数
+        max-active: 8
+        # #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+  elasticsearch:
+    rest:
+      uris: http://152.136.100.173:9200
+  # RabbitMQ配置
+  rabbitmq:
+    host: 192.168.1.107
+    port: 5672
+    virtual-host: /   # 虚拟主机配置
+    publisher-confirms: true  # 开启发送端消息抵达Broker确认
+    publisher-returns: true  # 开启发送端消息抵达Queue确认
+    template:
+      mandatory: true  # 只要消息抵达Queue，就会异步发送优先回调returnfirm
+    listener:
+      simple:
+        acknowledge-mode: manual  # 手动ack消息，不使用默认的消费端确认
+
+# token配置
+token:
+    # 令牌自定义标识
+    header: Authorization
+    # 令牌密钥
+    secret: abcdefghijklmnopqrstuvwxyz
+    # 令牌有效期（默认30分钟）
+    expireTime: 30
+
+# MyBatis配置
+mybatis:
+    # 搜索指定包别名
+    typeAliasesPackage: com.ruoyi.**.domain
+    # 配置mapper的扫描，找到所有的mapper.xml映射文件
+    mapperLocations: classpath*:mapper/**/*Mapper.xml
+    # 加载全局的配置文件
+    configLocation: classpath:mybatis/mybatis-config.xml
+
+
+cos:
+    bucketName: ffwy-1305725175
+    secretKey: tc9RUIsAHA3gHelhjc3HxOn1qlW5RjcH
+    secretId: AKIDGKABwTCphzvcMqA2pPjmbQ0MdnhUuLXU
+    prefixUrl: https://ffwy-1305725175.cos.ap-beijing.myqcloud.com/
+
+#cos:
+#  bucketName: ffwy-1300383620
+#  secretKey: ZtHQ5oHo5tqXCbfldS2Lj3A881viJ5Z0
+#  secretId: AKIDXsypcBn58C0by6CYsxiFFzMVNVNzoTKw
+#  prefixUrl: https://ffwy-1300383620.cos.ap-beijing.myqcloud.com/
+
+
+
+
+
+
+# PageHelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: false
+  supportMethodsArguments: true
+  params: count=countSql
+
+# Swagger配置
+swagger:
+  # 是否开启swagger
+  enabled: true
+  # 请求前缀
+  pathMapping: /dev-api
+
+# 防止XSS攻击
+xss:
+  # 过滤开关
+  enabled: true
+  # 排除链接（多个用逗号分隔）
+  excludes: /system/notice/*
+  # 匹配链接
+  urlPatterns: /system/*,/monitor/*,/tool/*
+
+
+
+
+
+
+# 云之讯 短信配置
+yzx:
+  sid:
+  token:
+  appId:
+  templateId:
+
+message:
+  #  短信 SdkAppId，在 短信控制台 添加应用后生成的实际 SdkAppId，示例如1400006666。
+  sdkAppId : 1400520231
+  #  短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，例如：腾讯云，签名信息可登录 短信控制台 查看。 注：国内短信为必填参数。
+  signName : 北京嗅美科技有限公司
+
+alipay:
+  config:
+    url: https://openapi.alipay.com/gateway.do
+    appId: 2021002152641027
+    privateKey: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDiLNTrI4Be/j3gIM5YVjCMMMJcPiudvyKtJVOiMCHDS4l/UeM6pLaHc2Cq55vRzo+yVfPlzpKsY+Shf1AVIN2C37pu9yDKNtGuEYHDmIUkCiyLG8UZLuaMwW4lHf5fv0e/zzqiTvecFmSMiipKaTf3691LFD1V6Z+zoJeBUPvxTCM4EPwrDKwCI/oq8NdbBxSJ5bUEeacNzsx7woJOhp9jtiDB2Qai2vYTyl+fFTVvWDusfyaFZWQEa1KqVUeyUaw+9m2TEkY9oIJtQHqr3V95qerYvFAK10x04g+KGVaHKDl/1SeCf0FKFW+n2ieH6N7/cItLcHmyeWghxNlYBUbXAgMBAAECggEAAd+7N+OIacEThCrhasv0BQVWZutA80KlJ+gaREq/zN1wWzSzfEXnGUI0d9YJbXiXqjOaHLpUbsc5GrlyUWp/S1lNMyQrCmHf5OBSQeuelsjay6BERswjruDfZ8FS3To5fvZZlwSueoWY+a0fYpRymUREBh45z99qqlNXTgP8wmgKGdDYYuWImcOJHoR9h1sCOn2zHAy62GtUtI6ijKifre5nxgx9lS9KqIuERUM1KXtq8XR154j3g3SwryFy6K41/JqR6mKuSRQIj7aTKznyYR5ISYNuM2s0SAQYOViBgo1fqgT3mx/FSqtQo3nnD6P7ez1pl7ABwVtPHY3YTJ1doQKBgQDzZ7NGPG88W0MD8aGikOSmx1cCLUhp1Uj5Dxqnfy0tLroFxnd35Smbo8bfu1VtwLEoLIBjE7bAetUZrA1zw8BvaPHh1a6UlBjpEGqnzkyLyd77dipMo2Rciu728rhIvpP6VFQtU8Z75pj/wl3uOFeL9RTBQwCngEbynb5rFtscZwKBgQDt4ORzlCIm6FjEOX5UcyInRxHzjE6Ez8bT8twizdp3IZ17aoUXJQApAwZqTos/k/pSvCaq7jT7B16GZXdtF/+3B7rBCQMzbQh55QV/Ckym3iee3M9v6Oh4iC5i36OY1dWtThgE+6CH5GDyln9FUATF+H5IzqMAOi52/p9AToX8EQKBgC9gO9Cr6qrAyKZ33ZIayaZ8nj7aOYH/9ZgkjHeVlWF5+tMs8gvwGs0kb40UlWgrXVAIeWTPbX7BacD5cBTcQRRuRMZEJRreSIr0mw3WZae/vxsKwOjx1JL+p8yBKcVe8saCq2+3IqbzF0yQtF+tr7yaE1QaioIPwb9vXKTTagp5AoGBAJKhxHDyaTLumnkqr5LC/dSUXJ5yaJw5r+hKliPmHLq+v+KpwKyJpFWjhbrV+8QPJYkGbheDiqkK29ughEN9PaXHX/lJ4u06UrVA1WiAIsvhuS6WElB7k4FpAJ72GFRHy9VuhCPeMBBUWOZwmrdRIgAes0mSBqxHMQks32G2haThAoGBAKausKZOnCwWkJq6n6Yv0AjV89FpZnxdb+svI1/zI+e+WdW4qcwb/XKdcBb1WYpMlCe4JtFWYSRSV8ei/M3g9vszyaFo+2z1iaLHf+UF0vhTrrXtHyrQ/xhxMCOZE/rRFRwEqLPsa2P1qp+HCKvCATE+lXdtqHNORouE085gurtr
+    pubKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgXA/T4ZIpwXJHFuz4AXj3XU3TVhfIgvyccnJGrVirWuidl9n34FnoB6E3unuzSKK8x0mQjZ1z5r+Rggcd70x15UPdKadOdTgelpSUXqx88hG/8l0k94hnXUJCRiDZQZ23767ULMnmQ5dtt/OIL/5L8cc85ILnbpgIdLrL8mbAbfO1Pmb3fKBhxo58Pd4OfvuGVRLh0zSLKjy40t2QrTznCTABk9zLEqdD3GQfM7fIDxYcIZzSqdrA2eppTQHdXBCBMeAlmTtjvRywM3a0vYVdnTNgVtr/GMnxHQ5PCh8tZYp2MicB/6786IKXp9luIbG+hYuaoMnIKIW3hnSRNrx4QIDAQAB
+    charset: UTF-8
+    signType: RSA2
+    notifyUrl: http://23139f2z38.51mypc.cn/app/unionPay/aliPayCallback
+    format: json
+
+wxpay:
+  appId: # appid
+  mchId: # 商户号
+  mchKey: # 秘钥
+  notifyUrl: http://127.0.0.1:8080/wxPay/wxPayNotice #微信支付回调地址
+
+sass:
+  #   host: https://openapi.esign.cn #正式环境域名
+  host: https://smlopenapi.esign.cn #沙箱环境域名
+  projectId: 7438866430
+  projectScert: b9f3eb85f1aab0b2df793b09dd2eb45e
+  idNumberOrg: 91110105MA0038GH6Y

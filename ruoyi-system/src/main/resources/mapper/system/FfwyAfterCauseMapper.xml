@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.aftersale.FfwyAfterCauseMapper">
+    
+    <resultMap type="FfwyAfterCause" id="FfwyAfterCauseResult">
+        <result property="refundId"    column="refund_id"    />
+        <result property="refundName"    column="refund_name"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyAfterCauseVo">
+        select refund_id, refund_name from ffwy_after_cause
+    </sql>
+
+    <select id="selectFfwyAfterCauseList" parameterType="FfwyAfterCause" resultMap="FfwyAfterCauseResult">
+        <include refid="selectFfwyAfterCauseVo"/>
+        <where>  
+            <if test="refundName != null  and refundName != ''"> and refund_name like concat('%', #{refundName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyAfterCauseById" parameterType="Long" resultMap="FfwyAfterCauseResult">
+        <include refid="selectFfwyAfterCauseVo"/>
+        where refund_id = #{refundId}
+    </select>
+        
+    <insert id="insertFfwyAfterCause" parameterType="FfwyAfterCause" useGeneratedKeys="true" keyProperty="refundId">
+        insert into ffwy_after_cause
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="refundName != null">refund_name,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="refundName != null">#{refundName},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyAfterCause" parameterType="FfwyAfterCause">
+        update ffwy_after_cause
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="refundName != null">refund_name = #{refundName},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where refund_id = #{refundId}
+    </update>
+
+    <delete id="deleteFfwyAfterCauseById" parameterType="Long">
+        delete from ffwy_after_cause where refund_id = #{refundId}
+    </delete>
+
+    <delete id="deleteFfwyAfterCauseByIds" parameterType="String">
+        delete from ffwy_after_cause where refund_id in 
+        <foreach item="refundId" collection="array" open="(" separator="," close=")">
+            #{refundId}
+        </foreach>
+    </delete>
+	
+	  <select id="selectFfwyAfterCauseLists" resultMap="FfwyAfterCauseResult">
+        <include refid="selectFfwyAfterCauseVo"/>
+    </select>
+</mapper>

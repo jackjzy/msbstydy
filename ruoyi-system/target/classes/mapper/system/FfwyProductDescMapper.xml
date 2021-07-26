@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.product.FfwyProductDescMapper">
+    
+    <resultMap type="FfwyProductDesc" id="FfwyProductDescResult">
+        <result property="descId"    column="desc_id"    />
+        <result property="productId"    column="product_id"    />
+        <result property="decript"    column="decript"    />
+        <result property="descSort"    column="desc_sort"    />
+        <result property="descType"    column="desc_type"    />
+        <result property="descStatus"    column="desc_status"    />
+    </resultMap>
+
+    <sql id="selectFfwyProductDescVo">
+        select desc_id, product_id, decript, desc_sort, desc_type, desc_status  from ffwy_product_desc
+    </sql>
+
+    <select id="selectFfwyProductDescList" parameterType="FfwyProductDesc" resultMap="FfwyProductDescResult">
+        <include refid="selectFfwyProductDescVo"/>
+        <where>  
+            <if test="descId != null "> and desc_id = #{descId}</if>
+            <if test="productId != null "> and product_id = #{productId}</if>
+            <if test="decript != null  and decript != ''"> and decript = #{decript}</if>
+            <if test="descType != null  and descType != ''"> and desc_type = #{descType}</if>
+            <if test="descSort != null "> and desc_sort = #{descSort}</if>
+            <if test="descStatus != null "> and desc_status = #{descStatus}</if>
+        </where>
+    </select>
+
+    <select id="selectProductDescListBySort" resultMap="FfwyProductDescResult">
+        <include refid="selectFfwyProductDescVo"/>
+        <where>
+            <if test="productId != null "> and product_id = #{productId}</if>
+            <if test="descType != null  and descType != ''"> and desc_type = #{descType}</if>
+            <if test="descSort != null "> and desc_sort > #{descSort}</if>
+            <if test="descStatus != null "> and desc_status = #{descStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyProductDescById" parameterType="Long" resultMap="FfwyProductDescResult">
+        <include refid="selectFfwyProductDescVo"/>
+        where desc_id = #{descId}
+    </select>
+
+    <select id="selectSpecificationById" parameterType="Long" resultMap="FfwyProductDescResult">
+        <include refid="selectFfwyProductDescVo"/>
+        where product_id = #{productId}
+    </select>
+
+    <select id="selectFfwySpecificationById" parameterType="Long" resultMap="FfwyProductDescResult">
+        select ffpd.desc_id, ffpd.product_id, ffpd.decript, ffpd.desc_sort,fpp.product_photopath,ffpd.desc_type from ffwy_product_desc  ffpd
+ INNER JOIN  ffwy_product_photo fpp on ffpd.product_id=fpp.product_id
+
+ WHERE  ffpd.product_id=#{productId} and fpp.photo_type=3
+    </select>
+        
+    <insert id="insertFfwyProductDesc" parameterType="FfwyProductDesc">
+        insert into ffwy_product_desc
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="descId != null">desc_id,</if>
+            <if test="productId != null">product_id,</if>
+            <if test="decript != null">decript,</if>
+            <if test="descSort != null">desc_sort,</if>
+            <if test="descType != null">desc_type,</if>
+            <if test="descStatus != null">desc_status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="descId != null">#{descId},</if>
+            <if test="productId != null">#{productId},</if>
+            <if test="decript != null">#{decript},</if>
+            <if test="descSort != null">#{descSort},</if>
+            <if test="descType != null">#{descType},</if>
+            <if test="descStatus != null">#{descStatus},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyProductDesc" parameterType="FfwyProductDesc">
+        update ffwy_product_desc
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productId != null">product_id = #{productId},</if>
+            <if test="decript != null">decript = #{decript},</if>
+            <if test="descSort != null">desc_sort = #{descSort},</if>
+            <if test="descType != null">desc_type = #{descType},</if>
+            <if test="descStatus != null">desc_status = #{descStatus},</if>
+        </trim>
+        where desc_id = #{descId}
+    </update>
+
+    <delete id="deleteFfwyProductDescById" parameterType="Long">
+        delete from ffwy_product_desc where desc_id = #{descId}
+    </delete>
+
+    <delete id="deleteFfwyProductDescByIds" parameterType="String">
+        delete from ffwy_product_desc where desc_id in 
+        <foreach item="descId" collection="array" open="(" separator="," close=")">
+            #{descId}
+        </foreach>
+    </delete>
+    <delete id="deleteFfwyProductDescByProductId">
+        delete from ffwy_product_desc where product_id  = #{productId}
+    </delete>
+</mapper>

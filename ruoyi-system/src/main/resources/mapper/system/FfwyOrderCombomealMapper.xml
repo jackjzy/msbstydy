@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.combomealorders.FfwyOrderCombomealMapper">
+    
+    <resultMap type="FfwyOrderCombomeal" id="FfwyOrderCombomealResult">
+        <result property="orderId"    column="order_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="workerId"    column="worker_id"    />
+        <result property="workerName"    column="worker_name"    />
+        <result property="designerId"    column="designer_id"    />
+        <result property="designerName"    column="designer_name"    />
+        <result property="designerPhoto"    column="designer_photo"    />
+        <result property="proectName"    column="proect_name"    />
+        <result property="houseType"    column="house_type"    />
+        <result property="houseArea"    column="house_area"    />
+        <result property="orderRemarks"    column="order_remarks"    />
+        <result property="combomealId"    column="combomeal_id"    />
+        <result property="combomealCover"    column="combomeal_cover"    />
+        <result property="combomealName"    column="combomeal_name"    />
+        <result property="orderUserName"    column="order_user_name"    />
+        <result property="orderPhone"    column="order_phone"    />
+        <result property="orderAddr"    column="order_addr"    />
+        <result property="orderNumber"    column="order_number"    />
+        <result property="payId"    column="pay_id"    />
+        <result property="payTime"    column="pay_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="workingTime"    column="working_time"    />
+        <result property="beginTime"    column="begin_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="orderStatus"    column="order_status"    />
+        <result property="isUpgrade"    column="is_upgrade"    />
+        <result property="orderType"    column="order_type"    />
+        <result property="serviceMoney"    column="service_money"    />
+        <result property="realityMoney"    column="reality_money"    />
+        <result property="proectMoney"    column="proect_money"    />
+        <result property="allotStatus"  column="allot_status"/>
+        <result property="combomealType" column="combomeal_type"></result>
+        <result property="payRatio" column="pay_ratio"></result>
+        <result property="workerPhoto" column="worker_photo"></result>
+        <result property="contractId" column="contract_id"></result>
+        <result property="idCard" column="id_card"></result>
+    </resultMap>
+
+    <sql id="selectFfwyOrderCombomealVo">
+        select order_id, foc.user_id, worker_id, foc.worker_name, designer_id,
+         designer_name, designer_photo, proect_name, house_type, house_area,
+         order_remarks, combomeal_id, combomeal_cover, combomeal_name, order_user_name,
+          order_phone, order_addr, order_number, pay_id, pay_time, foc.create_time,
+           working_time, begin_time, end_time, order_status, is_upgrade, order_type,
+            service_money, reality_money, proect_money , combomeal_type,allot_status,
+            pay_ratio,fu.worker_photo,contract_id,id_card
+            from ffwy_order_combomeal foc left JOIN ffwy_user fu on
+					  foc.worker_id =fu.user_id
+    </sql>
+
+    <select id="selectFfwyOrderCombomealList" parameterType="FfwyOrderCombomeal" resultMap="FfwyOrderCombomealResult">
+        <include refid="selectFfwyOrderCombomealVo"/>
+        <where>  
+            <if test="userId != null "> and foc.user_id = #{userId}</if>
+            <if test="workerId != null "> and worker_id = #{workerId}</if>
+            <if test="workerName != null  and workerName != ''"> and foc.worker_name like concat('%', #{workerName}, '%')</if>
+            <if test="designerId != null "> and designer_id = #{designerId}</if>
+            <if test="designerName != null  and designerName != ''"> and designer_name like concat('%', #{designerName}, '%')</if>
+            <if test="designerPhoto != null  and designerPhoto != ''"> and designer_photo = #{designerPhoto}</if>
+            <if test="proectName != null  and proectName != ''"> and proect_name like concat('%', #{proectName}, '%')</if>
+            <if test="houseType != null  and houseType != ''"> and house_type = #{houseType}</if>
+            <if test="houseArea != null "> and house_area = #{houseArea}</if>
+            <if test="orderRemarks != null  and orderRemarks != ''"> and order_remarks = #{orderRemarks}</if>
+            <if test="combomealId != null "> and combomeal_id = #{combomealId}</if>
+            <if test="combomealCover != null  and combomealCover != ''"> and combomeal_cover = #{combomealCover}</if>
+            <if test="combomealName != null  and combomealName != ''"> and combomeal_name like concat('%', #{combomealName}, '%')</if>
+            <if test="orderUserName != null  and orderUserName != ''"> and order_user_name like concat('%', #{orderUserName}, '%')</if>
+            <if test="orderPhone != null  and orderPhone != ''"> and order_phone = #{orderPhone}</if>
+            <if test="orderAddr != null  and orderAddr != ''"> and order_addr = #{orderAddr}</if>
+            <if test="orderNumber != null  and orderNumber != ''"> and order_number = #{orderNumber}</if>
+            <if test="payId != null "> and pay_id = #{payId}</if>
+            <if test="payTime != null "> and pay_time = #{payTime}</if>
+            <if test="workingTime != null "> and working_time = #{workingTime}</if>
+            <if test="beginTime != null "> and begin_time = #{beginTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
+            <if test="isUpgrade != null  and isUpgrade != ''"> and is_upgrade = #{isUpgrade}</if>
+            <if test="orderType != null  and orderType != ''"> and order_type = #{orderType}</if>
+            <if test="serviceMoney != null "> and service_money = #{serviceMoney}</if>
+            <if test="realityMoney != null "> and reality_money = #{realityMoney}</if>
+            <if test="proectMoney != null "> and proect_money = #{proectMoney}</if>
+            <if test="payRatio != null "> and pay_ratio = #{payRatio}</if>
+            <if test="combomealType != null  and combomealType != ''"> and combomeal_type = #{combomealType}</if>
+            <if test="allotStatus != null  and allotStatus != ''"> and allot_status = #{allotStatus}</if>
+            <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="contractId != null  and contractId != ''"> and contract_id = #{contractId}</if>
+            <if test="searchStr!=null and searchStr!=''">
+                AND
+                CONCAT(order_user_name,order_phone) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectFfwyOrderCombomealListPC" parameterType="FfwyOrderCombomealVo" resultMap="FfwyOrderCombomealResult">
+        <include refid="selectFfwyOrderCombomealVo"/>
+        <where>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="workerId != null "> and worker_id = #{workerId}</if>
+            <if test="workerName != null  and workerName != ''"> and worker_name like concat('%', #{workerName}, '%')</if>
+            <if test="designerId != null "> and designer_id = #{designerId}</if>
+            <if test="designerName != null  and designerName != ''"> and designer_name like concat('%', #{designerName}, '%')</if>
+            <if test="designerPhoto != null  and designerPhoto != ''"> and designer_photo = #{designerPhoto}</if>
+            <if test="proectName != null  and proectName != ''"> and proect_name like concat('%', #{proectName}, '%')</if>
+            <if test="houseType != null  and houseType != ''"> and house_type = #{houseType}</if>
+            <if test="houseArea != null "> and house_area = #{houseArea}</if>
+            <if test="orderRemarks != null  and orderRemarks != ''"> and order_remarks = #{orderRemarks}</if>
+            <if test="combomealId != null "> and combomeal_id = #{combomealId}</if>
+            <if test="combomealCover != null  and combomealCover != ''"> and combomeal_cover = #{combomealCover}</if>
+            <if test="combomealName != null  and combomealName != ''"> and combomeal_name like concat('%', #{combomealName}, '%')</if>
+            <if test="orderUserName != null  and orderUserName != ''"> and order_user_name like concat('%', #{orderUserName}, '%')</if>
+            <if test="orderPhone != null  and orderPhone != ''"> and order_phone = #{orderPhone}</if>
+            <if test="orderAddr != null  and orderAddr != ''"> and order_addr = #{orderAddr}</if>
+            <if test="orderNumber != null  and orderNumber != ''"> and order_number = #{orderNumber}</if>
+            <if test="payId != null "> and pay_id = #{payId}</if>
+            <if test="createTimeStart != null "> and create_time >= #{createTimeStart}</if>
+            <if test="createTimeEnd != null "> and create_time &lt;= #{createTimeEnd}</if>
+            <if test="payTime != null "> and pay_time = #{payTime}</if>
+            <if test="workingTime != null "> and working_time = #{workingTime}</if>
+            <if test="beginTime != null "> and begin_time = #{beginTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
+            <if test="isUpgrade != null  and isUpgrade != ''"> and is_upgrade = #{isUpgrade}</if>
+            <if test="orderType != null  and orderType != ''"> and order_type = #{orderType}</if>
+            <if test="serviceMoney != null "> and service_money = #{serviceMoney}</if>
+            <if test="realityMoney != null "> and reality_money = #{realityMoney}</if>
+            <if test="proectMoney != null "> and proect_money = #{proectMoney}</if>
+            <if test="payRatio != null "> and pay_ratio = #{payRatio}</if>
+            <if test="allotStatus != null  and allotStatus != ''"> and allot_status = #{allotStatus}</if>
+            <if test="combomealType != null  and combomealType != ''"> and combomeal_type = #{combomealType}</if>
+            <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="contractId != null  and contractId != ''"> and contract_id = #{contractId}</if>
+            <if test="searchStr!=null and searchStr!=''">
+                AND
+                CONCAT(order_user_name,order_phone) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectFfwyOrderCombomealById" parameterType="Long" resultMap="FfwyOrderCombomealResult">
+        <include refid="selectFfwyOrderCombomealVo"/>
+        where order_id = #{orderId}
+    </select>
+
+    <select id="selectFfwyOrderCombomealByOrderNumber" parameterType="String" resultMap="FfwyOrderCombomealResult">
+        <include refid="selectFfwyOrderCombomealVo"/>
+        where order_number = #{orderNumber}
+    </select>
+        
+    <insert id="insertFfwyOrderCombomeal" parameterType="FfwyOrderCombomeal" useGeneratedKeys="true" keyProperty="orderId">
+        insert into ffwy_order_combomeal
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="userId != null">user_id,</if>
+            <if test="workerId != null">worker_id,</if>
+            <if test="workerName != null">worker_name,</if>
+            <if test="designerId != null">designer_id,</if>
+            <if test="designerName != null">designer_name,</if>
+            <if test="designerPhoto != null">designer_photo,</if>
+            <if test="proectName != null">proect_name,</if>
+            <if test="houseType != null">house_type,</if>
+            <if test="houseArea != null">house_area,</if>
+            <if test="orderRemarks != null">order_remarks,</if>
+            <if test="combomealId != null">combomeal_id,</if>
+            <if test="combomealCover != null">combomeal_cover,</if>
+            <if test="combomealName != null">combomeal_name,</if>
+            <if test="orderUserName != null">order_user_name,</if>
+            <if test="orderPhone != null">order_phone,</if>
+            <if test="orderAddr != null">order_addr,</if>
+            <if test="orderNumber != null">order_number,</if>
+            <if test="payId != null">pay_id,</if>
+            <if test="payTime != null">pay_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="workingTime != null">working_time,</if>
+            <if test="beginTime != null">begin_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="orderStatus != null">order_status,</if>
+            <if test="isUpgrade != null">is_upgrade,</if>
+            <if test="orderType != null">order_type,</if>
+            <if test="serviceMoney != null">service_money,</if>
+            <if test="realityMoney != null">reality_money,</if>
+            <if test="proectMoney != null">proect_money,</if>
+            <if test="payRatio != null ">pay_ratio, </if>
+            <if test="combomealType != null  and combomealType != ''">combomeal_type,</if>
+
+            <if test="idCard != null ">id_card, </if>
+            <if test="contractId != null  ">contract_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+            <if test="userId != null">#{userId},</if>
+            <if test="workerId != null">#{workerId},</if>
+            <if test="workerName != null">#{workerName},</if>
+            <if test="designerId != null">#{designerId},</if>
+            <if test="designerName != null">#{designerName},</if>
+            <if test="designerPhoto != null">#{designerPhoto},</if>
+            <if test="proectName != null">#{proectName},</if>
+            <if test="houseType != null">#{houseType},</if>
+            <if test="houseArea != null">#{houseArea},</if>
+            <if test="orderRemarks != null">#{orderRemarks},</if>
+            <if test="combomealId != null">#{combomealId},</if>
+            <if test="combomealCover != null">#{combomealCover},</if>
+            <if test="combomealName != null">#{combomealName},</if>
+            <if test="orderUserName != null">#{orderUserName},</if>
+            <if test="orderPhone != null">#{orderPhone},</if>
+            <if test="orderAddr != null">#{orderAddr},</if>
+            <if test="orderNumber != null">#{orderNumber},</if>
+            <if test="payId != null">#{payId},</if>
+            <if test="payTime != null">#{payTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="workingTime != null">#{workingTime},</if>
+            <if test="beginTime != null">#{beginTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="orderStatus != null">#{orderStatus},</if>
+            <if test="isUpgrade != null">#{isUpgrade},</if>
+            <if test="orderType != null">#{orderType},</if>
+            <if test="serviceMoney != null">#{serviceMoney},</if>
+            <if test="realityMoney != null">#{realityMoney},</if>
+            <if test="proectMoney != null">#{proectMoney},</if>
+            <if test="payRatio != null">#{payRatio},</if>
+            <if test="combomealType != null  and combomealType != ''">#{combomealType},</if>
+
+            <if test="idCard != null">#{idCard},</if>
+            <if test="contractId != null ">#{contractId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyOrderCombomeal" parameterType="FfwyOrderCombomeal">
+        update ffwy_order_combomeal
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="workerId != null">worker_id = #{workerId},</if>
+            <if test="workerName != null">worker_name = #{workerName},</if>
+            <if test="designerId != null">designer_id = #{designerId},</if>
+            <if test="designerName != null">designer_name = #{designerName},</if>
+            <if test="designerPhoto != null">designer_photo = #{designerPhoto},</if>
+            <if test="proectName != null">proect_name = #{proectName},</if>
+            <if test="houseType != null">house_type = #{houseType},</if>
+            <if test="houseArea != null">house_area = #{houseArea},</if>
+            <if test="orderRemarks != null">order_remarks = #{orderRemarks},</if>
+            <if test="combomealId != null">combomeal_id = #{combomealId},</if>
+            <if test="combomealCover != null">combomeal_cover = #{combomealCover},</if>
+            <if test="combomealName != null">combomeal_name = #{combomealName},</if>
+            <if test="orderUserName != null">order_user_name = #{orderUserName},</if>
+            <if test="orderPhone != null">order_phone = #{orderPhone},</if>
+            <if test="orderAddr != null">order_addr = #{orderAddr},</if>
+            <if test="orderNumber != null">order_number = #{orderNumber},</if>
+            <if test="payId != null">pay_id = #{payId},</if>
+            <if test="payTime != null">pay_time = #{payTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="workingTime != null">working_time = #{workingTime},</if>
+            <if test="beginTime != null">begin_time = #{beginTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+            <if test="isUpgrade != null">is_upgrade = #{isUpgrade},</if>
+            <if test="orderType != null">order_type = #{orderType},</if>
+            <if test="serviceMoney != null">service_money = #{serviceMoney},</if>
+            <if test="realityMoney != null">reality_money = #{realityMoney},</if>
+            <if test="proectMoney != null">proect_money = #{proectMoney},</if>
+            <if test="allotStatus != null">allot_status = #{allotStatus},</if>
+            <if test="payRatio != null ">pay_ratio = #{payRatio}</if>
+            <if test="combomealType != null  and combomealType != ''">combomeal_type = #{combomealType},</if>
+
+            <if test="idCard != null ">id_card = #{idCard}</if>
+            <if test="contractId != null ">contract_id = #{contractId},</if>
+        </trim>
+        where order_id = #{orderId}
+    </update>
+
+    <delete id="deleteFfwyOrderCombomealById" parameterType="Long">
+        delete from ffwy_order_combomeal where order_id = #{orderId}
+    </delete>
+
+    <delete id="deleteFfwyOrderCombomealByIds" parameterType="String">
+        delete from ffwy_order_combomeal where order_id in 
+        <foreach item="orderId" collection="array" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </delete>
+    
+    <select id="selectFfwyOrderCombomealByorderType" resultMap="FfwyOrderCombomealResult">
+        <include refid="selectFfwyOrderCombomealVo"/>
+        where order_type = 0
+    </select>
+</mapper>

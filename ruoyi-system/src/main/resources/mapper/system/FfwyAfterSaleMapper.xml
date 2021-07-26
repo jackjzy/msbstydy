@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.aftersale.FfwyAfterSaleMapper">
+    
+    <resultMap type="FfwyAfterSale" id="FfwyAfterSaleResult">
+        <result property="afterSaleid"    column="after_saleid"    />
+        <result property="orderDetailsId"    column="order_details_id"    />
+        <result property="orderNumber"    column="order_number"    />
+        <result property="userId"    column="user_id"    />
+        <result property="causeId"    column="cause_id"    />
+        <result property="afterType"    column="after_type"    />
+        <result property="afterStatus"    column="after_status"    />
+        <result property="problemDescription"    column="problem_description"    />
+        <result property="merchantLeave"    column="merchant_leave"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="kddh" column="kddh"/>
+        <result property="kdgs" column="kdgs"/>
+        <result property="refundOrderNumber" column="refund_order_number"></result>
+        <association property="ffwyAfterCause" javaType="FfwyAfterCause">
+            <result property="refundId" column="cause_id"></result>
+            <result property="refundName" column="refund_name"></result>
+        </association>
+        <collection property="photos" javaType="java.util.ArrayList" ofType="FfwyAfterPhoto">
+            <result property="afterPhotoId" column="after_photo_id"></result>
+            <result property="afterPhoto" column="after_photo"></result>
+        </collection>
+    </resultMap>
+
+    <sql id="selectFfwyAfterSaleVo">
+        select after_saleid, order_details_id, order_number, user_id, cause_id,
+         after_type, after_status, problem_description, merchant_leave, create_time,refund_order_number
+          from ffwy_after_sale
+    </sql>
+
+    <sql id="SELECT_AFTERSALE_PHOTO">
+        select after_saleid, order_details_id, order_number, user_id, cause_id, after_type,
+        after_status, problem_description, merchant_leave, fas.create_time ,fac.refund_name,
+        fap.after_photo,fap.after_photo_id,refund_order_number
+        from ffwy_after_sale fas
+        left JOIN ffwy_after_photo fap on fas .after_saleid =fap.after_sale_id
+        left join ffwy_after_cause fac on fas.cause_id =fac.refund_id
+    </sql>
+
+    <select id="selectFfwyAfterSaleList" parameterType="FfwyAfterSale" resultMap="FfwyAfterSaleResult">
+        <include refid="selectFfwyAfterSaleVo"/>
+        <where>  
+            <if test="orderDetailsId != null "> and order_details_id = #{orderDetailsId}</if>
+            <if test="orderNumber != null  and orderNumber != ''"> and order_number = #{orderNumber}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="causeId != null "> and cause_id = #{causeId}</if>
+            <if test="afterType != null "> and after_type = #{afterType}</if>
+            <if test="afterStatus != null  and afterStatus != ''"> and after_status = #{afterStatus}</if>
+            <if test="problemDescription != null  and problemDescription != ''"> and problem_description = #{problemDescription}</if>
+            <if test="merchantLeave != null  and merchantLeave != ''"> and merchant_leave = #{merchantLeave}</if>
+            <if test="refundOrderNumber != null  and refundOrderNumber != ''"> and refund_order_number = #{refundOrderNumber}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyAfterSaleById" parameterType="Long" resultMap="FfwyAfterSaleResult">
+        <include refid="selectFfwyAfterSaleVo"/>
+        where after_saleid = #{afterSaleid}
+    </select>
+
+    <select id="selectFfwyAfterSaleByOrderId" parameterType="Long" resultMap="FfwyAfterSaleResult">
+        <include refid="SELECT_AFTERSALE_PHOTO"/>
+        WHERE order_details_id=#{orderId}
+    </select>
+    <insert id="insertFfwyAfterSale" parameterType="FfwyAfterSale" useGeneratedKeys="true" keyProperty="afterSaleid">
+        insert into ffwy_after_sale
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderDetailsId != null">order_details_id,</if>
+            <if test="orderNumber != null">order_number,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="causeId != null">cause_id,</if>
+            <if test="afterType != null">after_type,</if>
+            <if test="afterStatus != null">after_status,</if>
+            <if test="problemDescription != null">problem_description,</if>
+            <if test="merchantLeave != null">merchant_leave,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="kddh != null">kddh,</if>
+            <if test="kdgs != null">kdgs,</if>
+            <if test="refundOrderNumber != null">refund_order_number,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderDetailsId != null">#{orderDetailsId},</if>
+            <if test="orderNumber != null">#{orderNumber},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="causeId != null">#{causeId},</if>
+            <if test="afterType != null">#{afterType},</if>
+            <if test="afterStatus != null">#{afterStatus},</if>
+            <if test="problemDescription != null">#{problemDescription},</if>
+            <if test="merchantLeave != null">#{merchantLeave},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="kddh != null">#{kddh},</if>
+            <if test="kdgs !=null">#{kdgs},</if>
+            <if test="refundOrderNumber !=null">#{refundOrderNumber},</if>
+         </trim>
+    </insert>
+
+    <insert id="insertFfwyAfterStatus" parameterType="FfwyAfterStatus" useGeneratedKeys="true" >
+        insert into ffwy_after_status
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="saleId != null">sale_id,</if>
+        <if test="auditStatusId != null">audit_status_id,</if>
+        <if test="createTime != null">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="saleId != null">#{saleId},</if>
+        <if test="auditStatusId != null">#{auditStatusId},</if>
+        <if test="createTime != null">#{createTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateFfwyAfterSale" parameterType="FfwyAfterSale">
+        update ffwy_after_sale
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderDetailsId != null">order_details_id = #{orderDetailsId},</if>
+            <if test="orderNumber != null">order_number = #{orderNumber},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="causeId != null">cause_id = #{causeId},</if>
+            <if test="afterType != null">after_type = #{afterType},</if>
+            <if test="afterStatus != null">after_status = #{afterStatus},</if>
+            <if test="problemDescription != null">problem_description = #{problemDescription},</if>
+            <if test="merchantLeave != null">merchant_leave = #{merchantLeave},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="kddh != null">kddh = #{kddh},</if>
+            <if test="kdgs != null">kdgs = #{kdgs},</if>
+            <if test="refundOrderNumber != null">refund_order_number = #{refundOrderNumber},</if>
+        </trim>
+        where after_saleid = #{afterSaleid}
+    </update>
+
+    <delete id="deleteFfwyAfterSaleById" parameterType="Long">
+        delete from ffwy_after_sale where after_saleid = #{afterSaleid}
+    </delete>
+
+    <delete id="deleteFfwyAfterStatus" parameterType="Long">
+        DELETE FROM ffwy_after_status WHERE sale_id = #{afterSaleid}
+    </delete>
+
+    <delete id="deleteFfwyAfterSaleByIds" parameterType="String">
+        delete from ffwy_after_sale where after_saleid in 
+        <foreach item="afterSaleid" collection="array" open="(" separator="," close=")">
+            #{afterSaleid}
+        </foreach>
+    </delete>
+	
+</mapper>

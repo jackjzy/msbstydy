@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.myhoust.FfwyMyhoustsMapper">
+    
+    <resultMap type="FfwyWorkplanVo" id="FfwyMyhoustsResult">
+        <result property="myhoustId"    column="myhoust_id"    />
+        <result property="myhoustName"    column="myhoust_name"    />
+        <result property="combomealId"    column="combomeal_id"    />
+        <result property="sumPrice"    column="sum_price"    />
+        <result property="house"    column="house"    />
+        <result property="area"    column="area"    />
+        <result property="blueprint"    column="blueprint"    />
+        <result property="workTime"    column="work_time"    />
+        <result property="stylist"    column="stylist"    />
+        <result property="foreman"    column="foreman"    />
+        <result property="userId"    column="user_id"    />
+        <result property="actDate"    column="act_date"    />
+        <result property="closedDate"    column="closed_date"    />
+        <result property="myhoustRemark"    column="myhoust_remark"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="phaseId"    column="phase_id"    />
+        <result property="shopName" column="shop_name" />
+        <result property="shopLogo" column="shop_logo" />
+        <result property="shopLocation" column="shop_location" />
+        <result property="phaseName" column="phase_name" />
+    </resultMap>
+
+    <sql id="selectFfwyMyhoustsVo">
+        select myhoust_id, myhoust_name, combomeal_id, sum_price, house, area, blueprint, work_time, stylist, foreman, user_id, act_date, closed_date, myhoust_remark, shop_id, phase_id from ffwy_myhousts
+    </sql>
+
+    <select id="selectFfwyMyhoustsList" parameterType="FfwyMyhousts" resultMap="FfwyMyhoustsResult">
+        <include refid="selectFfwyMyhoustsVo"/>
+        <where>  
+            <if test="myhoustName != null  and myhoustName != ''"> and myhoust_name like concat('%', #{myhoustName}, '%')</if>
+            <if test="combomealId != null "> and combomeal_id = #{combomealId}</if>
+            <if test="sumPrice != null "> and sum_price = #{sumPrice}</if>
+            <if test="house != null  and house != ''"> and house = #{house}</if>
+            <if test="area != null "> and area = #{area}</if>
+            <if test="blueprint != null  and blueprint != ''"> and blueprint = #{blueprint}</if>
+            <if test="workTime != null "> and work_time = #{workTime}</if>
+            <if test="stylist != null "> and stylist = #{stylist}</if>
+            <if test="foreman != null "> and foreman = #{foreman}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="actDate != null "> and act_date = #{actDate}</if>
+            <if test="closedDate != null "> and closed_date = #{closedDate}</if>
+            <if test="myhoustRemark != null  and myhoustRemark != ''"> and myhoust_remark = #{myhoustRemark}</if>
+            <if test="shopId != null "> and shop_id = #{shopId}</if>
+            <if test="phaseId != null "> and phase_id = #{phaseId}</if>
+            <if test="searchStr!=null and searchStr!=''">
+                AND
+                CONCAT(myhoustName,house,myhoustRemark) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyMyhoustsById" parameterType="Long" resultMap="FfwyMyhoustsResult">
+        <include refid="selectFfwyMyhoustsVo"/>
+        where myhoust_id = #{myhoustId}
+    </select>
+        
+    <insert id="insertFfwyMyhousts" parameterType="FfwyMyhousts" useGeneratedKeys="true" keyProperty="myhoustId">
+        insert into ffwy_myhousts
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="myhoustName != null">myhoust_name,</if>
+            <if test="combomealId != null">combomeal_id,</if>
+            <if test="sumPrice != null">sum_price,</if>
+            <if test="house != null">house,</if>
+            <if test="area != null">area,</if>
+            <if test="blueprint != null">blueprint,</if>
+            <if test="workTime != null">work_time,</if>
+            <if test="stylist != null">stylist,</if>
+            <if test="foreman != null">foreman,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="actDate != null">act_date,</if>
+            <if test="closedDate != null">closed_date,</if>
+            <if test="myhoustRemark != null">myhoust_remark,</if>
+            <if test="shopId != null">shop_id,</if>
+            <if test="phaseId != null">phase_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="myhoustName != null">#{myhoustName},</if>
+            <if test="combomealId != null">#{combomealId},</if>
+            <if test="sumPrice != null">#{sumPrice},</if>
+            <if test="house != null">#{house},</if>
+            <if test="area != null">#{area},</if>
+            <if test="blueprint != null">#{blueprint},</if>
+            <if test="workTime != null">#{workTime},</if>
+            <if test="stylist != null">#{stylist},</if>
+            <if test="foreman != null">#{foreman},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="actDate != null">#{actDate},</if>
+            <if test="closedDate != null">#{closedDate},</if>
+            <if test="myhoustRemark != null">#{myhoustRemark},</if>
+            <if test="shopId != null">#{shopId},</if>
+            <if test="phaseId != null">#{phaseId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyMyhousts" parameterType="FfwyMyhousts">
+        update ffwy_myhousts
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="myhoustName != null">myhoust_name = #{myhoustName},</if>
+            <if test="combomealId != null">combomeal_id = #{combomealId},</if>
+            <if test="sumPrice != null">sum_price = #{sumPrice},</if>
+            <if test="house != null">house = #{house},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="blueprint != null">blueprint = #{blueprint},</if>
+            <if test="workTime != null">work_time = #{workTime},</if>
+            <if test="stylist != null">stylist = #{stylist},</if>
+            <if test="foreman != null">foreman = #{foreman},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="actDate != null">act_date = #{actDate},</if>
+            <if test="closedDate != null">closed_date = #{closedDate},</if>
+            <if test="myhoustRemark != null">myhoust_remark = #{myhoustRemark},</if>
+            <if test="shopId != null">shop_id = #{shopId},</if>
+            <if test="phaseId != null">phase_id = #{phaseId},</if>
+        </trim>
+        where myhoust_id = #{myhoustId}
+    </update>
+
+    <delete id="deleteFfwyMyhoustsById" parameterType="Long">
+        delete from ffwy_myhousts where myhoust_id = #{myhoustId}
+    </delete>
+
+    <delete id="deleteFfwyMyhoustsByIds" parameterType="String">
+        delete from ffwy_myhousts where myhoust_id in 
+        <foreach item="myhoustId" collection="array" open="(" separator="," close=")">
+            #{myhoustId}
+        </foreach>
+    </delete>
+    
+    <select id="selectFfwyPhaseBypentId" parameterType="Long" resultMap="FfwyMyhoustsResult">
+        <include refid="selectFfwyMyhoustsVo"/>
+        where parent_id = #{parentId}
+    </select>
+    
+    <select id="selectFfwyMyhoustsByid" parameterType="Long" resultMap="FfwyMyhoustsResult">
+      SELECT
+	t1.myhoust_id,
+	t1.myhoust_name,
+	t1.myhoust_remark,
+	t1.sum_price,
+	t1.house,
+	t1.area,
+	t1.stylist,
+	t1.act_date,
+	t2.shop_name,
+	t2.shop_location,
+	t2.shop_logo,
+	t3.phase_name
+FROM
+	ffwy_myhousts t1,
+	ffwy_shop t2,
+	ffwy_phase t3,
+	ffwy_order_client t4
+	<where>
+	t4.order_client_id = #{orderClientId}
+	AND t4.user_id = t1.user_id
+	AND t1.shop_id = t2.shop_id
+	AND t1.phase_id = t3.phase_id
+    </where>
+    </select>
+</mapper>

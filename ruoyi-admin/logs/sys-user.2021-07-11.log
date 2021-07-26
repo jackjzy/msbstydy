@@ -1,0 +1,2 @@
+16:12:17.706 [SpringContextShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+16:25:41.705 [SpringContextShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====

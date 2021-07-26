@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.video.FfwyAppVideoMapper">
+
+    <resultMap type="FfwyvideouserVo" id="FfwyVideoResult">
+        <result property="videoId" column="video_id"/>
+        <result property="videoIds" column="videoIds"/>
+        <result property="userId" column="user_id"/>
+        <result property="videoCover" column="video_cover"/>
+        <result property="videoTitle" column="video_title"/>
+        <result property="videoIntro" column="video_intro"/>
+        <result property="videoPath" column="video_path"/>
+        <result property="productCategoryId" column="product_category_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="videoStatus" column="video_status"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="photo" column="photo"/>
+        <result property="userType" column="user_type"/>
+        <result property="comments" column="comments"/>
+        <result property="loveSum" column="loveSum"/>
+        <result property="isLove" column="isLove"/>
+        <result property="isFans" column="isFans"/>
+        <result property="isStore" column="isStore"/>
+        <result property="prouductId" column="prouduct_id"/>
+    </resultMap>
+
+    <sql id="selectFfwyVideoVo">
+        select video_id, user_id, video_cover, video_title, video_intro, video_path, product_category_id, create_time, video_status from ffwy_video
+    </sql>
+
+    <select id="selectFfwyVideoList" parameterType="FfwyVideo" resultMap="FfwyVideoResult">
+        <include refid="selectFfwyVideoVo"/>
+        <where>
+            <if test="userId != null ">and user_id = #{userId}</if>
+            <if test="videoId != null  and videoId != ''">and video_id = #{videoId}</if>
+            <if test="videoTitle != null  and videoTitle != ''">and video_title = #{videoTitle}</if>
+            <if test="videoIntro != null  and videoIntro != ''">and video_intro = #{videoIntro}</if>
+            <if test="videoPath != null  and videoPath != ''">and video_path = #{videoPath}</if>
+            <if test="productCategoryId != null ">and product_category_id = #{productCategoryId}</if>
+            <if test="videoStatus != null  and videoStatus != ''">and video_status = #{videoStatus}</if>
+        </where>
+    </select>
+
+    <select id="selectFfwyVideoById" parameterType="Long" resultMap="FfwyVideoResult">
+        <include refid="selectFfwyVideoVo"/>
+        where video_id = #{videoId}
+    </select>
+
+    <insert id="insertFfwyVideo" parameterType="FfwyVideo" useGeneratedKeys="true" keyProperty="videoId">
+        insert into ffwy_video
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="videoCover != null">video_cover,</if>
+            <if test="videoTitle != null">video_title,</if>
+            <if test="videoIntro != null">video_intro,</if>
+            <if test="videoPath != null">video_path,</if>
+            <if test="productCategoryId != null">product_category_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="videoStatus != null">video_status,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="videoCover != null">#{videoCover},</if>
+            <if test="videoTitle != null">#{videoTitle},</if>
+            <if test="videoIntro != null">#{videoIntro},</if>
+            <if test="videoPath != null">#{videoPath},</if>
+            <if test="productCategoryId != null">#{productCategoryId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="videoStatus != null">#{videoStatus},</if>
+        </trim>
+    </insert>
+
+    <update id="updateFfwyVideo" parameterType="FfwyVideo">
+        update ffwy_video
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="videoCover != null">video_cover = #{videoCover},</if>
+            <if test="videoTitle != null">video_title = #{videoTitle},</if>
+            <if test="videoIntro != null">video_intro = #{videoIntro},</if>
+            <if test="videoPath != null">video_path = #{videoPath},</if>
+            <if test="productCategoryId != null">product_category_id = #{productCategoryId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="videoStatus != null">video_status = #{videoStatus},</if>
+        </trim>
+        where video_id = #{videoId}
+    </update>
+
+    <delete id="deleteFfwyVideoById" parameterType="Long">
+        delete from ffwy_video where video_id = #{videoId}
+    </delete>
+
+    <delete id="deleteFfwyVideoByIds" parameterType="String">
+        delete from ffwy_video where video_id in
+        <foreach item="videoId" collection="array" open="(" separator="," close=")">
+            #{videoId}
+        </foreach>
+    </delete>
+
+    <!--    <select id="selectFfwyvideoByhotVido" resultMap="FfwyVideoResult">
+            `SELECT
+            t1.video_id,
+            t1.video_intro,
+            t1.create_time,
+            t1.video_path,
+            t1.video_love,
+            t1.video_trans,
+            t1.prouduct_id,
+            ( SELECT COUNT( * ) FROM ffwy_video_comment t2 WHERE t1.video_id = t2.video_id GROUP BY t2.video_id ) comments,
+            ( SELECT COUNT( * ) FROM ffwy_video_love t3 WHERE t1.video_id = t3.video_id GROUP BY t3.video_id ) loveSum,
+            ( SELECT count( * ) FROM ffwy_video_love t3 WHERE t3.video_id = t1.video_id AND t3.user_id = #{userId} GROUP BY t3.video_id  ) isLove,
+            ( SELECT count( * ) FROM ffwy_user_fans fuf WHERE fuf.user_id = t1.user_id AND fuf.fans_id = #{userId} ) isFans,
+            t3.user_id,
+            t3.user_name,
+            t3.photo,
+            t3.user_type
+            FROM
+            ffwy_video t1
+            LEFT JOIN ffwy_user t3 ON t1.user_id = t3.user_id
+            WHERE  t1.video_status = 0 and t1.user_id != #{userId}
+            <if test="integers != null and integers.size>0" >
+            and t1.video_id IN
+            <foreach collection="integers" item="id" index="index" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+            </if>
+            <if test="integers != null and integers.size>0">
+            ORDER BY
+            field( t1.video_id,
+            <foreach collection="integers" item="id" index="index"  separator=",">
+                #{id}
+            </foreach>
+             )
+            </if>
+
+
+        </select>-->
+
+
+    <select id="selectFfwyvideoByhotVido" resultMap="FfwyVideoResult">
+        (SELECT
+        t1.video_id,
+        t1.video_intro,
+        t1.create_time,
+        t1.video_path,
+        t1.video_love,
+        t1.video_trans,
+        t1.prouduct_id,
+        ( SELECT COUNT( * ) FROM ffwy_video_comment t2 WHERE t1.video_id = t2.video_id GROUP BY t2.video_id ) comments,
+        ( SELECT COUNT( * ) FROM ffwy_video_love t3 WHERE t1.video_id = t3.video_id GROUP BY t3.video_id ) loveSum,
+        ( SELECT count( * ) FROM ffwy_video_love t3 WHERE t3.video_id = t1.video_id AND t3.user_id = #{userId} GROUP BY
+        t3.video_id ) isLove,
+        ( SELECT count( * ) FROM ffwy_user_fans fuf WHERE fuf.user_id = t1.user_id AND fuf.fans_id = #{userId} ) isFans,
+        (SELECT COUNT(*) FROM ffwy_store_video fvc WHERE fvc.user_id = #{userId} and fvc.video_id = t1.video_id ) as
+        isStore,
+        t3.user_id,
+        t3.user_name,
+        t3.photo,
+        t3.user_type
+        FROM
+        ffwy_video t1
+        LEFT JOIN ffwy_user t3 ON t1.user_id = t3.user_id
+        WHERE t1.video_status = 0
+        <if test="integers != null and integers.size>0">
+            and t1.video_id IN
+            <foreach collection="integers" item="id" index="index" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </if>
+        <if test="integers != null and integers.size>0">
+            ORDER BY
+            field( t1.video_id,
+            <foreach collection="integers" item="id" index="index" separator=",">
+                #{id}
+            </foreach>
+            )
+            LIMIT 999999
+        </if>
+        )
+        UNION ALL
+        (SELECT
+        t1.video_id,
+        t1.video_intro,
+        t1.create_time,
+        t1.video_path,
+        t1.video_love,
+        t1.video_trans,
+        t1.prouduct_id,
+        ( SELECT COUNT( * ) FROM ffwy_video_comment t2 WHERE t1.video_id = t2.video_id GROUP BY t2.video_id ) comments,
+        ( SELECT COUNT( * ) FROM ffwy_video_love t3 WHERE t1.video_id = t3.video_id GROUP BY t3.video_id ) loveSum,
+        ( SELECT count( * ) FROM ffwy_video_love t3 WHERE t3.video_id = t1.video_id AND t3.user_id = #{userId} GROUP BY
+        t3.video_id ) isLove,
+        ( SELECT count( * ) FROM ffwy_user_fans fuf WHERE fuf.user_id = t1.user_id AND fuf.fans_id = #{userId} ) isFans,
+        (SELECT COUNT(*) FROM ffwy_store_video fvc WHERE fvc.user_id = #{userId} and fvc.video_id = t1.video_id ) as
+        isStore,
+        t3.user_id,
+        t3.user_name,
+        t3.photo,
+        t3.user_type
+        FROM
+        ffwy_video t1
+        LEFT JOIN ffwy_user t3 ON t1.user_id = t3.user_id
+        WHERE t1.video_status = 0
+        <if test="integers != null and integers.size>0">
+            and t1.video_id NOT IN
+            <foreach collection="integers" item="id" index="index" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </if>
+        ORDER BY
+        t1.create_time DESC LIMIT 999999)
+    </select>
+
+
+    <select id="selectFfwyvideohotVido" resultMap="FfwyVideoResult">
+        SELECT
+        t1.video_id,
+        t1.video_intro,
+        t1.create_time,
+        t1.video_path,
+        t1.video_love,
+        t1.video_trans,
+        t1.prouduct_id,
+        ( SELECT COUNT( * ) FROM ffwy_video_comment t2 WHERE t1.video_id = t2.video_id GROUP BY t2.video_id ) comments,
+        ( SELECT COUNT( * ) FROM ffwy_video_love t3 WHERE t1.video_id = t3.video_id GROUP BY t3.video_id ) loveSum,
+        t3.user_id,
+        t3.user_name,
+        t3.photo,
+        t3.user_type
+        FROM
+        ffwy_video t1
+        LEFT JOIN ffwy_user t3 ON t1.user_id = t3.user_id
+        WHERE t1.video_status =0  ORDER BY t1.create_time desc
+    </select>
+
+    <select id="selectTag" parameterType="Long" resultType="com.ruoyi.system.domain.video.FfwyVideoTag">
+        SELECT * FROM ffwy_video_tag WHERE tag_id =#{tagId}
+    </select>
+
+    <select id="selectFfwyvideohotVidoList" parameterType="Long"
+            resultType="com.ruoyi.system.domain.video.FfwyVideoTag">
+        SELECT * FROM ffwy_video_tag WHERE tag_id =#{tagId}
+    </select>
+    <select id="selectFfwyvideoByNothotVido" resultMap="FfwyVideoResult">
+        SELECT
+        t1.video_id,
+        t1.video_intro,
+        t1.create_time,
+        t1.video_path,
+        t1.video_love,
+        t1.video_trans,
+        t1.prouduct_id,
+        ( SELECT COUNT( * ) FROM ffwy_video_comment t2 WHERE t1.video_id = t2.video_id GROUP BY t2.video_id ) comments,
+        ( SELECT COUNT( * ) FROM ffwy_video_love t3 WHERE t1.video_id = t3.video_id GROUP BY t3.video_id ) loveSum,
+        ( SELECT count( * ) FROM ffwy_video_love t3 WHERE t3.video_id = t1.video_id AND t3.user_id = #{userId} GROUP BY
+        t3.video_id ) isLove,
+        ( SELECT count( * ) FROM ffwy_user_fans fuf WHERE fuf.user_id = t1.user_id AND fuf.fans_id = #{userId} ) isFans,
+        (SELECT COUNT(*) FROM ffwy_store_video fvc WHERE fvc.user_id = #{userId} and fvc.video_id = t1.video_id ) as
+        isStore,
+        t3.user_id,
+        t3.user_name,
+        t3.photo,
+        t3.user_type
+        FROM
+        ffwy_video t1
+        LEFT JOIN ffwy_user t3 ON t1.user_id = t3.user_id
+        WHERE t1.video_status = 0  <!-- and t1.user_id != #{userId} -->
+        <if test="integers != null and integers.size>0">
+            and t1.video_id NOT IN
+            <foreach collection="integers" item="id" index="index" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </if>
+        ORDER BY
+        t1.create_time DESC
+
+
+    </select>
+
+    <!--    查询喜欢类型的视频id    点赞 倒叙 24小时 用户不喜欢的-->
+    <select id="selectNotLove" resultMap="FfwyVideoResult">
+        SELECT
+            t4.video_id as video_id
+        FROM
+            ffwy_video_love t4
+            LEFT JOIN ffwy_video t1 ON t1.video_id = t4.video_id
+        WHERE 1=1 and
+            t4.user_id = #{userId} AND
+            t4.create_time >= ( NOW( ) - INTERVAL 24 HOUR ) AND
+            t4.video_id IN (SELECT DISTINCT  fv.video_id  FROM
+	        ffwy_video fv
+	        INNER JOIN ffwy_video_tag fvt ON fv.video_id = fvt.video_id
+	        AND fvt.tag_id NOT IN ( SELECT tag_id FROM ffwy_video_notlove WHERE user_id = #{userId} ) )
+        GROUP BY
+            t4.video_id
+        ORDER BY
+            count(t4.video_id) DESC
+
+    </select>
+
+
+    <select id="selectFfwyvideolikesum" resultMap="FfwyVideoResult">
+        SELECT count( * ) as loveSum FROM ffwy_video_love t3 	WHERE t3.video_id =#{videoId}
+    </select>
+
+
+    <select id="selectFfwyvideocountcommentsum" resultMap="FfwyVideoResult">
+        SELECT count( * ) as comments FROM ffwy_video_comment t3
+        WHERE t3.video_id =#{videoId}
+    </select>
+
+    <insert id="insertFfwyVideoForward">
+        insert into ffwy_video_forward
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="videoId != null">video_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="videoId != null">#{videoId}</if>
+        </trim>
+    </insert>
+
+</mapper>

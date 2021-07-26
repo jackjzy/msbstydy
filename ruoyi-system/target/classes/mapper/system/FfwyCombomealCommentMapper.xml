@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyCombomealCommentMapper">
+    
+    <resultMap type="FfwyCombomealComment" id="FfwyCombomealCommentResult">
+        <result property="commentId"    column="comment_id"    />
+        <result property="combomealId"    column="combomeal_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="comment"    column="comment"    />
+        <result property="decorationAttitude"    column="decoration_attitude"    />
+        <result property="serviceAttitude"    column="service_attitude"    />
+        <result property="decorationQuality"    column="decoration_quality"    />
+        <result property="createTime"    column="create_time"    />
+        <association property="ffwyUser" javaType="FfwyUser">
+            <result property="userName" column="user_name"></result>
+            <result property="photo" column="photo"></result>
+        </association>
+        <association property="ffwyCombomeal" javaType="FfwyCombomeal">
+            <result property="combomealName" column="combomeal_name"></result>
+        </association>
+        <collection property="photos" javaType="java.util.ArrayList"
+                    ofType="com.ruoyi.system.domain.combomeal.FfwyCombomealCommentPhoto">
+            <result property="photoId" column="photo_id"></result>
+            <result property="photoPath" column="photo_path"></result>
+            <result property="combomealCommentId" column="combomeal_id"></result>
+        </collection>
+    </resultMap>
+
+    <sql id="selectFfwyCombomealCommentVo">
+        select comment_id, combomeal_id, user_id, parent_id, comment, create_time,decoration_attitude,
+        service_attitude,decoration_quality
+         from ffwy_combomeal_comment
+    </sql>
+
+    <sql id="COMMENT_AND_PHOTO">
+        select fcc.comment_id,fc.combomeal_name, fcc.combomeal_id, fcc.user_id, fcc.parent_id, fcc.comment,
+         fcc.create_time, fccp.photo_id,fccp.photo_path, fcc.decoration_attitude,
+         fcc.service_attitude, fcc.decoration_quality,fu.user_name,fu.photo
+        from ffwy_combomeal_comment fcc
+        left join ffwy_combomeal_comment_photo fccp on fcc.comment_id =fccp.combomeal_comment_id
+        LEFT JOIN ffwy_user fu on  fcc.user_id=fu.user_id
+		LEFT JOIN ffwy_combomeal fc on fcc.combomeal_id =fc.combomeal_id
+    </sql>
+
+    <select id="selectFfwyCombomealCommentList" parameterType="FfwyCombomealComment" resultMap="FfwyCombomealCommentResult">
+        SELECT
+        t1.comment_id,
+        t1.combomeal_id,
+        t2.combomeal_name,
+        t1.comment,
+        t1.create_time
+        FROM
+        `ffwy_combomeal_comment` t1,
+        ffwy_combomeal t2
+        <where>
+            t1.combomeal_id = t2.combomeal_id
+            <if test="combomealId != null "> and t1.combomeal_id = #{combomealId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
+            <if test="searchStr!=null and searchStr!=''">
+                AND
+                CONCAT(comment) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+            <if test="beginTime != null "> and t1.create_time &gt;=#{beginTime} </if>
+            <if test="endTime != null "> and t1.create_time &lt;= #{endTime} </if>
+        </where>
+    </select>
+    <select id="selectFfwyCombomealCommentAndPhoto" parameterType="FfwyCombomealComment" resultMap="FfwyCombomealCommentResult">
+        <include refid="COMMENT_AND_PHOTO"/>
+        <where>
+            <if test="combomealId != null "> and combomeal_id = #{combomealId}</if>
+            <if test="beginTime != null "> and fcc.create_time &gt;=#{beginTime} </if>
+            <if test="endTime != null "> and fcc.create_time &lt;= #{endTime} </if>
+            <if test="userId != null "> and fcc.user_id = #{userId}</if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
+            <if test="searchStr!=null and searchStr!=''">
+                AND
+                CONCAT(comment) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+        </where>
+    </select>
+    <select id="selectCombomealCommentByCombomealId" parameterType="Long" resultMap="FfwyCombomealCommentResult">
+        <include refid="selectFfwyCombomealCommentVo"/>
+        where combomeal_id = #{combomealId}
+    </select>
+
+    <select id="selectFfwyCombomealCommentById" parameterType="Long" resultMap="FfwyCombomealCommentResult">
+        <include refid="selectFfwyCombomealCommentVo"/>
+        where comment_id = #{commentId}
+    </select>
+        
+    <insert id="insertFfwyCombomealComment" parameterType="FfwyCombomealComment" useGeneratedKeys="true" keyProperty="commentId">
+        insert into ffwy_combomeal_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="combomealId != null">combomeal_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="comment != null">comment,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="decorationAttitude != null">decoration_attitude,</if>
+            <if test="serviceAttitude != null">service_attitude,</if>
+            <if test="decorationQuality != null">decoration_quality,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="combomealId != null">#{combomealId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="comment != null">#{comment},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="decorationAttitude != null">#{decorationAttitude},</if>
+            <if test="serviceAttitude != null">#{serviceAttitude},</if>
+            <if test="decorationQuality != null">#{decorationQuality},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyCombomealComment" parameterType="FfwyCombomealComment">
+        update ffwy_combomeal_comment
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="combomealId != null">combomeal_id = #{combomealId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="comment != null">comment = #{comment},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="decorationAttitude != null">decoration_attitude = #{decorationAttitude},</if>
+            <if test="serviceAttitude != null">service_attitude = #{serviceAttitude},</if>
+            <if test="decorationQuality != null">decoration_quality = #{decorationQuality},</if>
+        </trim>
+        where comment_id = #{commentId}
+    </update>
+
+    <delete id="deleteFfwyCombomealCommentById" parameterType="Long">
+        delete from ffwy_combomeal_comment where comment_id = #{commentId}
+    </delete>
+
+    <delete id="deleteFfwyCombomealCommentByIds" parameterType="String">
+        delete from ffwy_combomeal_comment where comment_id in 
+        <foreach item="commentId" collection="array" open="(" separator="," close=")">
+            #{commentId}
+        </foreach>
+    </delete>
+</mapper>

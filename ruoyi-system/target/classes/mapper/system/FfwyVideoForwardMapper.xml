@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.video.FfwyVideoForwardMapper">
+    
+    <resultMap type="FfwyVideoForward" id="FfwyVideoForwardResult">
+        <result property="forwardId"    column="forward_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="videoId"    column="video_id"    />
+    </resultMap>
+
+    <sql id="selectFfwyVideoForwardVo">
+        select forward_id, user_id, video_id from ffwy_video_forward
+    </sql>
+
+    <select id="selectFfwyVideoForwardList" parameterType="FfwyVideoForward" resultMap="FfwyVideoForwardResult">
+        <include refid="selectFfwyVideoForwardVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="videoId != null "> and video_id = #{videoId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyVideoForwardById" parameterType="Long" resultMap="FfwyVideoForwardResult">
+        <include refid="selectFfwyVideoForwardVo"/>
+        where forward_id = #{forwardId}
+    </select>
+    <select id="selectFfwyVideoForwardIdCount" parameterType="FfwyVideoForward"
+            resultMap="FfwyVideoForwardResult">
+     SELECT COUNT(*)video_id FROM ffwy_video_forward  WHERE video_id=#{id}
+    </select>
+        
+    <insert id="insertFfwyVideoForward" parameterType="FfwyVideoForward" useGeneratedKeys="true" keyProperty="forwardId">
+        insert into ffwy_video_forward
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="videoId != null">video_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="videoId != null">#{videoId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyVideoForward" parameterType="FfwyVideoForward">
+        update ffwy_video_forward
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="videoId != null">video_id = #{videoId},</if>
+        </trim>
+        where forward_id = #{forwardId}
+    </update>
+
+    <delete id="deleteFfwyVideoForwardById" parameterType="Long">
+        delete from ffwy_video_forward where forward_id = #{forwardId}
+    </delete>
+
+    <delete id="deleteFfwyVideoForwardByIds" parameterType="String">
+        delete from ffwy_video_forward where forward_id in 
+        <foreach item="forwardId" collection="array" open="(" separator="," close=")">
+            #{forwardId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.cart.FfwyCartInfoMapper">
+    <resultMap type="FfwyCartInfo" id="FfwyCartInfoResult">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="skuId" column="sku_id"/>
+        <result property="cartPrice" column="cart_price"/>
+        <result property="skuNum" column="sku_num"/>
+        <result property="imgUrl" column="img_url"/>
+        <result property="skuName" column="sku_name"/>
+        <result property="isChecked" column="is_checked"/>
+        <result property="skuSpec" column="sku_spec"/>
+        <result property="freight" column="freight"/>
+    </resultMap>
+
+    <sql id="selectFfwyCartInfoVo">
+        
+                select id, user_id, sku_id, cart_price, sku_num, img_url, sku_name, is_checked ,sku_spec,freight from ffwy_cart_info
+
+    </sql>
+
+    <select id="selectFfwyCartInfoList" parameterType="FfwyCartInfo" resultMap="FfwyCartInfoResult">
+        <include refid="selectFfwyCartInfoVo"/>
+        <where>
+            <if test="userId != null  and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="skuId != null ">
+                and sku_id = #{skuId}
+            </if>
+            <if test="cartPrice != null ">
+                and cart_price = #{cartPrice}
+            </if>
+            <if test="imgUrl != null  and imgUrl != ''">
+                and img_url = #{imgUrl}
+            </if>
+            <if test="skuName != null  and skuName != ''">
+                and sku_name like concat('%', #{skuName}, '%')
+            </if>
+        </where>
+    </select>
+    <select id="selectFfwyCartInfoisCheckedById" parameterType="FfwyCartInfo" resultMap="FfwyCartInfoResult">
+        <include refid="selectFfwyCartInfoVo"/>
+        <where>
+            <if test="id != null  and id != ''">
+                and id = #{id}
+            </if>
+            <if test="userId != null  and userId != ''">
+                and user_id = #{userId}
+            </if>
+           and sku_num!=0
+        </where>
+    </select>
+
+    <select id="selectFfwyCartInfoById" parameterType="Long" resultMap="FfwyCartInfoResult">
+        <include refid="selectFfwyCartInfoVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectFfwyCartInfoSkuId" parameterType="FfwyCartInfo" resultMap="FfwyCartInfoResult">
+        <include refid="selectFfwyCartInfoVo"/>
+        where sku_id = #{skuId}
+    </select>
+
+    <insert id="insertFfwyCartInfo" parameterType="FfwyCartInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into ffwy_cart_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="skuId != null">
+                sku_id,
+            </if>
+            <if test="cartPrice != null">
+                cart_price,
+            </if>
+            <if test="skuNum != null">
+                sku_num,
+            </if>
+            <if test="imgUrl != null">
+                img_url,
+            </if>
+            <if test="skuName != null">
+                sku_name,
+            </if>
+            <if test="isChecked != null">
+                is_checked,
+            </if>
+            <if test="skuSpec != null">
+                sku_spec,
+            </if>
+            <if test="freight!= null">
+                freight,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="skuId != null">
+                #{skuId},
+            </if>
+            <if test="cartPrice != null">
+                #{cartPrice},
+            </if>
+            <if test="skuNum != null">
+                #{skuNum},
+            </if>
+            <if test="imgUrl != null">
+                #{imgUrl},
+            </if>
+            <if test="skuName != null">
+                #{skuName},
+            </if>
+            <if test="isChecked != null">
+                #{isChecked},
+            </if>
+            <if test="skuSpec != null">
+                #{skuSpec},
+            </if>
+            <if test="freight != null">
+                #{freight},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateFfwyCartInfo" parameterType="FfwyCartInfo">
+        update ffwy_cart_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="skuId != null">
+                sku_id = #{skuId},
+            </if>
+            <if test="cartPrice != null">
+                cart_price = #{cartPrice},
+            </if>
+            <if test="skuNum != null">
+                sku_num = #{skuNum},
+            </if>
+            <if test="imgUrl != null">
+                img_url = #{imgUrl},
+            </if>
+            <if test="skuName != null">
+                sku_name = #{skuName},
+            </if>
+            <if test="isChecked != null">
+                is_checked = #{isChecked},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="updateFfwyCartInfoId" parameterType="String">
+        update ffwy_cart_info SET is_checked=0 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">#{id}
+        </foreach>
+    </update>
+    <update id="updateFfwyCartInfoisCheckedId" parameterType="String">
+        update ffwy_cart_info SET is_checked=1 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">#{id}
+        </foreach>
+    </update>
+    <delete id="deleteFfwyCartInfoById" parameterType="Long">
+        delete from ffwy_cart_info where id = #{id}
+    </delete>
+
+
+    <delete id="deleteFfwyCartInfoSkuId" parameterType="Long">
+        delete from ffwy_cart_info where sku_id = #{skuId}
+    </delete>
+
+    <delete id="deleteFfwyCartInfoByIds" parameterType="String">
+        delete from ffwy_cart_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

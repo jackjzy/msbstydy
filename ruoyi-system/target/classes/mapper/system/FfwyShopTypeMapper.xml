@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.shop.FfwyShopTypeMapper">
+    
+    <resultMap type="FfwyShopType" id="FfwyShopTypeResult">
+        <result property="shopType"    column="shop_type"    />
+        <result property="typeName"    column="type_name"    />
+    </resultMap>
+
+    <sql id="selectFfwyShopTypeVo">
+        select shop_type, type_name from ffwy_shop_type
+    </sql>
+
+    <select id="selectFfwyShopTypeList" parameterType="FfwyShopType" resultMap="FfwyShopTypeResult">
+        <include refid="selectFfwyShopTypeVo"/>
+        <where>  
+            <if test="typeName != null  and typeName != ''"> and type_name like concat('%', #{typeName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyShopTypeById" parameterType="Integer" resultMap="FfwyShopTypeResult">
+        <include refid="selectFfwyShopTypeVo"/>
+        where shop_type = #{shopType}
+    </select>
+        
+    <insert id="insertFfwyShopType" parameterType="FfwyShopType">
+        insert into ffwy_shop_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="shopType != null">shop_type,</if>
+            <if test="typeName != null">type_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="shopType != null">#{shopType},</if>
+            <if test="typeName != null">#{typeName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyShopType" parameterType="FfwyShopType">
+        update ffwy_shop_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="typeName != null">type_name = #{typeName},</if>
+        </trim>
+        where shop_type = #{shopType}
+    </update>
+
+    <delete id="deleteFfwyShopTypeById" parameterType="Integer">
+        delete from ffwy_shop_type where shop_type = #{shopType}
+    </delete>
+
+    <delete id="deleteFfwyShopTypeByIds" parameterType="String">
+        delete from ffwy_shop_type where shop_type in 
+        <foreach item="shopType" collection="array" open="(" separator="," close=")">
+            #{shopType}
+        </foreach>
+    </delete>
+</mapper>

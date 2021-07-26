@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.product.FfwyProductSkuMapper">
+
+    <resultMap type="FfwyProductSku" id="FfwyProductSkuResult">
+        <result property="skuId"    column="sku_id"    />
+        <result property="productId"    column="product_id"    />
+        <result property="skuName"    column="sku_name"    />
+        <result property="skuSpec"    column="sku_spec"    />
+        <result property="skuDesc"    column="sku_desc"    />
+        <result property="catalogId"    column="catalog_id"    />
+        <result property="skuDefaultImg"    column="sku_default_img"    />
+        <result property="skuTitle"    column="sku_title"    />
+        <result property="skuSubtitle"    column="sku_subtitle"    />
+        <result property="price"    column="price"    />
+        <result property="saleCount"    column="sale_count"    />
+        <result property="stock"    column="stock"    />
+        <result property="stockUnit"    column="stock_unit"    />
+        <result property="currentPrice"    column="currentPrice"    />
+        <result property="productName"    column="productName"    />
+        <result property="photo"    column="photo"    />
+        <result property="isOpen"    column="is_open"    />
+
+    </resultMap>
+
+    <sql id="selectFfwyProductSkuVo">
+        select sku_id, product_id, sku_name, sku_spec, sku_desc, catalog_id, sku_default_img, sku_title, sku_subtitle, price, sale_count, stock, stock_unit, is_open from ffwy_product_sku
+    </sql>
+
+    <select id="selectFfwyProductSkuList" parameterType="FfwyProductSku" resultMap="FfwyProductSkuResult">
+        <include refid="selectFfwyProductSkuVo"/>
+        <where>
+            is_open=1
+            <if test="productId != null "> and product_id = #{productId}</if>
+            <if test="skuName != null  and skuName != ''"> and sku_name like concat('%', #{skuName}, '%')</if>
+            <if test="skuSpec != null  and skuSpec != ''"> and sku_spec like
+                concat('%', #{skuSpec}, '%')</if>
+            <if test="skuDesc != null  and skuDesc != ''"> and sku_desc = #{skuDesc}</if>
+            <if test="catalogId != null "> and catalog_id = #{catalogId}</if>
+            <if test="skuDefaultImg != null  and skuDefaultImg != ''"> and sku_default_img = #{skuDefaultImg}</if>
+            <if test="skuTitle != null  and skuTitle != ''"> and sku_title = #{skuTitle}</if>
+            <if test="skuSubtitle != null  and skuSubtitle != ''"> and sku_subtitle = #{skuSubtitle}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="saleCount != null "> and sale_count = #{saleCount}</if>
+            <if test="stock != null "> and stock = #{stock}</if>
+            <if test="stockUnit != null  and stockUnit != ''"> and stock_unit = #{stockUnit}</if>
+            <if test="skuId != null  and skuId != ''"> and sku_id = #{skuId}</if>
+            <if test="isOpen != null  and isOpen != ''"> and is_open = #{isOpen}</if>
+
+        </where>
+    </select>
+
+    <select id="selectFfwyProductSkuById" parameterType="Long" resultMap="FfwyProductSkuResult">
+        <include refid="selectFfwyProductSkuVo"/>
+        where sku_id = #{skuId} and is_open=1
+    </select>
+    <select id="selectFfwyProductSku" parameterType="FfwyProductSku" resultMap="FfwyProductSkuResult">
+        <include refid="selectFfwyProductSkuVo"/>
+        <where>
+            <if test="productId != null "> and product_id = #{productId}</if>
+            <if test="skuSpec != null  and skuSpec != ''"> and sku_spec like concat('%', #{skuSpec}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectFfwyProductSkuByproductIdAndskuSpec" resultMap="FfwyProductSkuResult">
+        <include refid="selectFfwyProductSkuVo"/>
+        where product_id = #{productId} and sku_spec = #{skuSpec}
+    </select>
+    <select id="selectFfwyProductSkunUmber" parameterType="FfwyProductSku" resultMap="FfwyProductSkuResult">
+        <include refid="selectFfwyProductSkuVo"/>
+        <where>
+            <if test="skuSpec != null  and skuSpec != ''"> and sku_spec like concat('%', #{skuSpec}, '%')</if>
+            <if test="productId != null  and productId != ''"> and product_id = #{productId}</if>
+        </where>
+    </select>
+
+    <insert id="insertFfwyProductSku" parameterType="FfwyProductSku">
+        insert into ffwy_product_sku
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="skuId != null">sku_id,</if>
+            <if test="productId != null">product_id,</if>
+            <if test="skuName != null">sku_name,</if>
+            <if test="skuSpec != null">sku_spec,</if>
+            <if test="skuDesc != null">sku_desc,</if>
+            <if test="catalogId != null">catalog_id,</if>
+            <if test="skuDefaultImg != null">sku_default_img,</if>
+            <if test="skuTitle != null">sku_title,</if>
+            <if test="skuSubtitle != null">sku_subtitle,</if>
+            <if test="price != null">price,</if>
+            <if test="saleCount != null">sale_count,</if>
+            <if test="stock != null">stock,</if>
+            <if test="stockUnit != null">stock_unit,</if>
+            <if test="isOpen != null">is_open,</if>
+
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="skuId != null">#{skuId},</if>
+            <if test="productId != null">#{productId},</if>
+            <if test="skuName != null">#{skuName},</if>
+            <if test="skuSpec != null">#{skuSpec},</if>
+            <if test="skuDesc != null">#{skuDesc},</if>
+            <if test="catalogId != null">#{catalogId},</if>
+            <if test="skuDefaultImg != null">#{skuDefaultImg},</if>
+            <if test="skuTitle != null">#{skuTitle},</if>
+            <if test="skuSubtitle != null">#{skuSubtitle},</if>
+            <if test="price != null">#{price},</if>
+            <if test="saleCount != null">#{saleCount},</if>
+            <if test="stock != null">#{stock},</if>
+            <if test="stockUnit != null">#{stockUnit},</if>
+            <if test="isOpen != null">#{isOpen},</if>
+
+         </trim>
+    </insert>
+
+    <update id="updateFfwyProductSku" parameterType="FfwyProductSku">
+        update ffwy_product_sku
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productId != null">product_id = #{productId},</if>
+            <if test="skuName != null">sku_name = #{skuName},</if>
+            <if test="skuSpec != null">sku_spec = #{skuSpec},</if>
+            <if test="skuDesc != null">sku_desc = #{skuDesc},</if>
+            <if test="catalogId != null">catalog_id = #{catalogId},</if>
+            <if test="skuDefaultImg != null">sku_default_img = #{skuDefaultImg},</if>
+            <if test="skuTitle != null">sku_title = #{skuTitle},</if>
+            <if test="skuSubtitle != null">sku_subtitle = #{skuSubtitle},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="saleCount != null">sale_count = #{saleCount},</if>
+            <if test="stock != null">stock = #{stock},</if>
+            <if test="stockUnit != null">stock_unit = #{stockUnit},</if>
+            <if test="isOpen != null">is_open = #{isOpen},</if>
+        </trim>
+        where sku_id = #{skuId}
+    </update>
+
+    <delete id="deleteFfwyProductSkuById" parameterType="Long">
+        delete from ffwy_product_sku where sku_id = #{skuId}
+    </delete>
+
+    <delete id="deleteFfwyProductSkuByIds" parameterType="String">
+        delete from ffwy_product_sku where sku_id in
+        <foreach item="skuId" collection="array" open="(" separator="," close=")">
+            #{skuId}
+        </foreach>
+    </delete>
+
+    <select id="selectFfwyProductCartById" parameterType="com.ruoyi.system.domain.product.FfwyProductSku"
+     resultMap="FfwyProductSkuResult">
+     select fp.current_price as currentPrice,fp.product_name as
+     productName,fp.photo ,fp.product_id,fps.sku_spec ,fps.sku_default_img		 from
+     ffwy_product_sku  fps
+     INNER JOIN  ffwy_product fp on  fps.product_id=fp.product_id
+		 WHERE fps.sku_id=#{skuId}    and is_open=1
+
+    </select>
+
+
+    <select id="selectFfwyfindByproductcatsj" parameterType="Long" resultMap="FfwyProductSkuResult">
+        <include refid="selectFfwyProductSkuVo"/>
+        where product_id = #{productId}
+    </select>
+
+    <delete id="deleteFfwyProductSkuByProductId" parameterType="Long">
+       delete from ffwy_product_sku where product_id = #{productId}
+    </delete>
+
+
+    <select id="selectFfwyfindByproductcatName" parameterType="Long" resultMap="FfwyProductSkuResult">
+        <include refid="selectFfwyProductSkuVo"/>
+        where sku_id = #{skuId}
+    </select>
+
+    <select id="selectFfwyProduct"  parameterType="FfwyProductSku" resultMap="FfwyProductSkuResult">
+        <include refid="selectFfwyProductSkuVo"/>
+        <where>
+            <if test="productId != null "> and product_id = #{productId}</if>
+            <if test="s != null  and s != ''"> and sku_spec like concat('%', #{s}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectFfwyProductStock" resultMap="FfwyProductSkuResult">
+        select sum(stock) as stock  from  ffwy_product_sku
+         WHERE product_id = #{productId} GROUP BY product_id
+
+    </select>
+
+</mapper>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.order.FfwyIncomeMapper">
+    
+    <resultMap type="FfwyIncome" id="FfwyIncomeResult">
+        <result property="incomeId"    column="income_id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="incomePay"    column="income_pay"    />
+        <result property="dealTime"    column="deal_time"    />
+        <result property="money"    column="money"    />
+        <result property="paymentId"    column="payment_id"    />
+        <result property="orderNumber"    column="order_number"    />
+        <association property="orderDetails" javaType="FfwyOrderDetails">
+            <result property="shopId" column="shop_id"></result>
+            <result property="productSkuName" column="product_sku_name"></result>
+            <result property="productSkuSpec" column="product_sku_spec"></result>
+            <result property="number" column="number"></result>
+            <result property="userName" column="user_name"></result>
+        </association>
+    </resultMap>
+
+    <sql id="selectFfwyIncomeVo">
+        select income_id, order_id, user_id, income_pay, deal_time, money, payment_id, order_number from ffwy_income
+    </sql>
+
+    <sql id="SELECT_INCOME_BY_SHOP">
+       select income_id, fi.order_id, fi.user_id, income_pay, deal_time, money,
+        payment_id, fi.order_number,fod.shop_id,fod.product_sku_name,fod.product_sku_spec,
+        fod.number,fod.user_name
+        from ffwy_income fi left join ffwy_order_details fod on  fi.order_id= fod.order_details_id
+    </sql>
+    <select id="selectFfwyIncomeList" parameterType="FfwyIncome" resultMap="FfwyIncomeResult">
+        <include refid="selectFfwyIncomeVo"/>
+        <where>  
+            <if test="orderId != null "> and order_id = #{orderId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="incomePay != null  and incomePay != ''"> and income_pay = #{incomePay}</if>
+            <if test="dealTime != null "> and deal_time &gt;= #{dealTime}</if>
+            <if test="money != null "> and money = #{money}</if>
+            <if test="paymentId != null "> and payment_id = #{paymentId}</if>
+            <if test="orderNumber != null  and orderNumber != ''"> and order_number = #{orderNumber}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyIncomeById" parameterType="Long" resultMap="FfwyIncomeResult">
+        <include refid="selectFfwyIncomeVo"/>
+        where fod.income_id = #{incomeId}
+    </select>
+
+    <select id="selectIncomeByshopId" parameterType="FfwyIncome" resultMap="FfwyIncomeResult">
+        <include refid="SELECT_INCOME_BY_SHOP"/>
+        <where>
+            <if test="dealTime != null "> and deal_time &gt;= #{dealTime}</if>
+            <if test="BeginTime != null "> and deal_time &gt;= #{BeginTime} </if>
+            <if test="endTime != null "> and deal_time &lt;= #{endTime} </if>
+            <if test="orderDetails!=null">
+                <if test="orderDetails.shopId!=null">
+                and fod.shop_id = #{orderDetails.shopId}  and income_pay='0'
+                </if>
+            </if>
+        </where>
+<!--        where fod.shop_id = #{orderDetails.shopId}  and income_pay='0'-->
+    </select>
+
+    <insert id="insertFfwyIncome" parameterType="FfwyIncome">
+        insert into ffwy_income
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="incomeId != null">income_id,</if>
+            <if test="orderId != null">order_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="incomePay != null">income_pay,</if>
+            <if test="dealTime != null">deal_time,</if>
+            <if test="money != null">money,</if>
+            <if test="paymentId != null">payment_id,</if>
+            <if test="orderNumber != null">order_number,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="incomeId != null">#{incomeId},</if>
+            <if test="orderId != null">#{orderId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="incomePay != null">#{incomePay},</if>
+            <if test="dealTime != null">#{dealTime},</if>
+            <if test="money != null">#{money},</if>
+            <if test="paymentId != null">#{paymentId},</if>
+            <if test="orderNumber != null">#{orderNumber},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyIncome" parameterType="FfwyIncome">
+        update ffwy_income
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="incomePay != null">income_pay = #{incomePay},</if>
+            <if test="dealTime != null">deal_time = #{dealTime},</if>
+            <if test="money != null">money = #{money},</if>
+            <if test="paymentId != null">payment_id = #{paymentId},</if>
+            <if test="orderNumber != null">order_number = #{orderNumber},</if>
+        </trim>
+        where income_id = #{incomeId}
+    </update>
+
+    <delete id="deleteFfwyIncomeById" parameterType="Long">
+        delete from ffwy_income where income_id = #{incomeId}
+    </delete>
+
+    <delete id="deleteFfwyIncomeByIds" parameterType="String">
+        delete from ffwy_income where income_id in 
+        <foreach item="incomeId" collection="array" open="(" separator="," close=")">
+            #{incomeId}
+        </foreach>
+    </delete>
+</mapper>

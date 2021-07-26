@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.back.mapper.FfwyVideoHotsMapper">
+    
+    <resultMap type="FfwyVideoHots" id="FfwyVideoHotsResult">
+        <result property="videoHotId"    column="video_hot_id"    />
+        <result property="videoName"    column="video_name"    />
+        <result property="hotId"    column="hot_id"    />
+    </resultMap>
+
+    <sql id="selectFfwyVideoHotsVo">
+        select video_hot_id, video_name, hot_id from ffwy_video_hots
+    </sql>
+
+    <select id="selectFfwyVideoHotsList" parameterType="FfwyVideoHots" resultMap="FfwyVideoHotsResult">
+        <include refid="selectFfwyVideoHotsVo"/>
+        <where>  
+            <if test="videoName != null "> and video_name = #{videoName}</if>
+            <if test="hotId != null "> and hot_id = #{hotId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyVideoHotsById" parameterType="Long" resultMap="FfwyVideoHotsResult">
+        <include refid="selectFfwyVideoHotsVo"/>
+        where video_hot_id = #{videoHotId}
+    </select>
+        
+    <insert id="insertFfwyVideoHots" parameterType="FfwyVideoHots" useGeneratedKeys="true" keyProperty="videoHotId">
+        insert into ffwy_video_hots
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="videoName != null">video_name,</if>
+            <if test="hotId != null">hot_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="videoName != null">#{videoName},</if>
+            <if test="hotId != null">#{hotId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyVideoHots" parameterType="FfwyVideoHots">
+        update ffwy_video_hots
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="videoName != null">video_name = #{videoName},</if>
+            <if test="hotId != null">hot_id = #{hotId},</if>
+        </trim>
+        where video_hot_id = #{videoHotId}
+    </update>
+
+    <delete id="deleteFfwyVideoHotsById" parameterType="Long">
+        delete from ffwy_video_hots where video_hot_id = #{videoHotId}
+    </delete>
+
+    <delete id="deleteFfwyVideoHotsByVideoIdAndhotId" parameterType="Long">
+        delete from ffwy_video_hots where video_name = #{videoName} and hot_id= #{videoHotId}
+    </delete>
+
+    <delete id="deleteFfwyVideoHotsByIds" parameterType="String">
+        delete from ffwy_video_hots where video_hot_id in 
+        <foreach item="videoHotId" collection="array" open="(" separator="," close=")">
+            #{videoHotId}
+        </foreach>
+    </delete>
+</mapper>

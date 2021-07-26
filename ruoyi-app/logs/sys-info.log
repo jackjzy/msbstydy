@@ -1,0 +1,832 @@
+10:57:36.088 [main] INFO  com.ruoyi.TestVideo - [logStarting,55] - Starting TestVideo on QH-20191221KEWA with PID 10908 (started by Administrator in E:\wemem\webffwy\ruoyi-app)
+10:57:36.108 [main] INFO  com.ruoyi.TestVideo - [logStartupProfileInfo,655] - The following profiles are active: prod
+10:58:21.329 [main] INFO  c.a.d.p.DruidDataSource - [init,985] - {dataSource-1} inited
+10:58:56.511 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+10:59:01.958 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+10:59:02.023 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+10:59:02.179 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+10:59:02.573 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_1
+10:59:02.611 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_1
+10:59:02.692 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_2
+10:59:02.698 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_1
+10:59:02.721 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_3
+10:59:02.725 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPOST_1
+10:59:02.744 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getCartCheckedListUsingGET_1
+10:59:02.749 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_2
+10:59:02.782 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_2
+10:59:02.786 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_1
+10:59:03.669 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_3
+10:59:03.683 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_3
+10:59:03.687 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_4
+10:59:03.691 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_2
+10:59:03.699 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_4
+10:59:03.721 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_4
+10:59:04.011 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_5
+10:59:04.213 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_3
+10:59:04.218 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_5
+10:59:04.220 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPUT_1
+10:59:04.223 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_5
+10:59:04.228 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_6
+10:59:04.231 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_4
+10:59:04.239 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_6
+10:59:04.880 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_7
+10:59:05.020 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_8
+10:59:05.074 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_7
+10:59:05.085 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listIdUsingGET_1
+10:59:05.106 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_6
+10:59:05.126 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_8
+10:59:05.152 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: createIndexUsingGET_1
+10:59:05.162 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: lowerProductSearchUsingGET_1
+10:59:05.190 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: productListUsingGET_1
+10:59:05.216 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_9
+10:59:05.269 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_9
+10:59:18.936 [main] INFO  com.ruoyi.TestVideo - [logStarted,61] - Started TestVideo in 104.807 seconds (JVM running for 108.656)
+10:59:21.382 [SpringContextShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+10:59:26.351 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2032] - {dataSource-1} closing ...
+10:59:26.378 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2104] - {dataSource-1} closed
+11:16:02.990 [main] INFO  com.ruoyi.TestVideo - [logStarting,55] - Starting TestVideo on QH-20191221KEWA with PID 3176 (started by Administrator in E:\wemem\webffwy\ruoyi-app)
+11:16:02.992 [main] INFO  com.ruoyi.TestVideo - [logStartupProfileInfo,655] - The following profiles are active: prod
+11:16:23.901 [main] INFO  c.a.d.p.DruidDataSource - [init,985] - {dataSource-1} inited
+11:16:46.928 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+11:16:51.128 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+11:16:51.182 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+11:16:51.309 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+11:16:51.731 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_1
+11:16:51.767 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_1
+11:16:51.891 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_2
+11:16:51.896 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_1
+11:16:51.914 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_3
+11:16:51.917 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPOST_1
+11:16:51.926 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getCartCheckedListUsingGET_1
+11:16:51.930 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_2
+11:16:51.967 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_2
+11:16:51.978 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_1
+11:16:52.855 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_3
+11:16:52.871 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_3
+11:16:52.875 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_4
+11:16:52.879 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_2
+11:16:52.885 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_4
+11:16:52.909 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_4
+11:16:53.179 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_5
+11:16:53.452 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_3
+11:16:53.460 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_5
+11:16:53.463 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPUT_1
+11:16:53.466 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_5
+11:16:53.470 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_6
+11:16:53.473 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_4
+11:16:53.480 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_6
+11:16:54.242 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_7
+11:16:54.557 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_8
+11:16:54.647 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_7
+11:16:54.657 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listIdUsingGET_1
+11:16:54.679 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_6
+11:16:54.698 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_8
+11:16:54.722 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: createIndexUsingGET_1
+11:16:54.732 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: lowerProductSearchUsingGET_1
+11:16:54.758 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: productListUsingGET_1
+11:16:54.808 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_9
+11:16:55.108 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_9
+11:17:11.175 [main] INFO  com.ruoyi.TestVideo - [logStarted,61] - Started TestVideo in 70.346 seconds (JVM running for 73.661)
+11:17:27.441 [SpringContextShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+11:17:32.398 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2032] - {dataSource-1} closing ...
+11:17:32.430 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2104] - {dataSource-1} closed
+11:18:13.347 [main] INFO  com.ruoyi.TestVideo - [logStarting,55] - Starting TestVideo on QH-20191221KEWA with PID 10600 (started by Administrator in E:\wemem\webffwy\ruoyi-app)
+11:18:13.349 [main] INFO  com.ruoyi.TestVideo - [logStartupProfileInfo,655] - The following profiles are active: prod
+11:18:36.071 [main] INFO  c.a.d.p.DruidDataSource - [init,985] - {dataSource-1} inited
+11:18:49.989 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+11:18:57.585 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+11:18:59.631 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+11:18:59.831 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+11:19:00.238 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_1
+11:19:00.277 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_1
+11:19:00.356 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_2
+11:19:00.359 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_1
+11:19:00.377 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_3
+11:19:00.381 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPOST_1
+11:19:00.390 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getCartCheckedListUsingGET_1
+11:19:00.395 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_2
+11:19:00.430 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_2
+11:19:00.433 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_1
+11:19:01.359 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_3
+11:19:01.373 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_3
+11:19:01.377 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_4
+11:19:01.381 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_2
+11:19:01.389 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_4
+11:19:01.411 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_4
+11:19:01.618 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_5
+11:19:01.899 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_3
+11:19:01.913 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_5
+11:19:01.916 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPUT_1
+11:19:01.921 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_5
+11:19:01.926 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_6
+11:19:01.930 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_4
+11:19:01.947 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_6
+11:19:02.584 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_7
+11:19:03.006 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_8
+11:19:03.054 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_7
+11:19:03.058 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listIdUsingGET_1
+11:19:03.373 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_6
+11:19:03.537 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_8
+11:19:03.551 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: createIndexUsingGET_1
+11:19:03.655 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: lowerProductSearchUsingGET_1
+11:19:03.788 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: productListUsingGET_1
+11:19:04.029 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_9
+11:19:04.267 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_9
+11:19:25.450 [main] INFO  com.ruoyi.TestVideo - [logStarted,61] - Started TestVideo in 73.855 seconds (JVM running for 77.052)
+11:19:26.880 [SpringContextShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+11:19:31.824 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2032] - {dataSource-1} closing ...
+11:19:31.845 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2104] - {dataSource-1} closed
+11:20:58.618 [main] INFO  com.ruoyi.TestVideo - [logStarting,55] - Starting TestVideo on QH-20191221KEWA with PID 9372 (started by Administrator in E:\wemem\webffwy\ruoyi-app)
+11:20:58.620 [main] INFO  com.ruoyi.TestVideo - [logStartupProfileInfo,655] - The following profiles are active: prod
+11:21:19.979 [main] INFO  c.a.d.p.DruidDataSource - [init,985] - {dataSource-1} inited
+11:21:29.298 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+11:21:34.613 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+11:21:34.668 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+11:21:34.834 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+11:21:35.248 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_1
+11:21:35.282 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_1
+11:21:35.354 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_2
+11:21:35.357 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_1
+11:21:35.374 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_3
+11:21:35.379 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPOST_1
+11:21:35.388 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getCartCheckedListUsingGET_1
+11:21:35.393 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_2
+11:21:35.418 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_2
+11:21:35.421 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_1
+11:21:36.272 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_3
+11:21:36.285 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_3
+11:21:36.290 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_4
+11:21:36.293 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_2
+11:21:36.299 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_4
+11:21:36.319 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_4
+11:21:36.553 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_5
+11:21:36.771 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_3
+11:21:36.778 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_5
+11:21:36.782 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPUT_1
+11:21:36.786 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_5
+11:21:36.789 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_6
+11:21:36.792 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_4
+11:21:36.798 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_6
+11:21:37.571 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_7
+11:21:37.776 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_8
+11:21:37.848 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_7
+11:21:37.851 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listIdUsingGET_1
+11:21:37.874 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_6
+11:21:37.896 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_8
+11:21:37.922 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: createIndexUsingGET_1
+11:21:37.930 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: lowerProductSearchUsingGET_1
+11:21:37.959 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: productListUsingGET_1
+11:21:37.985 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_9
+11:21:38.035 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_9
+11:21:51.738 [main] INFO  com.ruoyi.TestVideo - [logStarted,61] - Started TestVideo in 54.803 seconds (JVM running for 57.861)
+11:21:53.137 [SpringContextShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+11:21:58.116 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2032] - {dataSource-1} closing ...
+11:21:58.138 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2104] - {dataSource-1} closed
+11:23:46.305 [main] INFO  com.ruoyi.TestVideo - [logStarting,55] - Starting TestVideo on QH-20191221KEWA with PID 11272 (started by Administrator in E:\wemem\webffwy\ruoyi-app)
+11:23:46.307 [main] INFO  com.ruoyi.TestVideo - [logStartupProfileInfo,655] - The following profiles are active: prod
+11:24:24.958 [main] INFO  com.ruoyi.TestVideo - [logStarting,55] - Starting TestVideo on QH-20191221KEWA with PID 12120 (started by Administrator in E:\wemem\webffwy\ruoyi-app)
+11:24:24.959 [main] INFO  com.ruoyi.TestVideo - [logStartupProfileInfo,655] - The following profiles are active: prod
+11:24:45.543 [main] INFO  c.a.d.p.DruidDataSource - [init,985] - {dataSource-1} inited
+11:25:02.782 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+11:25:10.336 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+11:25:10.594 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+11:25:10.733 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+11:25:11.116 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_1
+11:25:11.154 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_1
+11:25:11.236 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_2
+11:25:11.239 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_1
+11:25:11.259 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_3
+11:25:11.263 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPOST_1
+11:25:11.282 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getCartCheckedListUsingGET_1
+11:25:11.296 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_2
+11:25:11.345 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_2
+11:25:11.349 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_1
+11:25:12.458 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_3
+11:25:12.473 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_3
+11:25:12.477 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_4
+11:25:12.480 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_2
+11:25:12.486 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_4
+11:25:12.507 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_4
+11:25:12.686 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_5
+11:25:12.838 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_3
+11:25:12.843 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_5
+11:25:12.847 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPUT_1
+11:25:12.850 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_5
+11:25:12.853 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_6
+11:25:12.856 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_4
+11:25:12.862 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_6
+11:25:13.437 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_7
+11:25:13.604 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_8
+11:25:13.659 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_7
+11:25:13.663 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listIdUsingGET_1
+11:25:13.679 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_6
+11:25:13.698 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_8
+11:25:13.717 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: createIndexUsingGET_1
+11:25:13.725 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: lowerProductSearchUsingGET_1
+11:25:13.751 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: productListUsingGET_1
+11:25:13.773 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_9
+11:25:13.817 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_9
+11:25:28.073 [main] INFO  com.ruoyi.TestVideo - [logStarted,61] - Started TestVideo in 64.789 seconds (JVM running for 68.042)
+11:25:29.707 [SpringContextShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+11:25:34.537 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2032] - {dataSource-1} closing ...
+11:25:34.575 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2104] - {dataSource-1} closed
+11:26:27.071 [main] INFO  com.ruoyi.TestVideo - [logStarting,55] - Starting TestVideo on QH-20191221KEWA with PID 10356 (started by Administrator in E:\wemem\webffwy\ruoyi-app)
+11:26:27.073 [main] INFO  com.ruoyi.TestVideo - [logStartupProfileInfo,655] - The following profiles are active: prod
+11:26:47.304 [main] INFO  c.a.d.p.DruidDataSource - [init,985] - {dataSource-1} inited
+11:26:56.060 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+11:27:00.467 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+11:27:00.520 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+11:27:00.664 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+11:27:01.055 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_1
+11:27:01.092 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_1
+11:27:01.171 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_2
+11:27:01.174 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_1
+11:27:01.196 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_3
+11:27:01.200 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPOST_1
+11:27:01.209 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getCartCheckedListUsingGET_1
+11:27:01.212 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_2
+11:27:01.241 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_2
+11:27:01.244 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_1
+11:27:02.026 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_3
+11:27:02.039 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_3
+11:27:02.042 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_4
+11:27:02.046 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_2
+11:27:02.052 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_4
+11:27:02.240 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_4
+11:27:02.456 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_5
+11:27:02.657 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_3
+11:27:02.665 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_5
+11:27:02.668 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPUT_1
+11:27:02.671 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_5
+11:27:02.675 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_6
+11:27:02.678 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_4
+11:27:02.685 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_6
+11:27:03.247 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_7
+11:27:03.455 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_8
+11:27:03.511 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_7
+11:27:03.514 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listIdUsingGET_1
+11:27:03.532 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_6
+11:27:03.550 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_8
+11:27:03.569 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: createIndexUsingGET_1
+11:27:03.578 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: lowerProductSearchUsingGET_1
+11:27:03.600 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: productListUsingGET_1
+11:27:03.623 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_9
+11:27:03.670 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_9
+11:27:17.822 [main] INFO  com.ruoyi.TestVideo - [logStarted,61] - Started TestVideo in 52.597 seconds (JVM running for 55.39)
+11:27:19.297 [SpringContextShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+11:27:24.267 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2032] - {dataSource-1} closing ...
+11:27:24.296 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2104] - {dataSource-1} closed
+20:47:05.665 [main] INFO  com.ruoyi.Testeqb - [logStarting,55] - Starting Testeqb on QH-20191221KEWA with PID 26292 (started by Administrator in E:\wemem\webffwy\ruoyi-app)
+20:47:05.671 [main] INFO  com.ruoyi.Testeqb - [logStartupProfileInfo,655] - The following profiles are active: prod
+20:47:41.947 [main] INFO  c.a.d.p.DruidDataSource - [init,985] - {dataSource-1} inited
+20:47:59.914 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+20:48:22.405 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+20:48:22.487 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+20:48:23.531 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+20:48:31.180 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_1
+20:48:31.228 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_1
+20:48:31.742 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_2
+20:48:31.744 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_1
+20:48:31.871 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_3
+20:48:31.874 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPOST_1
+20:48:31.950 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getCartCheckedListUsingGET_1
+20:48:31.953 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_2
+20:48:32.107 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_2
+20:48:32.111 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_1
+20:48:33.738 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_3
+20:48:33.840 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_3
+20:48:33.846 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_4
+20:48:33.869 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_2
+20:48:33.984 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_4
+20:48:34.005 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_4
+20:48:34.180 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_5
+20:48:34.360 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_3
+20:48:34.365 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_5
+20:48:34.368 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPUT_1
+20:48:34.371 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_5
+20:48:34.374 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_6
+20:48:34.377 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_4
+20:48:34.495 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_6
+20:48:35.701 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_7
+20:48:35.898 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_8
+20:48:35.944 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_7
+20:48:35.947 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listIdUsingGET_1
+20:48:36.206 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_6
+20:48:36.236 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_8
+20:48:36.255 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: createIndexUsingGET_1
+20:48:36.382 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: lowerProductSearchUsingGET_1
+20:48:36.575 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: productListUsingGET_1
+20:48:37.073 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_9
+20:48:37.266 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_9
+20:48:52.947 [main] INFO  com.ruoyi.Testeqb - [logStarted,61] - Started Testeqb in 108.951 seconds (JVM running for 112.592)
+20:48:53.446 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,75] - ------------------ 创建个人账号 start -----------------
+20:48:54.397 [SpringContextShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+20:48:59.357 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2032] - {dataSource-1} closing ...
+20:48:59.381 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2104] - {dataSource-1} closed
+21:09:28.728 [main] INFO  com.ruoyi.Testeqb - [logStarting,55] - Starting Testeqb on QH-20191221KEWA with PID 27008 (started by Administrator in E:\wemem\webffwy\ruoyi-app)
+21:09:28.732 [main] INFO  com.ruoyi.Testeqb - [logStartupProfileInfo,655] - The following profiles are active: prod
+21:10:14.889 [main] INFO  c.a.d.p.DruidDataSource - [init,985] - {dataSource-1} inited
+21:10:37.130 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+21:10:42.856 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+21:10:42.920 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+21:10:43.072 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+21:10:43.507 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_1
+21:10:43.548 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_1
+21:10:43.651 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_2
+21:10:43.654 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_1
+21:10:43.679 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_3
+21:10:43.683 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPOST_1
+21:10:43.692 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getCartCheckedListUsingGET_1
+21:10:43.696 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_2
+21:10:43.732 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_2
+21:10:43.735 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_1
+21:10:45.213 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_3
+21:10:45.383 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_3
+21:10:45.387 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_4
+21:10:45.393 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_2
+21:10:45.500 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_4
+21:10:45.631 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_4
+21:10:45.889 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_5
+21:10:46.148 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_3
+21:10:46.155 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_5
+21:10:46.158 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPUT_1
+21:10:46.161 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_5
+21:10:46.165 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_6
+21:10:46.169 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_4
+21:10:46.270 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_6
+21:10:47.169 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_7
+21:10:47.527 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_8
+21:10:47.580 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_7
+21:10:47.584 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listIdUsingGET_1
+21:10:47.933 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_6
+21:10:47.957 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_8
+21:10:47.991 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: createIndexUsingGET_1
+21:10:48.074 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: lowerProductSearchUsingGET_1
+21:10:48.164 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: productListUsingGET_1
+21:10:48.360 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_9
+21:10:48.737 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_9
+21:11:08.401 [main] INFO  com.ruoyi.Testeqb - [logStarted,61] - Started Testeqb in 101.767 seconds (JVM running for 106.32)
+21:11:08.915 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,79] - ------------------ 创建个人账号 start -----------------
+21:11:09.746 [SpringContextShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+21:11:14.688 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2032] - {dataSource-1} closing ...
+21:11:14.711 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2104] - {dataSource-1} closed
+21:16:21.188 [main] INFO  com.ruoyi.Testeqb - [logStarting,55] - Starting Testeqb on QH-20191221KEWA with PID 27372 (started by Administrator in E:\wemem\webffwy\ruoyi-app)
+21:16:21.191 [main] INFO  com.ruoyi.Testeqb - [logStartupProfileInfo,655] - The following profiles are active: prod
+21:16:53.937 [main] INFO  c.a.d.p.DruidDataSource - [init,985] - {dataSource-1} inited
+21:17:08.672 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+21:17:14.397 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+21:17:14.490 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+21:17:14.666 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+21:17:15.163 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_1
+21:17:15.205 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_1
+21:17:15.299 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_2
+21:17:15.303 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_1
+21:17:15.327 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_3
+21:17:15.330 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPOST_1
+21:17:15.340 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getCartCheckedListUsingGET_1
+21:17:15.345 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_2
+21:17:15.389 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_2
+21:17:15.394 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_1
+21:17:16.465 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_3
+21:17:16.481 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_3
+21:17:16.485 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_4
+21:17:16.490 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_2
+21:17:16.498 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_4
+21:17:16.521 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_4
+21:17:16.759 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_5
+21:17:16.975 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_3
+21:17:16.981 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_5
+21:17:16.984 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPUT_1
+21:17:16.987 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_5
+21:17:16.992 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_6
+21:17:16.995 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_4
+21:17:17.000 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_6
+21:17:17.801 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_7
+21:17:18.058 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_8
+21:17:18.119 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_7
+21:17:18.122 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listIdUsingGET_1
+21:17:18.145 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_6
+21:17:18.165 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_8
+21:17:18.188 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: createIndexUsingGET_1
+21:17:18.196 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: lowerProductSearchUsingGET_1
+21:17:18.223 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: productListUsingGET_1
+21:17:18.251 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_9
+21:17:18.332 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_9
+21:17:32.396 [main] INFO  com.ruoyi.Testeqb - [logStarted,61] - Started Testeqb in 72.719 seconds (JVM running for 76.54)
+21:17:33.156 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,79] - ------------------ 创建个人账号 start -----------------
+21:17:33.336 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"idNumber":"420902199707115954","idType":"CRED_PSN_CH_IDCARD","mobile":"17671850175","name":"杨志杰","thirdPartyUserId":"12321332321"}
+
+21:17:33.336 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/accounts/createByThirdPartyUserId
+请求方式
+:POST
+
+21:17:33.934 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":53000000,"message":"账号已存在","data":{"accountId":"7d618b0e829941e5be50bc489c9c96f2"}}
+
+21:17:33.988 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,89] - ------------------ 创建个人账号 end -----------------
+21:17:33.990 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,91] - ------------------ 创建企业账号 start -----------------
+21:17:33.999 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"creator":"7d618b0e829941e5be50bc489c9c96f2","idNumber":"91110105MA0038GH6Y","idType":"CRED_ORG_USCC","name":"北京嗅美科技有限公司","thirdPartyUserId":"91110105MA0038GH6Y"}
+
+21:17:33.999 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/organizations/createByThirdPartyUserId
+请求方式
+:POST
+
+21:17:34.161 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":53000000,"message":"机构已存在","data":{"accountId":"9deb10df79904650a64f8fadd4c59a6b","orgId":"9deb10df79904650a64f8fadd4c59a6b"}}
+
+21:17:34.174 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,101] - ------------------ 创建企业账号 end -----------------
+21:17:34.176 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,103] - ------------------ 创建个人模板印章 start -----------------
+21:17:34.187 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"color":"RED","type":"SQUARE"}
+
+21:17:34.188 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/accounts/7d618b0e829941e5be50bc489c9c96f2/seals/personaltemplate
+请求方式
+:POST
+
+21:17:34.365 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":0,"message":"成功","data":{"sealId":"c54e0343-8468-4d8b-91d4-b0f3e84eb59c","fileKey":"$d9e31097-4716-42d0-aa05-68a8052462eb$1158629991","url":"https://esignoss.esign.cn/seal-service/9dd95e6c-a388-4bf7-82b1-c17a4825dde7/bb360caf-319a-44ff-baf2-28de1249aeec-openseal.png?Expires=1626963457&OSSAccessKeyId=LTAI4G23YViiKnxTC28ygQzF&Signature=JU9SMXlHzK75nqScUBUf46C2IBE%3D","width":95,"height":95}}
+
+21:17:34.389 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,110] - ------------------ 创建个人模板印章 end -----------------
+21:17:34.389 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,112] - ------------------ 创建企业模板印章 start -----------------
+21:17:34.400 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"central":"STAR","color":"RED","type":"TEMPLATE_ROUND"}
+
+21:17:34.400 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/organizations/9deb10df79904650a64f8fadd4c59a6b/seals/officialtemplate
+请求方式
+:POST
+
+21:17:34.575 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":0,"message":"成功","data":{"sealId":"96107524-96d4-403e-89fe-21ac1ca6fcc1","fileKey":"$24d8e2d1-34e2-4d68-a3d9-2c408d30d044$817112578","url":"https://esignoss.esign.cn/seal-service/22335f23-8640-469b-b0a2-1f8b5d2c6207/c6d1c581-b947-4a10-b317-5fb5ab08ef91-openseal.png?Expires=1626963458&OSSAccessKeyId=LTAI4G23YViiKnxTC28ygQzF&Signature=Eh02UiWfxT89evEZNMDzniTSig8%3D","width":159,"height":159}}
+
+21:17:34.579 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,117] - ------------------ 创建企业模板印章 end -----------------
+21:17:34.580 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,119] - ------------------ 通过上传方式创建文件 start -----------------
+21:17:36.999 [SpringContextShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+21:17:41.838 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2032] - {dataSource-1} closing ...
+21:17:43.494 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2104] - {dataSource-1} closed
+21:20:55.394 [main] INFO  com.ruoyi.Testeqb - [logStarting,55] - Starting Testeqb on QH-20191221KEWA with PID 27060 (started by Administrator in E:\wemem\webffwy\ruoyi-app)
+21:20:55.397 [main] INFO  com.ruoyi.Testeqb - [logStartupProfileInfo,655] - The following profiles are active: prod
+21:22:40.802 [main] INFO  c.a.d.p.DruidDataSource - [init,985] - {dataSource-1} inited
+21:22:56.515 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+21:23:02.343 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+21:23:02.441 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+21:23:02.673 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+21:23:03.126 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_1
+21:23:03.176 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_1
+21:23:03.268 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_2
+21:23:03.271 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_1
+21:23:03.295 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_3
+21:23:03.300 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPOST_1
+21:23:03.311 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getCartCheckedListUsingGET_1
+21:23:03.317 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_2
+21:23:03.366 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_2
+21:23:03.372 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_1
+21:23:04.499 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_3
+21:23:04.514 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_3
+21:23:04.518 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_4
+21:23:04.522 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_2
+21:23:04.529 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_4
+21:23:04.552 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_4
+21:23:04.771 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_5
+21:23:04.976 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_3
+21:23:04.981 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_5
+21:23:04.984 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPUT_1
+21:23:04.987 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_5
+21:23:04.991 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_6
+21:23:04.995 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_4
+21:23:05.000 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_6
+21:23:05.718 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_7
+21:23:05.925 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_8
+21:23:06.009 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_7
+21:23:06.013 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listIdUsingGET_1
+21:23:06.031 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_6
+21:23:06.051 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_8
+21:23:06.073 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: createIndexUsingGET_1
+21:23:06.081 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: lowerProductSearchUsingGET_1
+21:23:06.108 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: productListUsingGET_1
+21:23:06.132 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_9
+21:23:06.195 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_9
+21:23:20.092 [main] INFO  com.ruoyi.Testeqb - [logStarted,61] - Started Testeqb in 146.666 seconds (JVM running for 151.129)
+21:23:20.739 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,79] - ------------------ 创建个人账号 start -----------------
+21:23:20.932 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"idNumber":"420902199707115954","idType":"CRED_PSN_CH_IDCARD","mobile":"17671850175","name":"杨志杰","thirdPartyUserId":"12321332321"}
+
+21:23:20.933 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/accounts/createByThirdPartyUserId
+请求方式
+:POST
+
+21:23:21.514 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":53000000,"message":"账号已存在","data":{"accountId":"7d618b0e829941e5be50bc489c9c96f2"}}
+
+21:23:21.573 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,89] - ------------------ 创建个人账号 end -----------------
+21:23:21.574 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,91] - ------------------ 创建企业账号 start -----------------
+21:23:21.585 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"creator":"7d618b0e829941e5be50bc489c9c96f2","idNumber":"91110105MA0038GH6Y","idType":"CRED_ORG_USCC","name":"北京嗅美科技有限公司","thirdPartyUserId":"91110105MA0038GH6Y"}
+
+21:23:21.586 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/organizations/createByThirdPartyUserId
+请求方式
+:POST
+
+21:23:21.688 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":53000000,"message":"机构已存在","data":{"accountId":"9deb10df79904650a64f8fadd4c59a6b","orgId":"9deb10df79904650a64f8fadd4c59a6b"}}
+
+21:23:21.697 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,101] - ------------------ 创建企业账号 end -----------------
+21:23:21.699 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,103] - ------------------ 创建个人模板印章 start -----------------
+21:23:21.708 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"color":"RED","type":"SQUARE"}
+
+21:23:21.708 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/accounts/7d618b0e829941e5be50bc489c9c96f2/seals/personaltemplate
+请求方式
+:POST
+
+21:23:21.881 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":0,"message":"成功","data":{"sealId":"c54e0343-8468-4d8b-91d4-b0f3e84eb59c","fileKey":"$d9e31097-4716-42d0-aa05-68a8052462eb$1158629991","url":"https://esignoss.esign.cn/seal-service/9dd95e6c-a388-4bf7-82b1-c17a4825dde7/bb360caf-319a-44ff-baf2-28de1249aeec-openseal.png?Expires=1626963805&OSSAccessKeyId=LTAI4G23YViiKnxTC28ygQzF&Signature=%2FwQtOf9BQzljp7m1uZTkayKFvC0%3D","width":95,"height":95}}
+
+21:23:21.889 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,110] - ------------------ 创建个人模板印章 end -----------------
+21:23:21.890 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,112] - ------------------ 创建企业模板印章 start -----------------
+21:23:21.899 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"central":"STAR","color":"RED","type":"TEMPLATE_ROUND"}
+
+21:23:21.899 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/organizations/9deb10df79904650a64f8fadd4c59a6b/seals/officialtemplate
+请求方式
+:POST
+
+21:23:22.056 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":0,"message":"成功","data":{"sealId":"96107524-96d4-403e-89fe-21ac1ca6fcc1","fileKey":"$24d8e2d1-34e2-4d68-a3d9-2c408d30d044$817112578","url":"https://esignoss.esign.cn/seal-service/22335f23-8640-469b-b0a2-1f8b5d2c6207/c6d1c581-b947-4a10-b317-5fb5ab08ef91-openseal.png?Expires=1626963805&OSSAccessKeyId=LTAI4G23YViiKnxTC28ygQzF&Signature=AuIVmTe7FYavfHWPRj%2FqAet8%2BFk%3D","width":159,"height":159}}
+
+21:23:22.061 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,117] - ------------------ 创建企业模板印章 end -----------------
+21:23:22.061 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,119] - ------------------ 通过上传方式创建文件 start -----------------
+21:23:23.498 [SpringContextShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+21:23:28.481 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2032] - {dataSource-1} closing ...
+21:23:28.541 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2104] - {dataSource-1} closed
+21:25:09.939 [main] INFO  com.ruoyi.Testeqb - [logStarting,55] - Starting Testeqb on QH-20191221KEWA with PID 26676 (started by Administrator in E:\wemem\webffwy\ruoyi-app)
+21:25:09.942 [main] INFO  com.ruoyi.Testeqb - [logStartupProfileInfo,655] - The following profiles are active: prod
+21:25:44.449 [main] INFO  c.a.d.p.DruidDataSource - [init,985] - {dataSource-1} inited
+21:25:55.966 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+21:26:02.736 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+21:26:02.847 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+21:26:03.043 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+21:26:03.500 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_1
+21:26:03.553 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_1
+21:26:03.671 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_2
+21:26:03.674 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_1
+21:26:03.692 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_3
+21:26:03.696 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPOST_1
+21:26:03.708 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getCartCheckedListUsingGET_1
+21:26:03.715 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_2
+21:26:03.760 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_2
+21:26:03.764 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_1
+21:26:04.837 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_3
+21:26:04.853 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_3
+21:26:04.856 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_4
+21:26:04.860 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_2
+21:26:04.866 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_4
+21:26:04.887 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_4
+21:26:05.147 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_5
+21:26:05.404 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_3
+21:26:05.409 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_5
+21:26:05.412 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPUT_1
+21:26:05.415 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_5
+21:26:05.420 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_6
+21:26:05.423 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_4
+21:26:05.429 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_6
+21:26:06.181 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_7
+21:26:06.402 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_8
+21:26:06.464 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_7
+21:26:06.469 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listIdUsingGET_1
+21:26:06.490 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_6
+21:26:06.513 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_8
+21:26:06.546 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: createIndexUsingGET_1
+21:26:06.554 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: lowerProductSearchUsingGET_1
+21:26:06.584 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: productListUsingGET_1
+21:26:06.610 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_9
+21:26:06.675 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_9
+21:26:20.864 [main] INFO  com.ruoyi.Testeqb - [logStarted,61] - Started Testeqb in 73.015 seconds (JVM running for 77.637)
+21:26:21.899 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,79] - ------------------ 创建个人账号 start -----------------
+21:26:22.021 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"idNumber":"420902199707115954","idType":"CRED_PSN_CH_IDCARD","mobile":"17671850175","name":"杨志杰","thirdPartyUserId":"12321332321"}
+
+21:26:22.022 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/accounts/createByThirdPartyUserId
+请求方式
+:POST
+
+21:26:22.566 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":53000000,"message":"账号已存在","data":{"accountId":"7d618b0e829941e5be50bc489c9c96f2"}}
+
+21:26:22.602 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,89] - ------------------ 创建个人账号 end -----------------
+21:26:22.602 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,91] - ------------------ 创建企业账号 start -----------------
+21:26:22.608 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"creator":"7d618b0e829941e5be50bc489c9c96f2","idNumber":"91110105MA0038GH6Y","idType":"CRED_ORG_USCC","name":"北京嗅美科技有限公司","thirdPartyUserId":"91110105MA0038GH6Y"}
+
+21:26:22.608 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/organizations/createByThirdPartyUserId
+请求方式
+:POST
+
+21:26:22.721 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":53000000,"message":"机构已存在","data":{"accountId":"9deb10df79904650a64f8fadd4c59a6b","orgId":"9deb10df79904650a64f8fadd4c59a6b"}}
+
+21:26:22.730 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,101] - ------------------ 创建企业账号 end -----------------
+21:26:22.730 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,103] - ------------------ 创建个人模板印章 start -----------------
+21:26:22.738 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"color":"RED","type":"SQUARE"}
+
+21:26:22.739 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/accounts/7d618b0e829941e5be50bc489c9c96f2/seals/personaltemplate
+请求方式
+:POST
+
+21:26:22.876 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":0,"message":"成功","data":{"sealId":"c54e0343-8468-4d8b-91d4-b0f3e84eb59c","fileKey":"$d9e31097-4716-42d0-aa05-68a8052462eb$1158629991","url":"https://esignoss.esign.cn/seal-service/9dd95e6c-a388-4bf7-82b1-c17a4825dde7/bb360caf-319a-44ff-baf2-28de1249aeec-openseal.png?Expires=1626963986&OSSAccessKeyId=LTAI4G23YViiKnxTC28ygQzF&Signature=jfgzjy1R6bhyLjtaFUol04MKur4%3D","width":95,"height":95}}
+
+21:26:22.889 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,110] - ------------------ 创建个人模板印章 end -----------------
+21:26:22.890 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,112] - ------------------ 创建企业模板印章 start -----------------
+21:26:22.900 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"central":"STAR","color":"RED","type":"TEMPLATE_ROUND"}
+
+21:26:22.900 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/organizations/9deb10df79904650a64f8fadd4c59a6b/seals/officialtemplate
+请求方式
+:POST
+
+21:26:23.056 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":0,"message":"成功","data":{"sealId":"96107524-96d4-403e-89fe-21ac1ca6fcc1","fileKey":"$24d8e2d1-34e2-4d68-a3d9-2c408d30d044$817112578","url":"https://esignoss.esign.cn/seal-service/22335f23-8640-469b-b0a2-1f8b5d2c6207/c6d1c581-b947-4a10-b317-5fb5ab08ef91-openseal.png?Expires=1626963986&OSSAccessKeyId=LTAI4G23YViiKnxTC28ygQzF&Signature=PO68%2FanntVKtA0r8jxqfUBz%2BMjM%3D","width":159,"height":159}}
+
+21:26:23.062 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,117] - ------------------ 创建企业模板印章 end -----------------
+21:26:23.063 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,119] - ------------------ 通过上传方式创建文件 start -----------------
+21:26:23.096 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"contentMd5":"lr36FxZrh7jEv17JuakM9Q==","contentType":"application/pdf","convert2Pdf":false,"fileName":"test.pdf","fileSize":161692}
+
+21:26:23.097 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/files/getUploadUrl
+请求方式
+:POST
+
+21:26:23.206 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":0,"message":"成功","data":{"fileId":"d9ae99d2a4734753acd72e64d73676fd","uploadUrl":"https://esignoss.esign.cn/1111564182/a5367fc8-1a84-4e59-bbca-05f13a577d8c/test.pdf?Expires=1626963986&OSSAccessKeyId=STS.NUV94w4KX4Bo7oVzWdV11UczL&Signature=LTGpN7yK9sW%2FROk%2BMsPyOmD1lgc%3D&callback-var=eyJ4OmZpbGVfa2V5IjoiJDllOTZkOWVhLTJkNzYtNGUwNS1iNTA0LWEwYTA5MzJjY2FjMyQxMjg0MjQ1Mjg3In0%3D%0A&callback=eyJjYWxsYmFja1VybCI6Imh0dHA6Ly9maWxlc3lzdGVtLXNtbC50c2lnbi5jbi9maWxlLXN5c3RlbS9jYWxsYmFjay9hbGlvc3MiLCJjYWxsYmFja0JvZHkiOiAie1wibWltZVR5cGVcIjoke21pbWVUeXBlfSxcInNpemVcIjogJHtzaXplfSxcImJ1Y2tldFwiOiAke2J1Y2tldH0sXCJvYmplY3RcIjogJHtvYmplY3R9LFwiZXRhZ1wiOiAke2V0YWd9LFwiZmlsZV9rZXlcIjoke3g6ZmlsZV9rZXl9fSIsImNhbGxiYWNrQm9keVR5cGUiOiAiYXBwbGljYXRpb24vanNvbiJ9%0A&security-token=CAIS%2BAF1q6Ft5B2yfSjIr5bjco7D2ZR5g4CENUnnnlcxWr4duqbRrjz2IHtKdXRvBu8Xs%2F4wnmxX7f4YlqB6T55OSAmcNZEoOnSYb8fmMeT7oMWQweEurv%2FMQBqyaXPS2MvVfJ%2BOLrf0ceusbFbpjzJ6xaCAGxypQ12iN%2B%2Fm6%2FNgdc9FHHPPD1x8CcxROxFppeIDKHLVLozNCBPxhXfKB0ca0WgVy0EHsPnvm5DNs0uH1AKjkbRM9r6ceMb0M5NeW75kSMqw0eBMca7M7TVd8RAi9t0t1%2FIVpGiY4YDAWQYLv0rda7DOltFiMkpla7MmXqlft%2BhzcgeQY0pc%2FRqAAVYwpAWjD%2F7rfC4Dip3B%2B3qQsL%2ByLzjg3ZY5S0AIxQ5f%2Bbzhk1KD2dbW4DZ0w2IqdCyeUeWF9eS98DCimhHzkunUhUZm0hHW8m917XaKwHsF7YX6QmdnBRn%2FR5wruwyTz82XhgWxERup2rOtoyRMB%2BEFwVzdpDEVNx%2BEvYJP4u00"}}
+
+21:26:23.217 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,133] - ------------------ 通过上传方式创建文件 end -----------------
+21:26:23.218 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,135] - ------------------ 文件流上传方法 start -----------------
+21:26:24.236 [SpringContextShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+21:26:29.205 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2032] - {dataSource-1} closing ...
+21:26:29.237 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2104] - {dataSource-1} closed
+21:30:00.693 [main] INFO  com.ruoyi.Testeqb - [logStarting,55] - Starting Testeqb on QH-20191221KEWA with PID 15956 (started by Administrator in E:\wemem\webffwy\ruoyi-app)
+21:30:00.694 [main] INFO  com.ruoyi.Testeqb - [logStartupProfileInfo,655] - The following profiles are active: prod
+21:30:24.307 [main] INFO  c.a.d.p.DruidDataSource - [init,985] - {dataSource-1} inited
+21:30:34.832 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - [initHandlerMethods,69] - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+21:30:41.300 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,160] - Context refreshed
+21:30:41.456 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - [start,163] - Found 1 custom documentation plugin(s)
+21:30:41.609 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - [scan,41] - Scanning for api listing references
+21:30:42.104 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_1
+21:30:42.148 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_1
+21:30:42.235 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_2
+21:30:42.239 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_1
+21:30:42.260 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_3
+21:30:42.264 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPOST_1
+21:30:42.272 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getCartCheckedListUsingGET_1
+21:30:42.278 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_2
+21:30:42.345 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_2
+21:30:42.349 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_1
+21:30:44.117 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_3
+21:30:44.137 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_3
+21:30:44.146 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_4
+21:30:44.185 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_2
+21:30:44.192 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_4
+21:30:44.217 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_4
+21:30:44.467 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_5
+21:30:44.686 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_3
+21:30:44.691 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_5
+21:30:44.694 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: editUsingPUT_1
+21:30:44.699 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_5
+21:30:44.702 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_6
+21:30:44.704 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: removeUsingDELETE_4
+21:30:44.709 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_6
+21:30:45.371 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_7
+21:30:45.632 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_8
+21:30:45.712 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_7
+21:30:45.717 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listIdUsingGET_1
+21:30:45.737 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: addUsingPOST_6
+21:30:45.760 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_8
+21:30:45.782 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: createIndexUsingGET_1
+21:30:45.789 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: lowerProductSearchUsingGET_1
+21:30:45.813 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: productListUsingGET_1
+21:30:45.841 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: getInfoUsingGET_9
+21:30:45.898 [main] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - [startingWith,40] - Generating unique operation named: listUsingGET_9
+21:30:59.539 [main] INFO  com.ruoyi.Testeqb - [logStarted,61] - Started Testeqb in 60.552 seconds (JVM running for 64.55)
+21:31:00.168 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,79] - ------------------ 创建个人账号 start -----------------
+21:31:00.315 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"idNumber":"420902199707115954","idType":"CRED_PSN_CH_IDCARD","mobile":"17671850175","name":"杨志杰","thirdPartyUserId":"12321332321"}
+
+21:31:00.316 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/accounts/createByThirdPartyUserId
+请求方式
+:POST
+
+21:31:00.794 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":53000000,"message":"账号已存在","data":{"accountId":"7d618b0e829941e5be50bc489c9c96f2"}}
+
+21:31:00.831 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,89] - ------------------ 创建个人账号 end -----------------
+21:31:00.832 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,91] - ------------------ 创建企业账号 start -----------------
+21:31:00.837 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"creator":"7d618b0e829941e5be50bc489c9c96f2","idNumber":"91110105MA0038GH6Y","idType":"CRED_ORG_USCC","name":"北京嗅美科技有限公司","thirdPartyUserId":"91110105MA0038GH6Y"}
+
+21:31:00.837 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/organizations/createByThirdPartyUserId
+请求方式
+:POST
+
+21:31:00.984 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":53000000,"message":"机构已存在","data":{"accountId":"9deb10df79904650a64f8fadd4c59a6b","orgId":"9deb10df79904650a64f8fadd4c59a6b"}}
+
+21:31:00.991 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,101] - ------------------ 创建企业账号 end -----------------
+21:31:00.993 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,103] - ------------------ 创建个人模板印章 start -----------------
+21:31:00.999 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"color":"RED","type":"SQUARE"}
+
+21:31:00.999 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/accounts/7d618b0e829941e5be50bc489c9c96f2/seals/personaltemplate
+请求方式
+:POST
+
+21:31:01.178 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":0,"message":"成功","data":{"sealId":"c54e0343-8468-4d8b-91d4-b0f3e84eb59c","fileKey":"$d9e31097-4716-42d0-aa05-68a8052462eb$1158629991","url":"https://esignoss.esign.cn/seal-service/9dd95e6c-a388-4bf7-82b1-c17a4825dde7/bb360caf-319a-44ff-baf2-28de1249aeec-openseal.png?Expires=1626964264&OSSAccessKeyId=LTAI4G23YViiKnxTC28ygQzF&Signature=YE8M7%2BHu4csevreDJEO8fsywp8Y%3D","width":95,"height":95}}
+
+21:31:01.186 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,110] - ------------------ 创建个人模板印章 end -----------------
+21:31:01.187 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,112] - ------------------ 创建企业模板印章 start -----------------
+21:31:01.200 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"central":"STAR","color":"RED","type":"TEMPLATE_ROUND"}
+
+21:31:01.200 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/organizations/9deb10df79904650a64f8fadd4c59a6b/seals/officialtemplate
+请求方式
+:POST
+
+21:31:01.379 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":0,"message":"成功","data":{"sealId":"96107524-96d4-403e-89fe-21ac1ca6fcc1","fileKey":"$24d8e2d1-34e2-4d68-a3d9-2c408d30d044$817112578","url":"https://esignoss.esign.cn/seal-service/22335f23-8640-469b-b0a2-1f8b5d2c6207/c6d1c581-b947-4a10-b317-5fb5ab08ef91-openseal.png?Expires=1626964264&OSSAccessKeyId=LTAI4G23YViiKnxTC28ygQzF&Signature=BCg8kMUEFkxaxFKV6JTeA71Hp1Q%3D","width":159,"height":159}}
+
+21:31:01.383 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,117] - ------------------ 创建企业模板印章 end -----------------
+21:31:01.384 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,119] - ------------------ 通过上传方式创建文件 start -----------------
+21:31:01.400 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"contentMd5":"lr36FxZrh7jEv17JuakM9Q==","contentType":"application/pdf","convert2Pdf":false,"fileName":"test.pdf","fileSize":161692}
+
+21:31:01.401 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/files/getUploadUrl
+请求方式
+:POST
+
+21:31:01.498 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":0,"message":"成功","data":{"fileId":"6e8598cdb1284dbb98e15b24f2154fd3","uploadUrl":"https://esignoss.esign.cn/1111564182/8d6ab063-56d2-4219-97be-ba345c174228/test.pdf?Expires=1626964264&OSSAccessKeyId=STS.NUV94w4KX4Bo7oVzWdV11UczL&Signature=uEuMjQCgJa940xftqHFg4muazdw%3D&callback-var=eyJ4OmZpbGVfa2V5IjoiJGZjMTRkNmRhLTk3ZTktNDRlYy1iNzRiLTQwOWJjZDdlNGUyYSQzODQ3OTU1NTE5In0%3D%0A&callback=eyJjYWxsYmFja1VybCI6Imh0dHA6Ly9maWxlc3lzdGVtLXNtbC50c2lnbi5jbi9maWxlLXN5c3RlbS9jYWxsYmFjay9hbGlvc3MiLCJjYWxsYmFja0JvZHkiOiAie1wibWltZVR5cGVcIjoke21pbWVUeXBlfSxcInNpemVcIjogJHtzaXplfSxcImJ1Y2tldFwiOiAke2J1Y2tldH0sXCJvYmplY3RcIjogJHtvYmplY3R9LFwiZXRhZ1wiOiAke2V0YWd9LFwiZmlsZV9rZXlcIjoke3g6ZmlsZV9rZXl9fSIsImNhbGxiYWNrQm9keVR5cGUiOiAiYXBwbGljYXRpb24vanNvbiJ9%0A&security-token=CAIS%2BAF1q6Ft5B2yfSjIr5bjco7D2ZR5g4CENUnnnlcxWr4duqbRrjz2IHtKdXRvBu8Xs%2F4wnmxX7f4YlqB6T55OSAmcNZEoOnSYb8fmMeT7oMWQweEurv%2FMQBqyaXPS2MvVfJ%2BOLrf0ceusbFbpjzJ6xaCAGxypQ12iN%2B%2Fm6%2FNgdc9FHHPPD1x8CcxROxFppeIDKHLVLozNCBPxhXfKB0ca0WgVy0EHsPnvm5DNs0uH1AKjkbRM9r6ceMb0M5NeW75kSMqw0eBMca7M7TVd8RAi9t0t1%2FIVpGiY4YDAWQYLv0rda7DOltFiMkpla7MmXqlft%2BhzcgeQY0pc%2FRqAAVYwpAWjD%2F7rfC4Dip3B%2B3qQsL%2ByLzjg3ZY5S0AIxQ5f%2Bbzhk1KD2dbW4DZ0w2IqdCyeUeWF9eS98DCimhHzkunUhUZm0hHW8m917XaKwHsF7YX6QmdnBRn%2FR5wruwyTz82XhgWxERup2rOtoyRMB%2BEFwVzdpDEVNx%2BEvYJP4u00"}}
+
+21:31:01.508 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,133] - ------------------ 通过上传方式创建文件 end -----------------
+21:31:01.508 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,135] - ------------------ 文件流上传方法 start -----------------
+21:31:01.513 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+[B@5d4369c5
+
+21:31:01.514 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://esignoss.esign.cn/1111564182/8d6ab063-56d2-4219-97be-ba345c174228/test.pdf?Expires=1626964264&OSSAccessKeyId=STS.NUV94w4KX4Bo7oVzWdV11UczL&Signature=uEuMjQCgJa940xftqHFg4muazdw%3D&callback-var=eyJ4OmZpbGVfa2V5IjoiJGZjMTRkNmRhLTk3ZTktNDRlYy1iNzRiLTQwOWJjZDdlNGUyYSQzODQ3OTU1NTE5In0%3D%0A&callback=eyJjYWxsYmFja1VybCI6Imh0dHA6Ly9maWxlc3lzdGVtLXNtbC50c2lnbi5jbi9maWxlLXN5c3RlbS9jYWxsYmFjay9hbGlvc3MiLCJjYWxsYmFja0JvZHkiOiAie1wibWltZVR5cGVcIjoke21pbWVUeXBlfSxcInNpemVcIjogJHtzaXplfSxcImJ1Y2tldFwiOiAke2J1Y2tldH0sXCJvYmplY3RcIjogJHtvYmplY3R9LFwiZXRhZ1wiOiAke2V0YWd9LFwiZmlsZV9rZXlcIjoke3g6ZmlsZV9rZXl9fSIsImNhbGxiYWNrQm9keVR5cGUiOiAiYXBwbGljYXRpb24vanNvbiJ9%0A&security-token=CAIS%2BAF1q6Ft5B2yfSjIr5bjco7D2ZR5g4CENUnnnlcxWr4duqbRrjz2IHtKdXRvBu8Xs%2F4wnmxX7f4YlqB6T55OSAmcNZEoOnSYb8fmMeT7oMWQweEurv%2FMQBqyaXPS2MvVfJ%2BOLrf0ceusbFbpjzJ6xaCAGxypQ12iN%2B%2Fm6%2FNgdc9FHHPPD1x8CcxROxFppeIDKHLVLozNCBPxhXfKB0ca0WgVy0EHsPnvm5DNs0uH1AKjkbRM9r6ceMb0M5NeW75kSMqw0eBMca7M7TVd8RAi9t0t1%2FIVpGiY4YDAWQYLv0rda7DOltFiMkpla7MmXqlft%2BhzcgeQY0pc%2FRqAAVYwpAWjD%2F7rfC4Dip3B%2B3qQsL%2ByLzjg3ZY5S0AIxQ5f%2Bbzhk1KD2dbW4DZ0w2IqdCyeUeWF9eS98DCimhHzkunUhUZm0hHW8m917XaKwHsF7YX6QmdnBRn%2FR5wruwyTz82XhgWxERup2rOtoyRMB%2BEFwVzdpDEVNx%2BEvYJP4u00
+请求方式
+:PUT
+
+21:31:02.052 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"errCode":0,"msg":"成功"}
+
+21:31:02.056 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,138] - ------------------ 文件流上传方法 end -----------------
+21:31:02.056 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,140] - ------------------ 一步发起签署 start -----------------
+21:31:02.121 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+{"docs":[{"fileId":"6e8598cdb1284dbb98e15b24f2154fd3"}],"flowInfo":{"autoArchive":true,"autoInitiate":true,"businessScene":"b2c合同签署测试"},"signers":[{"platformSign":false,"signerAccount":{"signerAccountId":"7d618b0e829941e5be50bc489c9c96f2"},"signfields":[{"autoExecute":false,"fileId":"6e8598cdb1284dbb98e15b24f2154fd3","posBean":{"addSignTime":false,"posPage":"1","posX":113.0,"posY":225.0}}]},{"platformSign":true,"signfields":[{"actorIndentityType":"2","autoExecute":true,"fileId":"6e8598cdb1284dbb98e15b24f2154fd3","posBean":{"addSignTime":false,"posPage":"1","posX":224.0,"posY":334.0}}]}]}
+
+21:31:02.122 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/api/v2/signflows/createFlowOneStep
+请求方式
+:POST
+
+21:31:03.374 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":0,"message":"成功","data":{"flowId":"dd2db7bcf8f142aab04329522fdb0e27"}}
+
+21:31:03.384 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,183] - ------------------ 一步发起签署 end -----------------
+21:31:03.384 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,186] - ------------------ 获取签署地址 start -----------------
+21:31:03.411 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,102] - 请求参数
+null
+
+21:31:03.411 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,103] - 请求地址
+:https://smlopenapi.esign.cn/v1/signflows/dd2db7bcf8f142aab04329522fdb0e27/executeUrl?accountId=7d618b0e829941e5be50bc489c9c96f2&organizeId=0
+请求方式
+:GET
+
+21:31:03.635 [main] INFO  c.r.a.u.h.c.HttpCfgHelper - [sendHttp,144] - 响应
+{"code":0,"message":"成功","data":{"url":"https://smlh5.esign.cn/guide?context=gWeFTWMvwkkI&flowId=dd2db7bcf8f142aab04329522fdb0e27&organ=false&appId=7438866430&linkSource=1&bizType=1&tsign_source_type=SIGN_LINK_WUKONG&tsign_source_detail=16R2mv%2F27h2Y5CkM9bwhboCH%2FhPla5I1BD%2BiMVxQer47p1GkoO40DCFNZDuewe5kW8ZeJzEE5iDTLSd5WCGTQk82MczCshcGGg%2FMKo5dp83qLVLfCJDpbqEP5ifVZtJ4cqvwZFtLXNSPkDZ%2FotWC3psFnZ%2BYHKsw7KOrQqs4P0DlRQRmBqLOjM67diXBtjf6dRoiqeJclHth9bHPkueUm7HP9GBZgqnOmaw7LS7t7fHtEP7VL4eb0GqTdsCGjBC8J","shortUrl":"https://smlt.esign.cn/7Naethf0Q6GW"}}
+
+21:31:03.643 [main] INFO  c.r.a.u.h.EqbB2cUtil - [createContract,195] - ------------------ 获取签署地址 end -----------------
+21:31:04.005 [SpringContextShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+21:31:08.951 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2032] - {dataSource-1} closing ...
+21:31:08.978 [SpringContextShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2104] - {dataSource-1} closed

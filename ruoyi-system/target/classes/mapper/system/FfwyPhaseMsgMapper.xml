@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.combomealorders.FfwyPhaseMsgMapper">
+    
+    <resultMap type="FfwyPhaseMsg" id="FfwyPhaseMsgResult">
+        <result property="phaseMsgId"    column="phase_msg_id"    />
+        <result property="phaseMsg"    column="phase_msg"    />
+        <result property="phaseTitle"    column="phase_title"    />
+        <result property="orderCombomealId" column="order_combomeal_id"></result>
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <collection property="ffwyPhasePhotos" javaType="java.util.ArrayList"
+                    ofType="com.ruoyi.system.domain.combomealorders.phaseMsg.FfwyPhasePhoto">
+            <result property="phasePhotoId" column="phase_photo_id"></result>
+            <result property="phasePhoto" column="phase_photo"></result>
+        </collection>
+    </resultMap>
+
+    <sql id="selectFfwyPhaseMsgVo">
+        select phase_msg_id, phase_msg, phase_title, create_time, update_time from ffwy_phase_msg
+    </sql>
+
+    <sql id="SELECT_PHASE_MSG_PHOTO">
+       select fpm.phase_msg_id, phase_msg, phase_title, fpm.create_time,
+        fpm.update_time ,fpp.phase_photo_id,fpp.phase_photo,fpm.order_combomeal_id
+        from ffwy_phase_msg fpm LEFT JOIN ffwy_phase_photo fpp
+        on fpm.phase_msg_id =fpp.phase_msg_id
+    </sql>
+    <select id="selectFfwyPhaseMsgList" parameterType="FfwyPhaseMsg" resultMap="FfwyPhaseMsgResult">
+        <include refid="selectFfwyPhaseMsgVo"/>
+        <where>
+            <if test="phaseMsg != null  and phaseMsg != ''"> and phase_msg = #{phaseMsg}</if>
+            <if test="phaseTitle != null  and phaseTitle != ''"> and phase_title = #{phaseTitle}</if>
+        </where>
+    </select>
+
+    <select id="selectFfwyPhaseMsgAndPhoto" parameterType="FfwyPhaseMsg" resultMap="FfwyPhaseMsgResult">
+        <include refid="SELECT_PHASE_MSG_PHOTO"/>
+        <where>
+            <if test="phaseMsgId != null  "> and fpm.phase_msg_id = #{phaseMsgId}</if>
+            <if test="phaseMsg != null  and phaseMsg != ''"> and phase_msg = #{phaseMsg}</if>
+            <if test="phaseTitle != null  and phaseTitle != ''"> and phase_title = #{phaseTitle}</if>
+            <if test="orderCombomealId != null  "> and fpm.order_combomeal_id = #{orderCombomealId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyPhaseMsgById" parameterType="Long" resultMap="FfwyPhaseMsgResult">
+        <include refid="selectFfwyPhaseMsgVo"/>
+        where phase_msg_id = #{phaseMsgId}
+    </select>
+        
+    <insert id="insertFfwyPhaseMsg" parameterType="FfwyPhaseMsg" useGeneratedKeys="true" keyProperty="phaseMsgId">
+        insert into ffwy_phase_msg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="phaseMsg != null">phase_msg,</if>
+            <if test="phaseTitle != null">phase_title,</if>
+            <if test="orderCombomealId != null">order_combomeal_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+            <if test="phaseMsg != null">#{phaseMsg},</if>
+            <if test="phaseTitle != null">#{phaseTitle},</if>
+            <if test="orderCombomealId != null">#{orderCombomealId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyPhaseMsg" parameterType="FfwyPhaseMsg">
+        update ffwy_phase_msg
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="phaseMsg != null">phase_msg = #{phaseMsg},</if>
+            <if test="phaseTitle != null">phase_title = #{phaseTitle},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="orderCombomealId != null  "> and order_combomeal_id = #{orderCombomealId}</if>
+        </trim>
+        where phase_msg_id = #{phaseMsgId}
+    </update>
+
+    <delete id="deleteFfwyPhaseMsgById" parameterType="Long">
+        delete from ffwy_phase_msg where phase_msg_id = #{phaseMsgId}
+    </delete>
+
+    <delete id="deleteFfwyPhaseMsgByIds" parameterType="String">
+        delete from ffwy_phase_msg where phase_msg_id in 
+        <foreach item="phaseMsgId" collection="array" open="(" separator="," close=")">
+            #{phaseMsgId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.combomealorders.FfwyPhaseMapper">
+
+    <resultMap type="FfwyPhase" id="FfwyPhaseResult">
+        <result property="phaseId"    column="phase_id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="phaseName"    column="phase_name"    />
+        <result property="phaseIntro"    column="phase_intro"    />
+        <result property="payMoney"    column="pay_money"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="level"    column="level"    />
+        <result property="beginTime"    column="begin_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="phaseStatus"    column="phase_status"    />
+        <result property="phaseStatusUser" column="phase_status_user"></result>
+        <result property="phaseOrderNumber" column="phase_order_number"></result>
+
+    </resultMap>
+
+    <sql id="selectFfwyPhaseVo">
+        select phase_id, order_id, phase_name, phase_intro, pay_money,
+         parent_id, level, begin_time, end_time, phase_status,phase_status_user,phase_order_number
+         from ffwy_phase
+    </sql>
+
+    <select id="selectFfwyPhaseList" parameterType="FfwyPhase" resultMap="FfwyPhaseResult">
+        <include refid="selectFfwyPhaseVo"/>
+        <where>
+            <if test="orderId != null "> and order_id = #{orderId}</if>
+            <if test="phaseName != null  and phaseName != ''"> and phase_name like concat('%', #{phaseName}, '%')</if>
+            <if test="phaseIntro != null  and phaseIntro != ''"> and phase_intro = #{phaseIntro}</if>
+            <if test="payMoney != null "> and pay_money = #{payMoney}</if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="parentId == null "> and parent_id is null </if>
+            <if test="level != null "> and level = #{level}</if>
+            <if test="beginTime != null "> and begin_time = #{beginTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="phaseStatus != null  and phaseStatus != ''"> and phase_status = #{phaseStatus}</if>
+            <if test="phaseStatusUser != null  and phaseStatusUser != ''"> and phase_status_user = #{phaseStatusUser}</if>
+            <if test="phaseOrderNumber != null  and phaseOrderNumber != ''"> and phase_order_number = #{phaseOrderNumber}</if>
+        </where>
+        order by level
+    </select>
+
+
+
+    <select id="selectFfwyPhaseByOrderIdAndLevel" parameterType="Long" resultMap="FfwyPhaseResult">
+        <include refid="selectFfwyPhaseVo"/>
+        where order_id = #{orderId} and  level=#{level}
+    </select>
+
+
+    <select id="selectNextParentPhase" parameterType="Long" resultMap="FfwyPhaseResult">
+        select phase_id, order_id, phase_name, phase_intro, pay_money, parent_id, level,
+         begin_time, end_time, phase_status from ffwy_phase
+
+        where phase_id in(
+        select
+        case
+        when SIGN(phase_id-${phaseId})&gt;0 THEN MIN(phase_id)
+        when SIGN(phase_id-${phaseId})&lt;0 THEN MAX(phase_id)
+        ELSE phase_id
+        end
+        from ffwy_phase
+        WHERE phase_id &gt; ${phaseId} and parent_id is NULL and order_id= ${orderId}
+
+        GROUP BY SIGN(phase_id-${phaseId})
+        ORDER BY SIGN(phase_id-${phaseId})
+        )
+    </select>
+
+    <select id="selectNowParentPhase" parameterType="Long" resultMap="FfwyPhaseResult">
+        select phase_id, order_id, phase_name, phase_intro, pay_money, parent_id, level,
+         begin_time, end_time, phase_status from ffwy_phase
+
+        where phase_id in(
+        select
+        case
+        when SIGN(phase_id-${phaseId})&gt;0 THEN MIN(phase_id)
+        when SIGN(phase_id-${phaseId})&lt;0 THEN MAX(phase_id)
+        ELSE phase_id
+        end
+        from ffwy_phase
+        WHERE phase_id &lt; ${phaseId} and parent_id is NULL and order_id= ${orderId}
+
+        GROUP BY SIGN(phase_id-${phaseId})
+        ORDER BY SIGN(phase_id-${phaseId})
+        )
+    </select>
+
+    <select id="selectNextChildPhase" parameterType="Long" resultMap="FfwyPhaseResult">
+        select phase_id, order_id, phase_name, phase_intro, pay_money, parent_id, level,
+         begin_time, end_time, phase_status from ffwy_phase
+
+        where phase_id in(
+        select
+        case
+        when SIGN(phase_id-${phaseId})&gt;0 THEN MIN(phase_id)
+        when SIGN(phase_id-${phaseId})&lt;0 THEN MAX(phase_id)
+        ELSE phase_id
+        end
+        from ffwy_phase
+        WHERE phase_id &gt; ${phaseId} and parent_id is not NULL and order_id= ${orderId}
+
+        GROUP BY SIGN(phase_id-${phaseId})
+        ORDER BY SIGN(phase_id-${phaseId})
+        )
+    </select>
+
+    <select id="selectFfwyPhaseByOrder" parameterType="String" resultMap="FfwyPhaseResult">
+        <include refid="selectFfwyPhaseVo"/>
+        where phase_order_number = #{orderId}
+    </select>
+
+    <select id="selectFfwyPhaseById" parameterType="Long" resultMap="FfwyPhaseResult">
+        <include refid="selectFfwyPhaseVo"/>
+        where phase_id = #{phaseId}
+    </select>
+
+
+    <insert id="insertFfwyMaterials" parameterType="java.util.List" >
+        insert into ffwy_phase(order_id,phase_name,phase_intro,pay_money,parent_id,
+        level,begin_time,end_time,phase_status,phase_order_number)
+        VALUES
+        <foreach collection="list" index="index" item="FfwyPhase" separator=",">
+            (
+            #{FfwyPhase.orderId}, #{FfwyPhase.phaseName},#{FfwyPhase.phaseIntro}, #{FfwyPhase.payMoney},
+            #{FfwyPhase.parentId}, #{FfwyPhase.level}, #{FfwyPhase.beginTime}, #{FfwyPhase.endTime},
+            #{FfwyPhase.phaseStatus},#{phaseOrderNumber}
+            )
+
+        </foreach>
+
+    </insert>
+
+    <insert id="insertFfwyPhase" parameterType="FfwyPhase" useGeneratedKeys="true" keyProperty="phaseId">
+        insert into ffwy_phase
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">order_id,</if>
+            <if test="phaseName != null">phase_name,</if>
+            <if test="phaseIntro != null">phase_intro,</if>
+            <if test="payMoney != null">pay_money,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="level != null">level,</if>
+            <if test="beginTime != null">begin_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="phaseStatus != null">phase_status,</if>
+            <if test="phaseStatusUser != null">phase_status_user,</if>
+
+            <if test="phaseOrderNumber != null">phase_order_number,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">#{orderId},</if>
+            <if test="phaseName != null">#{phaseName},</if>
+            <if test="phaseIntro != null">#{phaseIntro},</if>
+            <if test="payMoney != null">#{payMoney},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="level != null">#{level},</if>
+            <if test="beginTime != null">#{beginTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="phaseStatus != null">#{phaseStatus},</if>
+            <if test="phaseStatusUser != null">#{phaseStatusUser},</if>
+            <if test="phaseOrderNumber != null">#{phaseOrderNumber},</if>
+        </trim>
+    </insert>
+
+    <update id="updateFfwyPhase" parameterType="FfwyPhase">
+        update ffwy_phase
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="phaseName != null">phase_name = #{phaseName},</if>
+            <if test="phaseIntro != null">phase_intro = #{phaseIntro},</if>
+            <if test="payMoney != null">pay_money = #{payMoney},</if>
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="level != null">level = #{level},</if>
+            <if test="beginTime != null">begin_time = #{beginTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="phaseStatus != null">phase_status = #{phaseStatus},</if>
+            <if test="phaseStatusUser != null">phase_status_user = #{phaseStatusUser},</if>
+            <if test="phaseOrderNumber != null">phase_order_number = #{phaseOrderNumber},</if>
+        </trim>
+        where phase_id = #{phaseId}
+    </update>
+
+    <delete id="deleteFfwyPhaseById" parameterType="Long">
+        delete from ffwy_phase where phase_id = #{phaseId}
+    </delete>
+
+    <delete id="deleteFfwyPhaseByIds" parameterType="String">
+        delete from ffwy_phase where phase_id in
+        <foreach item="phaseId" collection="array" open="(" separator="," close=")">
+            #{phaseId}
+        </foreach>
+    </delete>
+</mapper>

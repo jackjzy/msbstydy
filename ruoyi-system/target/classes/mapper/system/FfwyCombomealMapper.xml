@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.combomeal.FfwyCombomealMapper">
+
+    <resultMap type="FfwyCombomeal" id="FfwyCombomealResult">
+        <result property="combomealId" column="combomeal_id"/>
+        <result property="combomealName" column="combomeal_name"/>
+        <result property="combomealNames" column="combomeal_names"/>
+        <result property="price" column="price"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="prices" column="prices"/>
+        <result property="photo" column="photo"/>
+        <result property="sales" column="sales"/>
+        <result property="information" column="information"/>
+        <result property="combomealStuts" column="combomeal_stuts"/>
+        <result property="smartName" column="smart_name"/>
+        <result property="smartNames" column="smart_name"/>
+        <result property="applianceName" column="appliance_name"/>
+        <result property="applianceNames" column="appliance_name"/>
+        <result property="arrangement" column="arrangement"/>
+        <result property="arrangements" column="arrangement"/>
+        <result property="articlesName" column="articles_name"/>
+        <result property="articlesNames" column="articles_name"/>
+        <result property="coverLink" column="cover_link"/>
+        <result property="fileCover" column="file_cover"/>
+        <result property="softOutfit" column="soft_outfit"/>
+        <result property="softOutfits" column="soft_outfit"/>
+        <result property="hardOutfit" column="hard_outfit"/>
+        <result property="explainl" column="explainl"/>
+        <result property="combomealType" column="combomeal_type"/>
+    </resultMap>
+
+    <sql id="selectFfwyCombomealVo">
+
+        select soft_outfit,combomeal_id, combomeal_name, price, create_time,hard_outfit,
+        update_time, category_id, prices, photo, sales, information, combomeal_stuts, smart_name,combomeal_type, appliance_name, arrangement, articles_name, cover_link, explainl from ffwy_combomeal
+    </sql>
+
+    <select id="selectFfwyCombomealList" parameterType="com.ruoyi.system.domain.combomeal.FfwyCombomeal"
+            resultMap="FfwyCombomealResult">
+        <include refid="selectFfwyCombomealVo"/>
+        <where>
+            <if test="combomealName != null  and combomealName != ''">and combomeal_name like concat('%',
+                #{combomealName}, '%')
+            </if>
+            <if test="price != null ">and price = #{price}</if>
+            <if test="categoryId != null ">and category_id = #{categoryId}</if>
+            <if test="prices != null ">and prices = #{prices}</if>
+            <if test="photo != null  and photo != ''">and photo = #{photo}</if>
+            <if test="sales != null ">and sales = #{sales}</if>
+            <if test="information != null  and information != ''">and information = #{information}</if>
+            <if test="combomealStuts != null ">and combomeal_stuts = #{combomealStuts}</if>
+            <if test="searchStr!=null and searchStr!=''">
+                AND
+                CONCAT(combomealName,information) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectFfwyCombomeal" parameterType="com.ruoyi.system.domain.combomeal.FfwyCombomeal"
+            resultMap="FfwyCombomealResult">
+        <include refid="selectFfwyCombomealVo"/>
+        <where>
+            <if test="price != null ">and price = #{price}</if>
+            <if test="categoryId != null ">and category_id = #{categoryId}</if>
+            <if test="prices != null ">and prices = #{prices}</if>
+            <if test="photo != null  and photo != ''">and photo = #{photo}</if>
+            <if test="sales != null ">and sales = #{sales}</if>
+            <if test="information != null  and information != ''">and information = #{information}</if>
+            <if test="combomealStuts != null ">and combomeal_stuts = #{combomealStuts}</if>
+        </where>
+    </select>
+
+    <select id="selectFfwyCombomealById" parameterType="Long" resultMap="FfwyCombomealResult">
+        <include refid="selectFfwyCombomealVo"/>
+        where combomeal_id = #{combomealId}
+    </select>
+
+    <select id="selectCombomealByCombomealId" parameterType="Long" resultMap="FfwyCombomealResult">
+        <include refid="selectFfwyCombomealVo"/>
+        where combomeal_id = #{combomealId}
+    </select>
+
+    <select id="selectCombomealByCategoryId" resultMap="FfwyCombomealResult">
+        <include refid="selectFfwyCombomealVo"/>
+        where category_id = #{categoryId}
+        Limit #{front},#{after}
+    </select>
+
+    <select id="getCountByCategoryId" resultType="java.lang.Integer">
+        select count(*) from ffwy_combomeal
+        where category_id = #{categoryId}
+    </select>
+
+    <select id="selectCombomealById" parameterType="Long" resultMap="FfwyCombomealResult">
+        <include refid="selectFfwyCombomealVo"/>
+        where combomeal_id = #{combomealId}
+    </select>
+
+    <insert id="insertFfwyCombomeal" parameterType="com.ruoyi.system.domain.combomeal.FfwyCombomeal"
+            useGeneratedKeys="true" keyProperty="combomealId">
+        insert into ffwy_combomeal
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="combomealName != null">combomeal_name,</if>
+            <if test="price != null">price,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="categoryId != null">category_id,</if>
+            <if test="prices != null">prices,</if>
+            <if test="photo != null">photo,</if>
+            <if test="sales != null">sales,</if>
+            <if test="information != null">information,</if>
+            <if test="combomealStuts != null">combomeal_stuts,</if>
+            <if test="smartName != null">smart_name,</if>
+            <if test="applianceName != null">appliance_name,</if>
+            <if test="arrangement != null">arrangement,</if>
+            <if test="articlesName != null">articles_name,</if>
+            <if test="coverLink != null">cover_link,</if>
+            <if test="fileCover !=null">file_cover,</if>
+            <if test="explainl != null">explainl,</if>
+            <if test="softOutfit != null">soft_outfit,</if>
+            <if test="hardOutfit != null">hard_outfit,</if>
+            <if test="combomealType != null">combomeal_type,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="combomealName != null">#{combomealName},</if>
+            <if test="price != null">#{price},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="categoryId != null">#{categoryId},</if>
+            <if test="prices != null">#{prices},</if>
+            <if test="photo != null">#{photo},</if>
+            <if test="sales != null">#{sales},</if>
+            <if test="information != null">#{information},</if>
+            <if test="combomealStuts != null">#{combomealStuts},</if>
+            <if test="smartName != null">#{smartName},</if>
+            <if test="applianceName != null">#{applianceName},</if>
+            <if test="arrangement != null">#{arrangement},</if>
+            <if test="articlesName != null">#{articlesName},</if>
+            <if test="coverLink != null">#{coverLink},</if>
+            <if test="fileCover != null">#{fileCover},</if>
+            <if test="explainl != null">#{explainl},</if>
+            <if test="softOutfit != null">#{softOutfit},</if>
+            <if test="hardOutfit != null">#{hardOutfit},</if>
+            <if test="combomealType != null">#{combomealType},</if>
+        </trim>
+    </insert>
+
+    <update id="updateFfwyCombomeal" parameterType="FfwyCombomeal">
+        update ffwy_combomeal
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="combomealName != null">combomeal_name = #{combomealName},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="prices != null">prices = #{prices},</if>
+            <if test="photo != null">photo = #{photo},</if>
+            <if test="sales != null">sales = #{sales},</if>
+            <if test="information != null">information = #{information},</if>
+            <if test="combomealStuts != null">combomeal_stuts = #{combomealStuts},</if>
+            <if test="smartName != null">smart_name = #{smartName},</if>
+            <if test="applianceName != null">appliance_name = #{applianceName},</if>
+            <if test="arrangement != null">arrangement = #{arrangement},</if>
+            <if test="articlesName != null">articles_name = #{articlesName},</if>
+            <if test="coverLink != null">cover_link = #{coverLink},</if>
+            <if test="explainl != null">explainl = #{explainl},</if>
+            <if test="fileCover !=null">file_cover = #{fileCover},</if>
+            <if test="softOutfit !=null">soft_outfit = #{softOutfit},</if>
+            <if test="hardOutfit != null">hard_outfit = #{hardOutfit},</if>
+        </trim>
+        where combomeal_id = #{combomealId}
+    </update>
+
+    <delete id="deleteFfwyCombomealById" parameterType="Long">
+        delete from ffwy_combomeal where combomeal_id = #{combomealId}
+    </delete>
+
+    <delete id="deleteFfwyCombomealByIds" parameterType="String">
+        delete from ffwy_combomeal where combomeal_id in
+        <foreach item="combomealId" collection="array" open="(" separator="," close=")">
+            #{combomealId}
+        </foreach>
+    </delete>
+    <select id="selectCombomealAll" parameterType="FfwyCombomeal" resultMap="FfwyCombomealResult">
+        SELECT
+        t1.*
+        ,t2.combomaeal_name as combomeal_names
+        FROM
+        ffwy_combomeal t1
+        LEFT JOIN
+        ffwy_combomeal_category t2
+        on t1.category_id = t2.category_id
+        <where>
+            <if test="combomealName != null">and t1.combomeal_name like concat('%', #{combomealName}, '%')</if>
+        </where>
+        ORDER BY t1.combomeal_id DESC
+    </select>
+
+    <select id="selectFfwyCombomealBylists" resultType="com.ruoyi.system.domain.video.FfwyVideoHotVo">
+        SELECT hot_id as hotId, hot_name as hotName	FROM ffwy_video_hot  LIMIT 5
+    </select>
+
+    <select id="selectFfwyCombomealfindBylists" parameterType="long" resultType="com.ruoyi.system.domain.video.FfwyVideoHotsVo">
+        SELECT video_hot_id as videoHotId, video_name as videoName
+        FROM ffwy_video_hots WHERE hot_id = #{hotId}  LIMIT 9
+    </select>
+
+</mapper>

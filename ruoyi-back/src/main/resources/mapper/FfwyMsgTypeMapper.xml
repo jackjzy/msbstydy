@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.back.mapper.FfwyMsgTypeMapper">
+    
+    <resultMap type="FfwyMsgType" id="FfwyMsgTypeResult">
+        <result property="msgTypeId"    column="msg_type_id"    />
+        <result property="typeName"    column="type_name"    />
+    </resultMap>
+
+    <sql id="selectFfwyMsgTypeVo">
+        select msg_type_id, type_name from ffwy_msg_type
+    </sql>
+
+    <select id="selectFfwyMsgTypeList" parameterType="FfwyMsgType" resultMap="FfwyMsgTypeResult">
+        <include refid="selectFfwyMsgTypeVo"/>
+        <where>  
+            <if test="typeName != null  and typeName != ''"> and type_name like concat('%', #{typeName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyMsgTypeById" parameterType="Long" resultMap="FfwyMsgTypeResult">
+        <include refid="selectFfwyMsgTypeVo"/>
+        where msg_type_id = #{msgTypeId}
+    </select>
+        
+    <insert id="insertFfwyMsgType" parameterType="FfwyMsgType" useGeneratedKeys="true" keyProperty="msgTypeId">
+        insert into ffwy_msg_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typeName != null">type_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="typeName != null">#{typeName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyMsgType" parameterType="FfwyMsgType">
+        update ffwy_msg_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="typeName != null">type_name = #{typeName},</if>
+        </trim>
+        where msg_type_id = #{msgTypeId}
+    </update>
+
+    <delete id="deleteFfwyMsgTypeById" parameterType="Long">
+        delete from ffwy_msg_type where msg_type_id = #{msgTypeId}
+    </delete>
+
+    <delete id="deleteFfwyMsgTypeByIds" parameterType="String">
+        delete from ffwy_msg_type where msg_type_id in 
+        <foreach item="msgTypeId" collection="array" open="(" separator="," close=")">
+            #{msgTypeId}
+        </foreach>
+    </delete>
+</mapper>

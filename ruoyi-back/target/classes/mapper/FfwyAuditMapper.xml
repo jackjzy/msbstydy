@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.back.mapper.FfwyAuditMapper">
+    
+    <resultMap type="FfwyAudit" id="FfwyAuditResult">
+        <result property="auditId"    column="audit_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="shopUserName"    column="shop_user_name"    />
+        <result property="phone"    column="phone"    />
+        <result property="email"    column="email"    />
+        <result property="shopUrl"    column="shop_url"    />
+        <result property="idCard"    column="id_card"    />
+        <result property="idCardBack"    column="id_card_back"    />
+        <result property="licence"    column="licence"    />
+        <result property="reject"    column="reject"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="passTime"    column="pass_time"    />
+        <result property="name"    column="name"    />
+        <association property="auditStatus" javaType="FfwyAuditStatus">
+            <result property="auditStatusId" column="audit_status"></result>
+            <result property="auditName" column="audit_name"></result>
+        </association>
+    </resultMap>
+
+    <sql id="selectFfwyAuditVo">
+        select audit_id, user_id, shop_user_name, phone, email, shop_url, id_card, id_card_back, licence, audit_status, reject, create_time, update_time, pass_time from ffwy_audit
+    </sql>
+
+    <sql id="QUERYALL_AUDTI">
+          select audit_id, user_id, shop_user_name, phone, email, shop_url, id_card, id_card_back, licence,
+
+            audit_status,fas.audit_name, reject, create_time, update_time, pass_time,fa.name
+
+            from ffwy_audit fa left JOIN ffwy_audit_status fas on fa.audit_status=fas.audit_status_id
+    </sql>
+
+    <select id="selectFfwyAuditList" parameterType="FfwyAudit" resultMap="FfwyAuditResult">
+        <include refid="selectFfwyAuditVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="shopUserName != null  and shopUserName != ''"> and shop_user_name like concat('%', #{shopUserName}, '%')</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="shopUrl != null  and shopUrl != ''"> and shop_url = #{shopUrl}</if>
+            <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="idCardBack != null  and idCardBack != ''"> and id_card_back = #{idCardBack}</if>
+            <if test="licence != null  and licence != ''"> and licence = #{licence}</if>
+            <if test="auditStatus != null "> and audit_status = #{auditStatus}</if>
+            <if test="reject != null  and reject != ''"> and reject = #{reject}</if>
+            <if test="passTime != null "> and pass_time = #{passTime}</if>
+            <if test="searchStr!=null and searchStr!=''">
+                AND
+                CONCAT(shop_user_name,phone) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="faindAllAuditList" parameterType="QueryAudti"  resultMap="FfwyAuditResult">
+        <include refid="QUERYALL_AUDTI"/>
+        <where>
+            <if test="auditId != null "> and audit_id = #{auditId}</if>
+            <if test="userName != null  and userName != ''"> and shop_user_name like concat('%', #{userName}, '%')</if>
+            <if test="phone != null and userName != ''"> and phone like concat('%', #{phone}, '%')</if>
+            <if test="auditStatusId != null "> and audit_status = #{auditStatusId}</if>
+            <if test="beginTime != null "> and pass_time &gt;=#{beginTime} </if>
+            <if test="endTime != null "> and pass_time &lt;= #{endTime} </if>
+            <if test="searchStr!=null and searchStr!=''">
+                AND
+                CONCAT(shop_user_name,phone,fa.name) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+        </where>
+
+    </select>
+
+
+    <select id="selectFfwyAuditById" parameterType="Long" resultMap="FfwyAuditResult">
+        <include refid="selectFfwyAuditVo"/>
+        where audit_id = #{auditId}
+    </select>
+
+    <select id="selectFfwyAuditByUserId" parameterType="Long" resultMap="FfwyAuditResult">
+        <include refid="selectFfwyAuditVo"/>
+        where user_id = #{userId}
+    </select>
+
+    <insert id="insertFfwyAudit" parameterType="FfwyAudit" useGeneratedKeys="true" keyProperty="auditId">
+        insert into ffwy_audit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="name != null">name,</if>
+            <if test="shopUserName != null">shop_user_name,</if>
+            <if test="phone != null">phone,</if>
+            <if test="email != null">email,</if>
+            <if test="shopUrl != null">shop_url,</if>
+            <if test="idCard != null">id_card,</if>
+            <if test="idCardBack != null">id_card_back,</if>
+            <if test="licence != null">licence,</if>
+            <if test="auditStatus != null">audit_status,</if>
+            <if test="reject != null">reject,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="passTime != null">pass_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="name != null">#{name},</if>
+            <if test="shopUserName != null">#{shopUserName},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="email != null">#{email},</if>
+            <if test="shopUrl != null">#{shopUrl},</if>
+            <if test="idCard != null">#{idCard},</if>
+            <if test="idCardBack != null">#{idCardBack},</if>
+            <if test="licence != null">#{licence},</if>
+            <if test="auditStatus != null">#{auditStatus.auditStatusId},</if>
+            <if test="reject != null">#{reject},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="passTime != null">#{passTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyAudit" parameterType="FfwyAudit">
+        update ffwy_audit
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="shopUserName != null">shop_user_name = #{shopUserName},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="shopUrl != null">shop_url = #{shopUrl},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="idCardBack != null">id_card_back = #{idCardBack},</if>
+            <if test="licence != null">licence = #{licence},</if>
+            <if test="auditStatus.auditStatusId != null">audit_status = #{auditStatus.auditStatusId},</if>
+            <if test="reject != null">reject = #{reject},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="passTime != null">pass_time = #{passTime},</if>
+        </trim>
+        where audit_id = #{auditId}
+    </update>
+
+    <delete id="deleteFfwyAuditById" parameterType="Long">
+        delete from ffwy_audit where audit_id = #{auditId}
+    </delete>
+
+    <delete id="deleteFfwyAuditByIds" parameterType="String">
+        delete from ffwy_audit where audit_id in 
+        <foreach item="auditId" collection="array" open="(" separator="," close=")">
+            #{auditId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.combomealorders.FfwyOrderCombomealPlanMapper">
+    
+    <resultMap type="FfwyOrderCombomealPlan" id="FfwyOrderCombomealPlanResult">
+        <result property="photoId"    column="photo_id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="photoPhath"    column="photo_phath"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyOrderCombomealPlanVo">
+        select photo_id, order_id, photo_phath, create_time, update_time from ffwy_order_combomeal_plan
+    </sql>
+
+    <select id="selectFfwyOrderCombomealPlanList" parameterType="FfwyOrderCombomealPlan" resultMap="FfwyOrderCombomealPlanResult">
+        <include refid="selectFfwyOrderCombomealPlanVo"/>
+        <where>  
+            <if test="orderId != null "> and order_id = #{orderId}</if>
+            <if test="photoPhath != null  and photoPhath != ''"> and photo_phath = #{photoPhath}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyOrderCombomealPlanById" parameterType="Long" resultMap="FfwyOrderCombomealPlanResult">
+        <include refid="selectFfwyOrderCombomealPlanVo"/>
+        where photo_id = #{photoId}
+    </select>
+        
+    <insert id="insertFfwyOrderCombomealPlan" parameterType="FfwyOrderCombomealPlan">
+        insert into ffwy_order_combomeal_plan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">order_id,</if>
+            <if test="photoPhath != null">photo_phath,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">#{orderId},</if>
+            <if test="photoPhath != null">#{photoPhath},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyOrderCombomealPlan" parameterType="FfwyOrderCombomealPlan">
+        update ffwy_order_combomeal_plan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="photoPhath != null">photo_phath = #{photoPhath},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where photo_id = #{photoId}
+    </update>
+
+    <delete id="deleteFfwyOrderCombomealPlanById" parameterType="Long">
+        delete from ffwy_order_combomeal_plan where photo_id = #{photoId}
+    </delete>
+
+    <delete id="deleteFfwyOrderCombomealPlanByOrderId" parameterType="Long">
+        delete from ffwy_order_combomeal_plan where order_id = #{OrderId}
+    </delete>
+
+    <delete id="deleteFfwyOrderCombomealPlanByIds" parameterType="String">
+        delete from ffwy_order_combomeal_plan where photo_id in 
+        <foreach item="photoId" collection="array" open="(" separator="," close=")">
+            #{photoId}
+        </foreach>
+    </delete>
+</mapper>

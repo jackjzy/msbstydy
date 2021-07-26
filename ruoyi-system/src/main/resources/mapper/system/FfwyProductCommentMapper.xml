@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.product.FfwyProductCommentMapper">
+    
+    <resultMap type="FfwyProductComment" id="FfwyProductCommentResult">
+        <result property="productCommentId"    column="product_comment_id"    />
+        <result property="productId"    column="product_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="comment"    column="comment"    />
+        <result property="commentNumber"    column="comment_number"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="productName"    column="product_name"    />
+        <result property="rating"    column="rating"    />
+        <result property="tagId"    column="tag_id"    />
+        <result property="commrnytTime"    column="commrnyt_time"    />
+        <result property="revert"    column="revert"    />
+        <result property="sumComment"    column="sumComment"    />
+        <result property="productCommentPhoto"    column="product_comment_photo"    />
+        <result property="categoryName"    column="category_name"    />
+        <result property="userName"    column="user_name"    />
+        <result property="photo"    column="photo"    />
+        <result property="commentType"    column="comment_type"    />
+        <result property="commentcount"    column="commentcount"    />
+        <result property="replyStatus" column="revery_status"></result>
+        <association property="ffwyUser" javaType="FfwyUser">
+            <result property="userName" column="user_name"></result>
+            <result property="photo" column="photo"></result>
+        </association>
+        <association property="ffwyProduct" javaType="FfwyProduct">
+            <result property="shopId" column="shop_id"></result>
+            <result property="productCategoryId" column="product_category_id"></result>
+        </association>
+        <association property="ffwyOrderDetails" javaType="FfwyOrderDetails">
+            <result property="orderNumber" column="order_number"></result>
+        </association>
+        <collection property="photot" javaType="java.util.ArrayList" ofType="FfwyProductCommentPhoto">
+            <id property="productCommentPhotoId" column="product_comment_photo_id"></id>
+            <result property="productCommentPhoto" column="product_comment_photo"></result>
+            <result property="productCommentId" column="comment_id"></result>
+        </collection>
+    </resultMap>
+
+    <sql id="selectFfwyProductCommentVo">
+        select product_comment_id, product_id, user_id, parent_id, comment, comment_number, order_id, product_name, rating, tag_id, commrnyt_time, revert,comment_type from ffwy_product_comment
+    </sql>
+
+    <sql id="SELECY_BY_COMMENT_PHOTO">
+             select fpc.product_comment_id, product_id, user_id, parent_id, comment,
+				comment_number, order_id, product_name, rating, tag_id, commrnyt_time,
+				revert,comment_type,product_comment_photo,product_comment_photo_id,
+				fpcp.product_comment_id comment_id
+				from ffwy_product_comment fpc
+				LEFT JOIN ffwy_product_comment_photo fpcp on fpc.product_comment_id=fpcp.product_comment_id
+    </sql>
+    <sql id="SELECT_BY_SHOP">
+        select product_comment_id,fpc.product_id,fu.user_id, parent_id, comment,
+        comment_number, fpc.order_id, fpc.product_name, rating, tag_id, commrnyt_time,
+        revert,comment_type,fu.user_name,fu.photo,fp.shop_id,fp.product_category_id,
+        fod.order_number,revery_status
+        from ffwy_product_comment fpc
+        LEFT JOIN ffwy_user fu on fpc.user_id =fu.user_id
+        LEFT JOIN ffwy_product fp on fpc.product_id=fp.product_id
+        LEFT JOIN ffwy_order_details fod on fpc.order_id=fod.order_details_id
+    </sql>
+
+    <select id="selectFfwyProductCommentList" parameterType="FfwyProductComment" resultMap="FfwyProductCommentResult">
+        <include refid="selectFfwyProductCommentVo"/>
+        <where>  
+            <if test="productId != null "> and product_id = #{productId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
+            <if test="commentNumber != null "> and comment_number = #{commentNumber}</if>
+            <if test="orderId != null "> and order_id = #{orderId}</if>
+            <if test="productName != null  and productName != ''"> and product_name like concat('%', #{productName}, '%')</if>
+            <if test="rating != null "> and rating = #{rating}</if>
+            <if test="tagId != null "> and tag_id = #{tagId}</if>
+            <if test="commrnytTime != null "> and commrnyt_time = #{commrnytTime}</if>
+            <if test="revert != null  and revert != ''"> and revert = #{revert}</if>
+            <if test="commentType != null  and commentType != ''"> and comment_type = #{commentType}</if>
+        </where>
+    </select>
+    <select id="selectFfwyProductCommentListByShop" parameterType="FfwyProductComment" resultMap="FfwyProductCommentResult">
+        <include refid="SELECT_BY_SHOP"/>
+        <where>
+            <if test="productId != null "> and product_id = #{productId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
+            <if test="commentNumber != null "> and comment_number = #{commentNumber}</if>
+            <if test="orderId != null "> and order_id = #{orderId}</if>
+            <if test="productName != null  and productName != ''"> and fpc.product_name like concat('%', #{productName}, '%')</if>
+            <if test="rating != null "> and rating = #{rating}</if>
+            <if test="tagId != null "> and tag_id = #{tagId}</if>
+            <if test="commrnytTime != null "> and commrnyt_time = #{commrnytTime}</if>
+            <if test="revert != null  and revert != ''"> and revert = #{revert}</if>
+            <if test="replyStatus != null  and replyStatus != ''"> and revery_status = #{replyStatus}</if>
+            <if test="commentType != null  and commentType != ''"> and comment_type = #{commentType}</if>
+            <if test="ffwyProduct != null  and ffwyProduct != ''">
+                <if test="ffwyProduct.shopId != null  and ffwyProduct.shopId != ''">
+                    and fp.shop_id = #{ffwyProduct.shopId}
+                </if>
+                <if test="ffwyProduct.productCategoryId != null  and ffwyProduct.productCategoryId != ''">
+                    and fp.product_category_id = #{ffwyProduct.productCategoryId}
+                </if>
+            </if>
+        </where>
+    </select>
+
+
+
+    <select id="selectFfwyProductCommentById" parameterType="Long" resultMap="FfwyProductCommentResult">
+        <include refid="SELECY_BY_COMMENT_PHOTO"/>
+        where fpc.product_comment_id = #{productCommentId}
+    </select>
+    <select id="selectFfwyProductCommentByproductId" parameterType="FfwyProductComment" resultMap="FfwyProductCommentResult">
+        select  COUNT(comment)  sumComment from ffwy_product_comment
+        where product_id = #{productId}  ORDER   BY product_comment_id  DESC
+         limit 1
+    </select>
+        
+    <insert id="insertFfwyProductComment" parameterType="FfwyProductComment" useGeneratedKeys="true" keyProperty="productCommentId">
+        insert into ffwy_product_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productId != null">product_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="comment != null">comment,</if>
+            <if test="commentNumber != null">comment_number,</if>
+            <if test="orderId != null">order_id,</if>
+            <if test="productName != null">product_name,</if>
+            <if test="rating != null">rating,</if>
+            <if test="tagId != null">tag_id,</if>
+            <if test="commrnytTime != null">commrnyt_time,</if>
+            <if test="revert != null">revert,</if>
+            <if test="commentType != null">comment_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productId != null">#{productId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="comment != null">#{comment},</if>
+            <if test="commentNumber != null">#{commentNumber},</if>
+            <if test="orderId != null">#{orderId},</if>
+            <if test="productName != null">#{productName},</if>
+            <if test="rating != null">#{rating},</if>
+            <if test="tagId != null">#{tagId},</if>
+            <if test="commrnytTime != null">#{commrnytTime},</if>
+            <if test="revert != null">#{revert},</if>
+            <if test="commentType != null">#{commentType},</if>
+         </trim>
+    </insert>
+    <insert id="insertProductComment" parameterType="FfwyProductComment" useGeneratedKeys="true" keyProperty="productCommentId">
+        insert into ffwy_product_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productId != null">product_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="comment != null">comment,</if>
+            <if test="commentNumber != null">comment_number,</if>
+            <if test="orderId != null">order_id,</if>
+            <if test="productName != null">product_name,</if>
+            <if test="rating != null">rating,</if>
+            <if test="tagId != null">tag_id,</if>
+            <if test="commrnytTime != null">commrnyt_time,</if>
+            <if test="revert != null">revert,</if>
+            <if test="commentType != null">comment_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productId != null">#{productId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="comment != null">#{comment},</if>
+            <if test="commentNumber != null">#{commentNumber},</if>
+            <if test="orderId != null">#{orderId},</if>
+            <if test="productName != null">#{productName},</if>
+            <if test="rating != null">#{rating},</if>
+            <if test="tagId != null">#{tagId},</if>
+            <if test="commrnytTime != null">#{commrnytTime},</if>
+            <if test="revert != null">#{revert},</if>
+            <if test="commentType != null">#{commentType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyProductComment" parameterType="FfwyProductComment">
+        update ffwy_product_comment
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productId != null">product_id = #{productId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="comment != null">comment = #{comment},</if>
+            <if test="commentNumber != null">comment_number = #{commentNumber},</if>
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="productName != null">product_name = #{productName},</if>
+            <if test="rating != null">rating = #{rating},</if>
+            <if test="tagId != null">tag_id = #{tagId},</if>
+            <if test="commrnytTime != null">commrnyt_time = #{commrnytTime},</if>
+            <if test="revert != null">revert = #{revert},</if>
+            <if test="replyStatus != null">revery_status = #{replyStatus},</if>
+        </trim>
+        where product_comment_id = #{productCommentId}
+    </update>
+
+    <delete id="deleteFfwyProductCommentById" parameterType="Long">
+        delete from ffwy_product_comment where product_comment_id = #{productCommentId}
+    </delete>
+
+    <delete id="deleteFfwyProductCommentByIds" parameterType="String">
+        delete from ffwy_product_comment where product_comment_id in 
+        <foreach item="productCommentId" collection="array" open="(" separator="," close=")">
+            #{productCommentId}
+        </foreach>
+    </delete>
+
+    <select id="selectFfwyProductCommentArticle"   parameterType="com.ruoyi.system.domain.product.FfwyProductComment" resultMap="FfwyProductCommentResult" >
+       select fpcp.product_comment_id, ffu.user_name  as user_name,ffu.photo as photo , ffpc.rating  as  rating, fpcp.product_comment_photo as product_comment_photo,
+				 fpc.category_name as category_name ,ffpc.revert as revert ,ffpc.comment,ffpc.commrnyt_time
+				 from ffwy_product_comment as ffpc
+				 INNER JOIN  ffwy_user as ffu  on  ffpc.user_id=ffu.user_id
+				 INNER JOIN  ffwy_product_comment_photo fpcp on ffpc.product_comment_id=fpcp.product_comment_id
+				 INNER JOIN  ffwy_product_category fpc on fpc.parent_id=ffpc.parent_id
+        where ffpc.product_id =#{ffpc.productId}
+        GROUP   BY ffu.user_id  DESC   LIMIT 1
+    </select>
+
+    <select id="selectFfwyProductCommentCount"   parameterType="com.ruoyi.system.domain.product.FfwyProductComment" resultMap="FfwyProductCommentResult" >
+     SELECT  COUNT(pfc.comment) as commentcount FROM  ffwy_product fp
+        INNER JOIN  ffwy_product_comment pfc
+        on  fp.product_id=pfc.product_id  WHERE fp.product_id=#{productId}
+    </select>
+
+</mapper>

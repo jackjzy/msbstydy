@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyInformationMapper">
+    
+    <resultMap type="MultiVo" id="FfwyInformationResult">
+        <result property="informationId"    column="information_id"    />
+        <result property="informationName"    column="information_name"    />
+        <result property="informationMsg"    column="information_msg"    />
+        <result property="informationVideo"    column="information_video"    />
+        <result property="categoryId"    column="category_id"    />
+        <result property="informationTypeId"    column="information_type_id"    />
+        <result property="informationCover"    column="information_cover"    />
+        <result property="informationStatus"    column="information_status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="likeCount"    column="like_count"    />
+        <result property="informationCommentCount"    column="information_comment_count"    />
+        <result property="categoryName"    column="category_name"    />
+        <result property="typeName"    column="type_name"    />
+        <result property="tagId"    column="tag_id"    />
+        <result property="tagName"    column="tag_name"    />
+    </resultMap>
+
+    <sql id="selectFfwyInformationVo">
+        select information_id, information_name, information_msg, information_video, category_id, information_type_id, information_cover, information_status, create_time, update_time, like_count, information_comment_count from ffwy_information
+    </sql>
+
+    <select id="selectFfwyInformationList" parameterType="FfwyInformation" resultMap="FfwyInformationResult">
+        SELECT
+        t1.information_id,
+        t1.information_name,
+        t1.category_id,
+        t1.information_type_id,
+        t1.like_count,
+        t1.information_comment_count,
+        t2.type_name,
+        t3.category_name,
+        t5.tag_id,
+        t5.tag_name
+        FROM
+        ffwy_information t1,
+        ffwy_information_type t2,
+        ffwy_product_category t3,
+        ffwy_information_tag t4,
+        ffwy_tag t5
+        <where>  
+            <if test="informationName != null  and informationName != ''"> and information_name like concat('%', #{informationName}, '%')</if>
+            <if test="informationMsg != null  and informationMsg != ''"> and information_msg = #{informationMsg}</if>
+            <if test="informationVideo != null  and informationVideo != ''"> and information_video = #{informationVideo}</if>
+            <if test="categoryId != null "> and category_id = #{categoryId}</if>
+            <if test="informationTypeId != null "> and information_type_id = #{informationTypeId}</if>
+            <if test="informationCover != null  and informationCover != ''"> and information_cover = #{informationCover}</if>
+            <if test="informationStatus != null  and informationStatus != ''"> and information_status = #{informationStatus}</if>
+            <if test="likeCount != null "> and like_count = #{likeCount}</if>
+            <if test="informationCommentCount != null "> and information_comment_count = #{informationCommentCount}</if>
+             and t1.information_type_id = t2.type_id and t1.category_id = t3.category_id GROUP BY information_id
+        </where>
+    </select>
+    
+    <select id="selectFfwyInformationById" parameterType="Long" resultMap="FfwyInformationResult">
+        <include refid="selectFfwyInformationVo"/>
+        where information_id = #{informationId}
+    </select>
+        
+    <insert id="insertFfwyInformation" parameterType="FfwyInformation" useGeneratedKeys="true" keyProperty="informationId">
+        insert into ffwy_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="informationName != null">information_name,</if>
+            <if test="informationMsg != null">information_msg,</if>
+            <if test="informationVideo != null">information_video,</if>
+            <if test="categoryId != null">category_id,</if>
+            <if test="informationTypeId != null">information_type_id,</if>
+            <if test="informationCover != null">information_cover,</if>
+            <if test="informationStatus != null">information_status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="likeCount != null">like_count,</if>
+            <if test="informationCommentCount != null">information_comment_count,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="informationName != null">#{informationName},</if>
+            <if test="informationMsg != null">#{informationMsg},</if>
+            <if test="informationVideo != null">#{informationVideo},</if>
+            <if test="categoryId != null">#{categoryId},</if>
+            <if test="informationTypeId != null">#{informationTypeId},</if>
+            <if test="informationCover != null">#{informationCover},</if>
+            <if test="informationStatus != null">#{informationStatus},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="likeCount != null">#{likeCount},</if>
+            <if test="informationCommentCount != null">#{informationCommentCount},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyInformation" parameterType="FfwyInformation">
+        update ffwy_information
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="informationName != null">information_name = #{informationName},</if>
+            <if test="informationMsg != null">information_msg = #{informationMsg},</if>
+            <if test="informationVideo != null">information_video = #{informationVideo},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="informationTypeId != null">information_type_id = #{informationTypeId},</if>
+            <if test="informationCover != null">information_cover = #{informationCover},</if>
+            <if test="informationStatus != null">information_status = #{informationStatus},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="likeCount != null">like_count = #{likeCount},</if>
+            <if test="informationCommentCount != null">information_comment_count = #{informationCommentCount},</if>
+        </trim>
+        where information_id = #{informationId}
+    </update>
+
+    <delete id="deleteFfwyInformationById" parameterType="Long">
+        delete from ffwy_information where information_id = #{informationId}
+    </delete>
+
+    <delete id="deleteFfwyInformationByIds" parameterType="String">
+        delete from ffwy_information where information_id in 
+        <foreach item="informationId" collection="array" open="(" separator="," close=")">
+            #{informationId}
+        </foreach>
+    </delete>
+    
+    <select id="selectFfwyInformationListAll" resultMap="FfwyInformationResult">
+        SELECT
+t1.information_id,
+t1.information_name,
+t1.category_id,
+t1.information_type_id,
+t1.like_count,
+t1.information_comment_count,
+t2.type_name,
+t3.category_name,
+t5.tag_id,
+t5.tag_name
+FROM
+ffwy_information t1,
+ffwy_information_type t2,
+ffwy_product_category t3,
+ffwy_information_tag t4,
+ffwy_tag t5
+<where>
+t1.information_type_id = t2.type_id and t1.category_id = t3.category_id GROUP BY information_id
+</where>
+    </select>
+</mapper>

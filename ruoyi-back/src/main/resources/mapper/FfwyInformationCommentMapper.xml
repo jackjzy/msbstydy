@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.back.mapper.FfwyInformationCommentMapper">
+    
+    <resultMap type="FfwyInformationComment" id="FfwyInformationCommentResult">
+        <result property="informationCommentId"    column="information_comment_id"    />
+        <result property="informationName"    column="information_name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="informationComment"    column="information_comment"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="reply"  column="reply"></result>
+        <result property="replyTime" column="reply_time"></result>
+        <association property="user" javaType="FfwyUser">
+            <result property="userId" column="user_id"></result>
+            <result property="userName" column="user_name"></result>
+            <result property="photo" column="photo"></result>
+            <result property="phonenumber" column="phonenumber"></result>
+        </association>
+    </resultMap>
+
+
+
+
+    <sql id="selectFfwyInformationCommentVo">
+        select information_comment_id, information_id, user_id, parent_id, information_comment, create_time,reply from ffwy_information_comment
+    </sql>
+
+    <sql id="selectChileComent">
+        select
+        fu.user_name
+        from ffwy_information_comment fc left JOIN ffwy_user fu on fc.user_id= fu.user_id
+        left JOIN  ffwy_information_comment cc on fc.information_comment_id =cc.parent_id
+    </sql>
+
+    <sql id="SELECT_FATHER_COMENT">
+        select fi.information_name, fc.information_comment_id ,fc.information_comment,fc.reply,
+        fu.user_id,fu.user_name,fu.photo,fu.phonenumber,fc.create_time
+        from  ffwy_information_comment fc LEFT JOIN ffwy_information fi
+        on fi.information_id =fc.information_id
+        left JOIN ffwy_user fu on fc.user_id= fu.user_id
+    </sql>
+
+    <select id="selectFfwyInformationCommentList"  resultMap="FfwyInformationCommentResult">
+        <include refid="SELECT_FATHER_COMENT"/>
+        <where>
+              <if test="phone != null "> and fu.phonenumber like '%${phone}%'</if>
+              <if test="userName != null "> and fu.user_name like '%${userName}%'</if>
+              <if test="informationComment != null  and informationComment != ''"> and information_comment like '%#{informationComment}%'</if>
+              <if test="parentId != null "> and fc.parent_id is null </if>
+              <if test="beginTime != null "> and fc.create_time &gt;=#{beginTime} </if>
+              <if test="endTime != null "> and fc.create_time &lt;= #{endTime} </if>
+            <if test="searchStr!=null and searchStr!=''">
+                AND
+                CONCAT(fu.phonenumber,fu.user_name,information_comment) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+        </where>
+
+
+    </select>
+    
+    <select id="selectFfwyInformationCommentById" parameterType="Long" resultMap="FfwyInformationCommentResult">
+        <include refid="selectFfwyInformationCommentVo"/>
+        where information_comment_id = #{informationCommentId}
+    </select>
+        
+    <insert id="insertFfwyInformationComment" parameterType="FfwyInformationComment" useGeneratedKeys="true" keyProperty="informationCommentId">
+        insert into ffwy_information_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="informationId != null">information_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="informationComment != null">information_comment,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="informationId != null">#{informationId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="informationComment != null">#{informationComment},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyInformationComment" parameterType="FfwyInformationComment">
+        update ffwy_information_comment
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="informationId != null">information_id = #{informationId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="informationComment != null">information_comment = #{informationComment},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="reply != null">reply = #{reply},</if>
+            <if test="replyTime != null">reply_time = #{replyTime},</if>
+        </trim>
+        where information_comment_id = #{informationCommentId}
+    </update>
+
+    <delete id="deleteFfwyInformationCommentById" parameterType="Long">
+        delete from ffwy_information_comment where information_comment_id = #{informationCommentId}
+    </delete>
+
+    <delete id="deleteFfwyInformationCommentByIds" parameterType="String">
+        delete from ffwy_information_comment where information_comment_id in 
+        <foreach item="informationCommentId" collection="array" open="(" separator="," close=")">
+            #{informationCommentId}
+        </foreach>
+    </delete>
+</mapper>

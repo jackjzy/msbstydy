@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.back.mapper.FfwyVideoMapper">
+    
+    <resultMap type="FfwyVideo" id="FfwyVideoResult">
+        <result property="videoId"    column="video_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="videoCover"    column="video_cover"    />
+        <result property="videoTitle"    column="video_title"    />
+        <result property="videoIntro"    column="video_intro"    />
+        <result property="videoPath"    column="video_path"    />
+        <result property="productCategoryId"    column="product_category_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="videoStatus"    column="video_status"    />
+        <result property="videoDuration" column="video_duration"/>
+        <result property="prouductId"  column="prouduct_id"/>
+        <collection property="tagList" javaType="java.util.ArrayList" ofType="FfwyTag">
+            <result property="tagId" column="tag_id"></result>
+            <result property="tagName" column="tag_name"></result>
+        </collection>
+    </resultMap>
+
+    <sql id="selectFfwyVideoVo">
+       select fv.video_id, user_id, video_cover, video_title, video_intro,video_duration, video_path, product_category_id, fv.create_time, video_status,ft.tag_id,ft.tag_name
+
+        from ffwy_video fv left JOIN ffwy_video_tag fvt on fv.video_id=fvt.video_id
+
+        left join ffwy_tag ft on fvt.tag_id =ft.tag_id
+    </sql>
+
+    <sql id="SELECT_VIDEO_LOVE">
+        select  fv.video_id, fv.user_id, video_cover, video_title, video_intro, video_path,
+            product_category_id, fv.create_time, video_status
+        from ffwy_video_love fvl LEFT JOIN    ffwy_video fv on fvl.video_id =fv.video_id
+    </sql>
+    <sql id="SELECT_VIDEO_PRIVATE">
+        select  fv.video_id, fv.user_id, video_cover, video_title, video_intro, video_path,
+            product_category_id, fv.create_time, video_status
+        from ffwy_video_private fvl LEFT JOIN    ffwy_video fv on fvl.video_id =fv.video_id
+    </sql>
+
+    <sql id="SELECT_STORE_VIDEO">
+        select  fv.video_id, fv.user_id, video_cover, video_title, video_intro, video_path,
+            product_category_id, fv.create_time, video_status
+        from ffwy_store_video fvl LEFT JOIN   ffwy_video fv on fvl.video_id =fv.video_id
+    </sql>
+
+    <sql id="SELECT_VIDEO_LOVE_COUNT">
+        select  COUNT(*)
+        from ffwy_video_love fvl LEFT JOIN    ffwy_video fv on fvl.video_id =fv.video_id
+    </sql>
+
+    <sql id="SELECT_VIDEO_PRIVATE_COUNT">
+        select  COUNT(*)
+        from ffwy_video
+    </sql>
+
+    <select id="selectFfwyVideoList" parameterType="FfwyVideo" resultMap="FfwyVideoResult">
+        <include refid="selectFfwyVideoVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="videoCover != null  and videoCover != ''"> and video_cover = #{videoCover}</if>
+            <if test="videoTitle != null  and videoTitle != ''"> and video_title = #{videoTitle}</if>
+            <if test="videoIntro != null  and videoIntro != ''"> and video_intro = #{videoIntro}</if>
+            <if test="videoPath != null  and videoPath != ''"> and video_path = #{videoPath}</if>
+            <if test="productCategoryId != null "> and product_category_id = #{productCategoryId}</if>
+            <if test="videoStatus != null  and videoStatus != ''"> and video_status = #{videoStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyVideoById" parameterType="Long" resultMap="FfwyVideoResult">
+        <include refid="selectFfwyVideoVo"/>
+        where fv.video_id= #{videoId}
+    </select>
+
+    <select id="selectFfwyVideoByStroe" parameterType="Long" resultMap="FfwyVideoResult">
+        <include refid="SELECT_STORE_VIDEO"/>
+        WHERE fvl.user_id= #{userId}
+    </select>
+
+    <select id="selectFfwyVideoByUserId" parameterType="Long" resultMap="FfwyVideoResult">
+        <include refid="selectFfwyVideoVo"/>
+        where user_id = #{userId} and video_status='0'
+    </select>
+
+    <select id="selectFfwyVideoByIdAndUserId" parameterType="Long" resultMap="FfwyVideoResult">
+        <include refid="SELECT_STORE_VIDEO"/>
+        where fvl.user_id = #{userId} and fv.video_id = #{videoId}
+    </select>
+
+    <select id="selectFfwyVideoByLike" parameterType="Long" resultMap="FfwyVideoResult">
+        <include refid="SELECT_VIDEO_LOVE"/>
+         where fvl.user_id = #{userId}  LIMIT #{num},#{size}
+    </select>
+
+    <select id="selectFfwyVideoByPrivate" parameterType="Long" resultMap="FfwyVideoResult">
+        <include refid="SELECT_VIDEO_PRIVATE"/>
+        where fvl.user_id = #{userId}
+    </select>
+
+    <select id="privateVideoCount" parameterType="Long" resultType="java.lang.Integer">
+        <include refid="SELECT_VIDEO_PRIVATE_COUNT"/>
+        where user_id = #{userId} and video_status='2'
+    </select>
+
+    <select id="loveVideoCount" parameterType="Long" resultType="java.lang.Integer">
+        <include refid="SELECT_VIDEO_LOVE_COUNT"/>
+        where fvl.user_id = #{userId}
+    </select>
+    <insert id="insertFfwyVideo" parameterType="FfwyVideo" useGeneratedKeys="true" keyProperty="videoId">
+        insert into ffwy_video
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="videoCover != null">video_cover,</if>
+            <if test="videoTitle != null">video_title,</if>
+            <if test="videoIntro != null">video_intro,</if>
+            <if test="videoPath != null">video_path,</if>
+            <if test="productCategoryId != null">product_category_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="videoStatus != null">video_status,</if>
+            <if test="videoDuration != null">video_duration,</if>
+            <if test="prouductId != null ">prouduct_id</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="videoCover != null">#{videoCover},</if>
+            <if test="videoTitle != null">#{videoTitle},</if>
+            <if test="videoIntro != null">#{videoIntro},</if>
+            <if test="videoPath != null">#{videoPath},</if>
+            <if test="productCategoryId != null">#{productCategoryId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="videoStatus != null">#{videoStatus},</if>
+            <if test="videoDuration != null">#{videoDuration},</if>
+            <if test="prouductId != null">#{prouductId}</if>
+         </trim>
+    </insert>
+
+    <insert id="insertFfwyLoveVideo">
+        INSERT INTO ffwy_video_love(user_id, video_id,create_time)
+        VALUES (#{userId}, #{videoId},now())
+    </insert>
+
+    <insert id="insertFfwyPirvateVideo">
+        INSERT INTO ffwy_video_private(user_id, video_id)
+         VALUES (#{userId}, #{videoId})
+    </insert>
+
+    <insert id="insertFfwyStroeVideo">
+        INSERT INTO ffwy_store_video(user_id, video_id)
+         VALUES (#{userId}, #{videoId})
+    </insert>
+
+    <update id="updateFfwyVideo" parameterType="FfwyVideo">
+        update ffwy_video
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="videoCover != null">video_cover = #{videoCover},</if>
+            <if test="videoTitle != null">video_title = #{videoTitle},</if>
+            <if test="videoIntro != null">video_intro = #{videoIntro},</if>
+            <if test="videoPath != null">video_path = #{videoPath},</if>
+            <if test="productCategoryId != null">product_category_id = #{productCategoryId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="videoStatus != null">video_status = #{videoStatus},</if>
+            <if test="prouductId != null">prouduct_id = #{prouductId},</if>
+        </trim>
+        where video_id = #{videoId}
+    </update>
+
+    <delete id="deleteFfwyVideoById" parameterType="Long">
+        delete from ffwy_video where video_id = #{videoId}
+    </delete>
+
+    <delete id="deleteLikeVideo">
+        delete from ffwy_video_love
+            where video_id = #{videoId} and user_id=#{userId}
+    </delete>
+
+    <delete id="deleteStroeVideo">
+        delete from ffwy_store_video
+            where video_id = #{videoId} and user_id=#{userId}
+    </delete>
+
+    <delete id="deleteFfwyVideoByIds" parameterType="String">
+        delete from ffwy_video where video_id in 
+        <foreach item="videoId" collection="array" open="(" separator="," close=")">
+            #{videoId}
+        </foreach>
+    </delete>
+    
+    <select id="selectFfwyvideoByphth" parameterType="FfwyVideo" resultMap="FfwyVideoResult">
+        <include refid="selectFfwyVideoVo"/>
+        <where>
+            user_id = #{userId} and video_id = #{videoId}
+        </where>
+    </select>
+    
+    <insert id="insertvideotag" parameterType="FfwyVideoTag">
+        insert into ffwy_video_tag(video_id,tag_id) values(#{videoId},#{tagId})
+    </insert>
+
+    <insert id="insertFfwyNotLoveVideo" parameterType="FfwyVideoNotlove" >
+        insert into ffwy_video_notlove(user_id,tag_id) values(#{FfwyVideoNotlove.userId},#{FfwyVideoNotlove.tagId})
+    </insert>
+
+    <select id="selectFfwyvideoTag" parameterType="Integer" resultType="com.ruoyi.system.domain.video.FfwyVideoTag">
+        SELECT tag_id as tagId FROM ffwy_video_tag WHERE video_id = #{videoId}
+    </select>
+
+    <select id="selectFfwyVideoNotlove" parameterType="Integer" resultType="com.ruoyi.system.domain.video.FfwyVideoNotlove">
+        SELECT tag_id as tagId FROM ffwy_video_notlove where user_id = #{userId}
+    </select>
+
+    <delete id="deleteFfwyVideoNotlove" parameterType="Integer">
+        DELETE FROM ffwy_video_notlove WHERE user_id = #{userId}
+    </delete>
+
+</mapper>

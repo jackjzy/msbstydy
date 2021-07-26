@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyFeedbackMapper">
+    
+    <resultMap type="FfwyFeedback" id="FfwyFeedbackResult">
+        <result property="feedbackId"    column="feedback_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="feedbackMessage"    column="feedback_message"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="feedbackStatus"    column="feedback_status"    />
+        <result property="feedType" column="feedback_type"></result>
+        <result property="userId" column="user_id"></result>
+        <association property="user" javaType="FfwyUser">
+            <result property="userName" column="user_name"></result>
+            <result property="phonenumber" column="phonenumber"></result>
+        </association>
+        <association property="reply" javaType="FfwyFeedbackReply">
+            <result property="replyMsg" column="reply_msg"></result>
+        </association>
+        <collection property="photos" javaType="java.util.ArrayList" ofType="FfwyFeedbackPhoto">
+            <result property="photoId" column="photo_id"></result>
+            <result property="path" column="path"></result>
+        </collection>
+    </resultMap>
+
+    <sql id="selectFfwyFeedbackVo">
+        select feedback_id, user_id, feedback_message, create_time, feedback_status ,feedback_type from ffwy_feedback
+    </sql>
+
+    <sql id="SELECT_FEEDBACKS">
+        select ff.feedback_id,ff.user_id, feedback_message, ff.create_time, feedback_status
+        ,feedback_type,user_name,phonenumber,ffr.reply_msg,ffp.photo_id,ffp.path
+        from ffwy_feedback ff
+        LEFT JOIN ffwy_user fu on ff.user_id =fu.user_id
+        LEFT JOIN ffwy_feedback_reply ffr on ff.feedback_id =ffr.feedback_id
+		LEFT join ffwy_feedback_photo ffp on ff.feedback_id =ffp.feedback_id
+    </sql>
+    <select id="selectFfwyFeedbackList" parameterType="FfwyFeedback" resultMap="FfwyFeedbackResult">
+        SELECT
+        t1.feedback_id,
+        t1.feedback_message,
+        t1.feedback_status,
+        t2.user_id,
+        t2.user_name,
+        t2.phonenumber
+        FROM
+        ffwy_feedback t1,
+        ffwy_user t2
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="feedbackId != null "> and feedback_id = #{feedbackId}</if>
+            <if test="feedbackMessage != null  and feedbackMessage != ''"> and feedback_message = #{feedbackMessage}</if>
+            <if test="feedbackStatus != null  and feedbackStatus != ''"> and feedback_status = #{feedbackStatus}</if>
+            <if test="createTime != null"> and create_time = #{createTime}</if>
+            <if test="searchStr!=null and searchStr!=''">
+                AND
+                CONCAT(feedbackMessage) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+            <if test="begcreateTime != null"> and create_time &gt; #{begcreateTime}</if>
+            <if test="actcreateTime != null"> and create_time &lt; #{actcreateTime}</if>
+             and t1.user_id = t2.user_id
+        </where>
+    </select>
+
+    <select id="selectFfwyFeedback" parameterType="FfwyFeedback" resultMap="FfwyFeedbackResult">
+        <include refid="SELECT_FEEDBACKS"/>
+        <where>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="feedbackId != null "> and feedback_id = #{feedbackId}</if>
+            <if test="feedbackMessage != null  and feedbackMessage != ''"> and feedback_message = #{feedbackMessage}</if>
+            <if test="feedbackStatus != null  and feedbackStatus != ''"> and feedback_status = #{feedbackStatus}</if>
+            <if test="createTime != null"> and ff.create_time = #{createTime}</if>
+            <if test="searchStr!=null and searchStr!=''">
+                AND
+                CONCAT(feedbackMessage) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+            <if test="beginTime != null"> and ff.create_time &gt; #{beginTime}</if>
+            <if test="endTime != null"> and ff.create_time &lt; #{endTime}</if>
+
+        </where>
+    </select>
+
+    <select id="selectFfwyFeedbackById" parameterType="Long" resultMap="FfwyFeedbackResult">
+        <include refid="selectFfwyFeedbackVo"/>
+        where feedback_id = #{feedbackId}
+    </select>
+        
+    <insert id="insertFfwyFeedback" useGeneratedKeys="true" keyProperty="feedbackId" parameterType="FfwyFeedback">
+        insert into ffwy_feedback
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="userId != null">user_id,</if>
+            <if test="feedbackMessage != null">feedback_message,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="feedbackStatus != null">feedback_status,</if>
+            <if test="feedType != null">feedback_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+            <if test="userId != null">#{userId},</if>
+            <if test="feedbackMessage != null">#{feedbackMessage},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="feedbackStatus != null">#{feedbackStatus},</if>
+            <if test="feedType != null">#{feedType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyFeedback" parameterType="FfwyFeedback">
+        update ffwy_feedback
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="feedbackMessage != null">feedback_message = #{feedbackMessage},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="feedbackStatus != null">feedback_status = #{feedbackStatus},</if>
+        </trim>
+        where feedback_id = #{feedbackId}
+    </update>
+
+    <delete id="deleteFfwyFeedbackById" parameterType="Integer">
+        delete from ffwy_feedback where feedback_id = #{feedbackId}
+    </delete>
+    <select id="selectFfwyFeedbackLists" resultMap="FfwyFeedbackResult">
+        SELECT
+        t1.feedback_id,
+        t1.feedback_message,
+        t1.feedback_status,
+        t2.user_id,
+        t2.user_name,
+        t2.phonenumber
+        FROM
+        ffwy_feedback t1,
+        ffwy_user t2
+        <where>
+            t1.user_id = t2.user_id
+        </where>
+    </select>
+</mapper>

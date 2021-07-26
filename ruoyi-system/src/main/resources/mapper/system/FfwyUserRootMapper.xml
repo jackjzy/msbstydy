@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.admin.FfwyUserRootMapper">
+    
+    <resultMap type="FfwyUserRoot" id="FfwyUserRootResult">
+        <result property="userId"    column="user_id"    />
+        <result property="rootId"    column="root_id"    />
+    </resultMap>
+
+    <sql id="selectFfwyUserRootVo">
+        select user_id, root_id from ffwy_user_root
+    </sql>
+
+    <select id="selectFfwyUserRootList" parameterType="FfwyUserRoot" resultMap="FfwyUserRootResult">
+        <include refid="selectFfwyUserRootVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="rootId != null "> and root_id = #{rootId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyUserRootById" parameterType="Long" resultMap="FfwyUserRootResult">
+        <include refid="selectFfwyUserRootVo"/>
+        where user_id = #{userId}
+    </select>
+        
+    <insert id="insertFfwyUserRoot" parameterType="FfwyUserRoot">
+        insert into ffwy_user_root
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="rootId != null">root_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="rootId != null">#{rootId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyUserRoot" parameterType="FfwyUserRoot">
+        update ffwy_user_root
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="rootId != null">root_id = #{rootId},</if>
+        </trim>
+        where user_id = #{userId}
+    </update>
+
+    <delete id="deleteFfwyUserRootById" parameterType="Long">
+        delete from ffwy_user_root where user_id = #{userId}
+    </delete>
+
+    <delete id="deleteFfwyUserRootByIds" parameterType="String">
+        delete from ffwy_user_root where user_id in 
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+</mapper>

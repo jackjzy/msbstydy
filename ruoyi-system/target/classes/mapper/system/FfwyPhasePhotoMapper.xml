@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.combomealorders.FfwyPhasePhotoMapper">
+    
+    <resultMap type="FfwyPhasePhoto" id="FfwyPhasePhotoResult">
+        <result property="phasePhotoId"    column="phase_photo_id"    />
+        <result property="phaseMsgId"    column="phase_msg_id"    />
+        <result property="phasePhoto"    column="phase_photo"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyPhasePhotoVo">
+        select phase_photo_id, phase_msg_id, phase_photo, create_time, update_time from ffwy_phase_photo
+    </sql>
+
+    <select id="selectFfwyPhasePhotoList" parameterType="FfwyPhasePhoto" resultMap="FfwyPhasePhotoResult">
+        <include refid="selectFfwyPhasePhotoVo"/>
+        <where>  
+            <if test="phaseMsgId != null "> and phase_msg_id = #{phaseMsgId}</if>
+            <if test="phasePhoto != null  and phasePhoto != ''"> and phase_photo = #{phasePhoto}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyPhasePhotoById" parameterType="Long" resultMap="FfwyPhasePhotoResult">
+        <include refid="selectFfwyPhasePhotoVo"/>
+        where phase_photo_id = #{phasePhotoId}
+    </select>
+        
+    <insert id="insertFfwyPhasePhoto" parameterType="FfwyPhasePhoto">
+        insert into ffwy_phase_photo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="phasePhotoId != null">phase_photo_id,</if>
+            <if test="phaseMsgId != null">phase_msg_id,</if>
+            <if test="phasePhoto != null">phase_photo,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="phasePhotoId != null">#{phasePhotoId},</if>
+            <if test="phaseMsgId != null">#{phaseMsgId},</if>
+            <if test="phasePhoto != null">#{phasePhoto},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyPhasePhoto" parameterType="FfwyPhasePhoto">
+        update ffwy_phase_photo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="phaseMsgId != null">phase_msg_id = #{phaseMsgId},</if>
+            <if test="phasePhoto != null">phase_photo = #{phasePhoto},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where phase_photo_id = #{phasePhotoId}
+    </update>
+
+    <delete id="deleteFfwyPhasePhotoById" parameterType="Long">
+        delete from ffwy_phase_photo where phase_photo_id = #{phasePhotoId}
+    </delete>
+
+    <delete id="deleteFfwyPhasePhotoByIds" parameterType="String">
+        delete from ffwy_phase_photo where phase_photo_id in 
+        <foreach item="phasePhotoId" collection="array" open="(" separator="," close=")">
+            #{phasePhotoId}
+        </foreach>
+    </delete>
+</mapper>

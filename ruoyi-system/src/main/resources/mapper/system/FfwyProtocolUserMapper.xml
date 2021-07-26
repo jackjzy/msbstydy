@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.protocol.FfwyProtocolUserMapper">
+    
+    <resultMap type="FfwyProtocolUser" id="FfwyProtocolUserResult">
+        <result property="protocolUserId"    column="protocol_user_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="protocolId"    column="protocol_id"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyProtocolUserVo">
+        select protocol_user_id, user_id, protocol_id, create_time from ffwy_protocol_user
+    </sql>
+
+    <select id="selectFfwyProtocolUserList" parameterType="FfwyProtocolUser" resultMap="FfwyProtocolUserResult">
+        <include refid="selectFfwyProtocolUserVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="protocolId != null "> and protocol_id = #{protocolId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyProtocolUserById" parameterType="Integer" resultMap="FfwyProtocolUserResult">
+        <include refid="selectFfwyProtocolUserVo"/>
+        where protocol_user_id = #{protocolUserId}
+    </select>
+        
+    <insert id="insertFfwyProtocolUser" parameterType="FfwyProtocolUser" useGeneratedKeys="true" keyProperty="protocolUserId">
+        insert into ffwy_protocol_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="protocolId != null">protocol_id,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="protocolId != null">#{protocolId},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyProtocolUser" parameterType="FfwyProtocolUser">
+        update ffwy_protocol_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="protocolId != null">protocol_id = #{protocolId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where protocol_user_id = #{protocolUserId}
+    </update>
+
+    <delete id="deleteFfwyProtocolUserById" parameterType="Integer">
+        delete from ffwy_protocol_user where protocol_user_id = #{protocolUserId}
+    </delete>
+
+    <delete id="deleteFfwyProtocolUserByIds" parameterType="String">
+        delete from ffwy_protocol_user where protocol_user_id in 
+        <foreach item="protocolUserId" collection="array" open="(" separator="," close=")">
+            #{protocolUserId}
+        </foreach>
+    </delete>
+</mapper>

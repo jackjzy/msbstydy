@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.back.mapper.FfwyMsgUserMapper">
+    
+    <resultMap type="FfwyMsgUser" id="FfwyMsgUserResult">
+        <result property="msgId"    column="msg_id"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectFfwyMsgUserVo">
+        select msg_id, user_id from ffwy_msg_user
+    </sql>
+
+    <select id="selectFfwyMsgUserList" parameterType="FfwyMsgUser" resultMap="FfwyMsgUserResult">
+        <include refid="selectFfwyMsgUserVo"/>
+        <where>  
+            <if test="msgId != null "> and msg_id = #{msgId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyMsgUserById" parameterType="Long" resultMap="FfwyMsgUserResult">
+        <include refid="selectFfwyMsgUserVo"/>
+        where msg_id = #{msgId}
+    </select>
+        
+    <insert id="insertFfwyMsgUser" parameterType="FfwyMsgUser">
+        insert into ffwy_msg_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="msgId != null">msg_id,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="msgId != null">#{msgId},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyMsgUser" parameterType="FfwyMsgUser">
+        update ffwy_msg_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where msg_id = #{msgId}
+    </update>
+
+    <delete id="deleteFfwyMsgUserById" parameterType="Long">
+        delete from ffwy_msg_user where msg_id = #{msgId}
+    </delete>
+
+    <delete id="deleteFfwyMsgUserByIds" parameterType="String">
+        delete from ffwy_msg_user where msg_id in 
+        <foreach item="msgId" collection="array" open="(" separator="," close=")">
+            #{msgId}
+        </foreach>
+    </delete>
+</mapper>

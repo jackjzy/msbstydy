@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.back.mapper.FfwyMsgMapper">
+    
+    <resultMap type="FfwyMsg" id="FfwyMsgResult">
+        <result property="msgId"    column="msg_id"    />
+        <result property="title"    column="title"    />
+        <result property="msg"    column="msg"    />
+        <result property="msgStatus"    column="msg_status"    />
+        <result property="msgTime"    column="msg_time"    />
+        <result property="receiveTime"    column="receive_time"    />
+        <result property="receiveStatus"    column="receive_status"    />
+        <result property="userId" column="user_id"></result>
+        <result property="userName" column="user_name"></result>
+        <association property="ffwyMsgType" javaType="FfwyMsgType">
+            <result property="msgTypeId" column="msg_type_id"></result>
+            <result property="typeName" column="type_name"></result>
+        </association>
+    </resultMap>
+
+    <sql id="selectFfwyMsgVo">
+        select msg_id, title, msg, msg_status, msg_time, receive_time, receive_status from ffwy_msg
+    </sql>
+
+    <sql id="SELECT_MSG_TYPE">
+        select msg_id, title, msg, msg_status, msg_time, receive_time, receive_status ,
+        mst.msg_type_id,mst.type_name,user_id,user_name
+        from ffwy_msg  fm LEFT JOIN ffwy_msg_type mst on fm.msg_type_id = mst.msg_type_id
+    </sql>
+
+    <select id="selectFfwyMsgList" parameterType="QueryMsg" resultMap="FfwyMsgResult">
+        <include refid="SELECT_MSG_TYPE"/>
+        <where>  
+
+            <if test="msg != null  and msg != ''"> and msg like concat('%', #{msg}, '%')</if>
+            <if test="msgTime != null "> and msg_time = #{msgTime}</if>
+            <if test="beginTime != null "> and msg_time &gt;=#{beginTime} </if>
+            <if test="endTime != null "> and msg_time &lt;= #{endTime} </if>
+
+        </where>
+    </select>
+    
+    <select id="selectFfwyMsgById" parameterType="Long" resultMap="FfwyMsgResult">
+        <include refid="SELECT_MSG_TYPE"/>
+        where msg_id = #{msgId}
+    </select>
+        
+    <insert id="insertFfwyMsg" parameterType="FfwyMsg" useGeneratedKeys="true" keyProperty="msgId">
+        insert into ffwy_msg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="msg != null">msg,</if>
+            <if test="msgStatus != null">msg_status,</if>
+            <if test="msgTime != null">msg_time,</if>
+            <if test="receiveTime != null">receive_time,</if>
+            <if test="receiveStatus != null">receive_status,</if>
+            <if test="ffwyMsgType.msgTypeId != null">msg_type_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="msg != null">#{msg},</if>
+            <if test="msgStatus != null">#{msgStatus},</if>
+            <if test="msgTime != null">#{msgTime},</if>
+            <if test="receiveTime != null">#{receiveTime},</if>
+            <if test="receiveStatus != null">#{receiveStatus},</if>
+            <if test="ffwyMsgType.msgTypeId != null">#{ffwyMsgType.msgTypeId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyMsg" parameterType="FfwyMsg">
+        update ffwy_msg
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="msg != null">msg = #{msg},</if>
+            <if test="msgStatus != null">msg_status = #{msgStatus},</if>
+            <if test="msgTime != null">msg_time = #{msgTime},</if>
+            <if test="receiveTime != null">receive_time = #{receiveTime},</if>
+            <if test="receiveStatus != null">receive_status = #{receiveStatus},</if>
+        </trim>
+        where msg_id = #{msgId}
+    </update>
+
+    <delete id="deleteFfwyMsgById" parameterType="Long">
+        delete from ffwy_msg where msg_id = #{msgId}
+    </delete>
+
+    <delete id="deleteFfwyMsgByIds" parameterType="String">
+        delete from ffwy_msg where msg_id in 
+        <foreach item="msgId" collection="array" open="(" separator="," close=")">
+            #{msgId}
+        </foreach>
+    </delete>
+</mapper>

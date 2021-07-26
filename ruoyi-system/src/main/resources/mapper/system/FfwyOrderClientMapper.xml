@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.order.FfwyOrderClientMapper">
+    
+    <resultMap type="OrderClientVo" id="FfwyOrderClientResult">
+        <result property="orderClientId"    column="order_client_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="orderClientPhone"    column="order_client_phone"    />
+        <result property="orderClientAddr"    column="order_client_addr"    />
+        <result property="orderClientType"    column="order_client_type"    />
+        <result property="orderClientStatus"    column="order_client_status"    />
+        <result property="userName"    column="user_name"    />
+    </resultMap>
+
+    <sql id="selectFfwyOrderClientVo">
+        select order_client_id, user_id, order_client_phone, order_client_addr, order_client_type, order_client_status from ffwy_order_client
+    </sql>
+
+    <select id="selectFfwyOrderClientList" parameterType="FfwyOrderClient" resultMap="FfwyOrderClientResult">
+        select
+        t1.order_client_id,
+        t1.order_client_phone,
+        t1.order_client_type,
+        t1.order_client_addr,
+        t1.order_client_status,
+        t2.user_name
+        FROM
+        ffwy_order_client t1,
+        ffwy_user t2
+        <where>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="orderClientPhone != null "> and order_client_phone = #{orderClientPhone}</if>
+            <if test="orderClientAddr != null  and orderClientAddr != ''"> and order_client_addr = #{orderClientAddr}</if>
+            <if test="orderClientType != null  and orderClientType != ''"> and order_client_type = #{orderClientType}</if>
+            <if test="orderClientStatus != null "> and order_client_status = #{orderClientStatus}</if>
+            <if test="searchStr!=null and searchStr!=''">
+                and
+                CONCAT(orderClientAddr,orderClientType) LIKE CONCAT ('%', #{searchStr},'%')
+            </if>
+            and t1.user_id = t2.user_id
+        </where>
+    </select>
+    
+    <select id="selectFfwyOrderClientById" parameterType="Long" resultMap="FfwyOrderClientResult">
+        <include refid="selectFfwyOrderClientVo"/>
+        where order_client_id = #{orderClientId}
+    </select>
+        
+    <insert id="insertFfwyOrderClient" parameterType="FfwyOrderClient">
+        insert into ffwy_order_client
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderClientId != null">order_client_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="orderClientPhone != null">order_client_phone,</if>
+            <if test="orderClientAddr != null">order_client_addr,</if>
+            <if test="orderClientType != null">order_client_type,</if>
+            <if test="orderClientStatus != null">order_client_status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderClientId != null">#{orderClientId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="orderClientPhone != null">#{orderClientPhone},</if>
+            <if test="orderClientAddr != null">#{orderClientAddr},</if>
+            <if test="orderClientType != null">#{orderClientType},</if>
+            <if test="orderClientStatus != null">#{orderClientStatus},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyOrderClient" parameterType="FfwyOrderClient">
+        update ffwy_order_client
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="orderClientPhone != null">order_client_phone = #{orderClientPhone},</if>
+            <if test="orderClientAddr != null">order_client_addr = #{orderClientAddr},</if>
+            <if test="orderClientType != null">order_client_type = #{orderClientType},</if>
+            <if test="orderClientStatus != null">order_client_status = #{orderClientStatus},</if>
+        </trim>
+        where order_client_id = #{orderClientId}
+    </update>
+
+    <delete id="deleteFfwyOrderClientById" parameterType="Long">
+        delete from ffwy_order_client where order_client_id = #{orderClientId}
+    </delete>
+
+    <delete id="deleteFfwyOrderClientByIds" parameterType="String">
+        delete from ffwy_order_client where order_client_id in 
+        <foreach item="orderClientId" collection="array" open="(" separator="," close=")">
+            #{orderClientId}
+        </foreach>
+    </delete>
+    
+   <select id="selectOrderClientList" resultMap="FfwyOrderClientResult">
+       select
+       t1.order_client_id,
+       t1.order_client_phone,
+       t1.order_client_type,
+       t1.order_client_addr,
+       t1.order_client_status,
+       t2.user_name
+       FROM
+       ffwy_order_client t1,
+       ffwy_user t2
+       <where>
+           t1.user_id = t2.user_id
+       </where>
+    </select>
+</mapper>

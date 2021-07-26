@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyPaymentMapper">
+    
+    <resultMap type="FfwyPayment" id="FfwyPaymentResult">
+        <result property="paymentId"    column="payment_id"    />
+        <result property="patmentType"    column="patment_type"    />
+    </resultMap>
+
+    <sql id="selectFfwyPaymentVo">
+        select payment_id, patment_type from ffwy_payment
+    </sql>
+
+    <select id="selectFfwyPaymentList" parameterType="FfwyPayment" resultMap="FfwyPaymentResult">
+        <include refid="selectFfwyPaymentVo"/>
+        <where>  
+            <if test="patmentType != null  and patmentType != ''"> and patment_type = #{patmentType}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyPaymentById" parameterType="Integer" resultMap="FfwyPaymentResult">
+        <include refid="selectFfwyPaymentVo"/>
+        where payment_id = #{paymentId}
+    </select>
+
+    <select id="selectpatmentTypeById" parameterType="Integer" resultType="String">
+        select patment_type from ffwy_payment
+        where payment_id = #{paymentId}
+    </select>
+        
+    <insert id="insertFfwyPayment" parameterType="FfwyPayment" useGeneratedKeys="true" keyProperty="paymentId">
+        insert into ffwy_payment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="patmentType != null">patment_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="patmentType != null">#{patmentType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyPayment" parameterType="FfwyPayment">
+        update ffwy_payment
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="patmentType != null">patment_type = #{patmentType},</if>
+        </trim>
+        where payment_id = #{paymentId}
+    </update>
+
+    <delete id="deleteFfwyPaymentById" parameterType="Integer">
+        delete from ffwy_payment where payment_id = #{paymentId}
+    </delete>
+
+    <delete id="deleteFfwyPaymentByIds" parameterType="String">
+        delete from ffwy_payment where payment_id in 
+        <foreach item="paymentId" collection="array" open="(" separator="," close=")">
+            #{paymentId}
+        </foreach>
+    </delete>
+</mapper>

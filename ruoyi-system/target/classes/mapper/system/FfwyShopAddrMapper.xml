@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.shop.FfwyShopAddrMapper">
+    
+    <resultMap type="FfwyShopAddr" id="FfwyShopAddrResult">
+        <result property="consigneeAddrid"    column="consignee_addrid"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="consigneeName"    column="consignee_name"    />
+        <result property="consigneePhone"    column="consignee_phone"    />
+        <result property="administrative"    column="administrative"    />
+        <result property="consigneeAddress"    column="consignee_address"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyShopAddrVo">
+        select consignee_addrid, shop_id, consignee_name, consignee_phone, administrative, consignee_address, create_time, update_time from ffwy_shop_addr
+    </sql>
+
+    <select id="selectFfwyShopAddrList" parameterType="FfwyShopAddr" resultMap="FfwyShopAddrResult">
+        <include refid="selectFfwyShopAddrVo"/>
+        <where>  
+            <if test="shopId != null "> and shop_id = #{shopId}</if>
+            <if test="consigneeName != null  and consigneeName != ''"> and consignee_name like concat('%', #{consigneeName}, '%')</if>
+            <if test="consigneePhone != null  and consigneePhone != ''"> and consignee_phone = #{consigneePhone}</if>
+            <if test="administrative != null  and administrative != ''"> and administrative = #{administrative}</if>
+            <if test="consigneeAddress != null  and consigneeAddress != ''"> and consignee_address = #{consigneeAddress}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyShopAddrById" parameterType="Long" resultMap="FfwyShopAddrResult">
+        <include refid="selectFfwyShopAddrVo"/>
+        where consignee_addrid = #{consigneeAddrid}
+    </select>
+        
+    <insert id="insertFfwyShopAddr" parameterType="FfwyShopAddr" useGeneratedKeys="true" keyProperty="consigneeAddrid">
+        insert into ffwy_shop_addr
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="shopId != null">shop_id,</if>
+            <if test="consigneeName != null">consignee_name,</if>
+            <if test="consigneePhone != null">consignee_phone,</if>
+            <if test="administrative != null">administrative,</if>
+            <if test="consigneeAddress != null">consignee_address,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="shopId != null">#{shopId},</if>
+            <if test="consigneeName != null">#{consigneeName},</if>
+            <if test="consigneePhone != null">#{consigneePhone},</if>
+            <if test="administrative != null">#{administrative},</if>
+            <if test="consigneeAddress != null">#{consigneeAddress},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyShopAddr" parameterType="FfwyShopAddr">
+        update ffwy_shop_addr
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null">shop_id = #{shopId},</if>
+            <if test="consigneeName != null">consignee_name = #{consigneeName},</if>
+            <if test="consigneePhone != null">consignee_phone = #{consigneePhone},</if>
+            <if test="administrative != null">administrative = #{administrative},</if>
+            <if test="consigneeAddress != null">consignee_address = #{consigneeAddress},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where consignee_addrid = #{consigneeAddrid}
+    </update>
+
+    <delete id="deleteFfwyShopAddrById" parameterType="Long">
+        delete from ffwy_shop_addr where consignee_addrid = #{consigneeAddrid}
+    </delete>
+
+    <delete id="deleteFfwyShopAddrByIds" parameterType="String">
+        delete from ffwy_shop_addr where consignee_addrid in 
+        <foreach item="consigneeAddrid" collection="array" open="(" separator="," close=")">
+            #{consigneeAddrid}
+        </foreach>
+    </delete>
+</mapper>

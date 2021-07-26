@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyPayRefundMapper">
+    
+    <resultMap type="FfwyPayRefund" id="FfwyPayRefundResult">
+        <result property="id"    column="id"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="reFundOrderId"    column="re_fund_order_id"    />
+        <result property="reqData"    column="req_data"    />
+        <result property="resData"    column="res_data"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="userId"    column="user_id"    />
+        <result property="refundUserId"    column="refund_user_id"    />
+        <result property="refundMoney"    column="refund_money"    />
+        <result property="callBackData"    column="call_back_data"    />
+        <result property="callBackQuerid"    column="call_back_querId"    />
+        <result property="callBackDate"    column="call_back_date"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectFfwyPayRefundVo">
+        select id, pay_type, order_id, re_fund_order_id, req_data, res_data, create_time, user_id, refund_user_id, refund_money, call_back_data, call_back_querId, call_back_date, status from ffwy_pay_refund
+    </sql>
+
+    <select id="selectFfwyPayRefundList" parameterType="FfwyPayRefund" resultMap="FfwyPayRefundResult">
+        <include refid="selectFfwyPayRefundVo"/>
+        <where>  
+            <if test="payType != null  and payType != ''"> and pay_type = #{payType}</if>
+            <if test="orderId != null  and orderId != ''"> and order_id = #{orderId}</if>
+            <if test="reFundOrderId != null  and reFundOrderId != ''"> and re_fund_order_id = #{reFundOrderId}</if>
+            <if test="reqData != null  and reqData != ''"> and req_data = #{reqData}</if>
+            <if test="resData != null  and resData != ''"> and res_data = #{resData}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="refundUserId != null "> and refund_user_id = #{refundUserId}</if>
+            <if test="refundMoney != null "> and refund_money = #{refundMoney}</if>
+            <if test="callBackData != null  and callBackData != ''"> and call_back_data = #{callBackData}</if>
+            <if test="callBackQuerid != null  and callBackQuerid != ''"> and call_back_querId = #{callBackQuerid}</if>
+            <if test="callBackDate != null "> and call_back_date = #{callBackDate}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyPayRefundById" parameterType="Long" resultMap="FfwyPayRefundResult">
+        <include refid="selectFfwyPayRefundVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectFfwyPayRefundByRefundOrderId"  resultMap="FfwyPayRefundResult">
+        <include refid="selectFfwyPayRefundVo"/>
+        where re_fund_order_id = #{orderId}
+    </select>
+
+
+    <insert id="insertFfwyPayRefund" parameterType="FfwyPayRefund" useGeneratedKeys="true" keyProperty="id">
+        insert into ffwy_pay_refund
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payType != null">pay_type,</if>
+            <if test="orderId != null">order_id,</if>
+            <if test="reFundOrderId != null">re_fund_order_id,</if>
+            <if test="reqData != null">req_data,</if>
+            <if test="resData != null">res_data,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="refundUserId != null">refund_user_id,</if>
+            <if test="refundMoney != null">refund_money,</if>
+            <if test="callBackData != null">call_back_data,</if>
+            <if test="callBackQuerid != null">call_back_querId,</if>
+            <if test="callBackDate != null">call_back_date,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="payType != null">#{payType},</if>
+            <if test="orderId != null">#{orderId},</if>
+            <if test="reFundOrderId != null">#{reFundOrderId},</if>
+            <if test="reqData != null">#{reqData},</if>
+            <if test="resData != null">#{resData},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="refundUserId != null">#{refundUserId},</if>
+            <if test="refundMoney != null">#{refundMoney},</if>
+            <if test="callBackData != null">#{callBackData},</if>
+            <if test="callBackQuerid != null">#{callBackQuerid},</if>
+            <if test="callBackDate != null">#{callBackDate},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyPayRefund" parameterType="FfwyPayRefund">
+        update ffwy_pay_refund
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="reFundOrderId != null">re_fund_order_id = #{reFundOrderId},</if>
+            <if test="reqData != null">req_data = #{reqData},</if>
+            <if test="resData != null">res_data = #{resData},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="refundUserId != null">refund_user_id = #{refundUserId},</if>
+            <if test="refundMoney != null">refund_money = #{refundMoney},</if>
+            <if test="callBackData != null">call_back_data = #{callBackData},</if>
+            <if test="callBackQuerid != null">call_back_querId = #{callBackQuerid},</if>
+            <if test="callBackDate != null">call_back_date = #{callBackDate},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFfwyPayRefundById" parameterType="Long">
+        delete from ffwy_pay_refund where id = #{id}
+    </delete>
+
+    <delete id="deleteFfwyPayRefundByIds" parameterType="String">
+        delete from ffwy_pay_refund where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

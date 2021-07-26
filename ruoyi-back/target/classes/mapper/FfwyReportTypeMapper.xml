@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.back.mapper.FfwyReportTypeMapper">
+    
+    <resultMap type="FfwyReportType" id="FfwyReportTypeResult">
+        <result property="reportTypeId"    column="report_type_id"    />
+        <result property="typeName"    column="type_name"    />
+    </resultMap>
+
+    <sql id="selectFfwyReportTypeVo">
+        select report_type_id, type_name from ffwy_report_type
+    </sql>
+
+    <select id="selectFfwyReportTypeList" parameterType="FfwyReportType" resultMap="FfwyReportTypeResult">
+        <include refid="selectFfwyReportTypeVo"/>
+        <where>  
+            <if test="typeName != null  and typeName != ''"> and type_name like concat('%', #{typeName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyReportTypeById" parameterType="Long" resultMap="FfwyReportTypeResult">
+        <include refid="selectFfwyReportTypeVo"/>
+        where report_type_id = #{reportTypeId}
+    </select>
+        
+    <insert id="insertFfwyReportType" parameterType="FfwyReportType" useGeneratedKeys="true" keyProperty="reportTypeId">
+        insert into ffwy_report_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typeName != null">type_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="typeName != null">#{typeName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyReportType" parameterType="FfwyReportType">
+        update ffwy_report_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="typeName != null">type_name = #{typeName},</if>
+        </trim>
+        where report_type_id = #{reportTypeId}
+    </update>
+
+    <delete id="deleteFfwyReportTypeById" parameterType="Long">
+        delete from ffwy_report_type where report_type_id = #{reportTypeId}
+    </delete>
+
+    <delete id="deleteFfwyReportTypeByIds" parameterType="String">
+        delete from ffwy_report_type where report_type_id in 
+        <foreach item="reportTypeId" collection="array" open="(" separator="," close=")">
+            #{reportTypeId}
+        </foreach>
+    </delete>
+</mapper>

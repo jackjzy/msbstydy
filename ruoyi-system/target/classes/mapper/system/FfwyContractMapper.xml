@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyContractMapper">
+    
+    <resultMap type="FfwyContract" id="FfwyContractResult">
+        <result property="contractId"    column="contract_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="accountId"    column="account_id"    />
+        <result property="orgId"    column="org_id"    />
+        <result property="psnSealId"    column="psn_seal_id"    />
+        <result property="orgSealId"    column="org_seal_id"    />
+        <result property="fileId"    column="file_id"    />
+        <result property="uploadUrl"    column="upload_url"    />
+        <result property="flowid"    column="flowId"    />
+        <result property="shorturl"    column="shortUrl"    />
+        <result property="url"    column="url"    />
+        <result property="thirdPartyUserIdPsn"    column="third_party_user_id_psn"    />
+        <result property="namePsn"    column="name_psn"    />
+        <result property="idTypePsn"    column="id_type_psn"    />
+        <result property="idNumberPsn"    column="id_number_psn"    />
+        <result property="mobilePsn"    column="mobile_psn"    />
+        <result property="thirdPartyUserIdOrg"    column="third_party_user_id_org"    />
+        <result property="nameOrg"    column="name_org"    />
+        <result property="idTypeOrg"    column="id_type_org"    />
+        <result property="idNumberOrg"    column="id_number_org"    />
+        <result property="filePhas"    column="file_phas"    />
+
+        <result property="createStatus"    column="create_status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="sigeTime"    column="sige_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyContractVo">
+        select contract_id, user_id, account_id, org_id, psn_seal_id, org_seal_id, file_id, upload_url,
+         flowId, shortUrl, url, third_party_user_id_psn, name_psn,
+         id_type_psn, id_number_psn, mobile_psn, third_party_user_id_org,
+         name_org, id_type_org, id_number_org,file_phas,create_status,create_time,sige_time
+         from ffwy_contract
+    </sql>
+
+    <select id="selectFfwyContractList" parameterType="FfwyContract" resultMap="FfwyContractResult">
+        <include refid="selectFfwyContractVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="accountId != null  and accountId != ''"> and account_id = #{accountId}</if>
+            <if test="orgId != null  and orgId != ''"> and org_id = #{orgId}</if>
+            <if test="psnSealId != null  and psnSealId != ''"> and psn_seal_id = #{psnSealId}</if>
+            <if test="orgSealId != null  and orgSealId != ''"> and org_seal_id = #{orgSealId}</if>
+            <if test="fileId != null  and fileId != ''"> and file_id = #{fileId}</if>
+            <if test="uploadUrl != null  and uploadUrl != ''"> and upload_url = #{uploadUrl}</if>
+            <if test="flowid != null  and flowid != ''"> and flowId = #{flowid}</if>
+            <if test="shorturl != null  and shorturl != ''"> and shortUrl = #{shorturl}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="thirdPartyUserIdPsn != null  and thirdPartyUserIdPsn != ''"> and third_party_user_id_psn = #{thirdPartyUserIdPsn}</if>
+            <if test="namePsn != null  and namePsn != ''"> and name_psn = #{namePsn}</if>
+            <if test="idTypePsn != null  and idTypePsn != ''"> and id_type_psn = #{idTypePsn}</if>
+            <if test="idNumberPsn != null  and idNumberPsn != ''"> and id_number_psn = #{idNumberPsn}</if>
+            <if test="mobilePsn != null  and mobilePsn != ''"> and mobile_psn = #{mobilePsn}</if>
+            <if test="thirdPartyUserIdOrg != null  and thirdPartyUserIdOrg != ''"> and third_party_user_id_org = #{thirdPartyUserIdOrg}</if>
+            <if test="nameOrg != null  and nameOrg != ''"> and name_org = #{nameOrg}</if>
+            <if test="idTypeOrg != null  and idTypeOrg != ''"> and id_type_org = #{idTypeOrg}</if>
+            <if test="idNumberOrg != null  and idNumberOrg != ''"> and id_number_org = #{idNumberOrg}</if>
+            <if test="filePhas != null  and filePhas != ''"> and file_phas = #{filePhas}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyContractById" parameterType="Long" resultMap="FfwyContractResult">
+        <include refid="selectFfwyContractVo"/>
+        where contract_id = #{contractId}
+    </select>
+        
+    <insert id="insertFfwyContract" parameterType="FfwyContract" useGeneratedKeys="true" keyProperty="contractId">
+        insert into ffwy_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="accountId != null">account_id,</if>
+            <if test="orgId != null">org_id,</if>
+            <if test="psnSealId != null">psn_seal_id,</if>
+            <if test="orgSealId != null">org_seal_id,</if>
+            <if test="fileId != null">file_id,</if>
+            <if test="uploadUrl != null">upload_url,</if>
+            <if test="flowid != null">flowId,</if>
+            <if test="shorturl != null">shortUrl,</if>
+            <if test="url != null">url,</if>
+            <if test="thirdPartyUserIdPsn != null">third_party_user_id_psn,</if>
+            <if test="namePsn != null">name_psn,</if>
+            <if test="idTypePsn != null">id_type_psn,</if>
+            <if test="idNumberPsn != null">id_number_psn,</if>
+            <if test="mobilePsn != null">mobile_psn,</if>
+            <if test="thirdPartyUserIdOrg != null">third_party_user_id_org,</if>
+            <if test="nameOrg != null">name_org,</if>
+            <if test="idTypeOrg != null">id_type_org,</if>
+            <if test="idNumberOrg != null">id_number_org,</if>
+            <if test="filePhas != null">file_phas,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="accountId != null">#{accountId},</if>
+            <if test="orgId != null">#{orgId},</if>
+            <if test="psnSealId != null">#{psnSealId},</if>
+            <if test="orgSealId != null">#{orgSealId},</if>
+            <if test="fileId != null">#{fileId},</if>
+            <if test="uploadUrl != null">#{uploadUrl},</if>
+            <if test="flowid != null">#{flowid},</if>
+            <if test="shorturl != null">#{shorturl},</if>
+            <if test="url != null">#{url},</if>
+            <if test="thirdPartyUserIdPsn != null">#{thirdPartyUserIdPsn},</if>
+            <if test="namePsn != null">#{namePsn},</if>
+            <if test="idTypePsn != null">#{idTypePsn},</if>
+            <if test="idNumberPsn != null">#{idNumberPsn},</if>
+            <if test="mobilePsn != null">#{mobilePsn},</if>
+            <if test="thirdPartyUserIdOrg != null">#{thirdPartyUserIdOrg},</if>
+            <if test="nameOrg != null">#{nameOrg},</if>
+            <if test="idTypeOrg != null">#{idTypeOrg},</if>
+            <if test="idNumberOrg != null">#{idNumberOrg},</if>
+            <if test="filePhas != null">#{filePhas},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyContract" parameterType="FfwyContract">
+        update ffwy_contract
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="accountId != null">account_id = #{accountId},</if>
+            <if test="orgId != null">org_id = #{orgId},</if>
+            <if test="psnSealId != null">psn_seal_id = #{psnSealId},</if>
+            <if test="orgSealId != null">org_seal_id = #{orgSealId},</if>
+            <if test="fileId != null">file_id = #{fileId},</if>
+            <if test="uploadUrl != null">upload_url = #{uploadUrl},</if>
+            <if test="flowid != null">flowId = #{flowid},</if>
+            <if test="shorturl != null">shortUrl = #{shorturl},</if>
+            <if test="url != null">url = #{url},</if>
+            <if test="thirdPartyUserIdPsn != null">third_party_user_id_psn = #{thirdPartyUserIdPsn},</if>
+            <if test="namePsn != null">name_psn = #{namePsn},</if>
+            <if test="idTypePsn != null">id_type_psn = #{idTypePsn},</if>
+            <if test="idNumberPsn != null">id_number_psn = #{idNumberPsn},</if>
+            <if test="mobilePsn != null">mobile_psn = #{mobilePsn},</if>
+            <if test="thirdPartyUserIdOrg != null">third_party_user_id_org = #{thirdPartyUserIdOrg},</if>
+            <if test="nameOrg != null">name_org = #{nameOrg},</if>
+            <if test="idTypeOrg != null">id_type_org = #{idTypeOrg},</if>
+            <if test="idNumberOrg != null">id_number_org = #{idNumberOrg},</if>
+            <if test="filePhas != null">file_phas = #{filePhas},</if>
+        </trim>
+        where contract_id = #{contractId}
+    </update>
+
+    <delete id="deleteFfwyContractById" parameterType="Long">
+        delete from ffwy_contract where contract_id = #{contractId}
+    </delete>
+
+    <delete id="deleteFfwyContractByIds" parameterType="String">
+        delete from ffwy_contract where contract_id in 
+        <foreach item="contractId" collection="array" open="(" separator="," close=")">
+            #{contractId}
+        </foreach>
+    </delete>
+</mapper>

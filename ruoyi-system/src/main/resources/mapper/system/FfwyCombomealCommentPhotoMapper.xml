@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.combomeal.FfwyCombomealCommentPhotoMapper">
+    
+    <resultMap type="FfwyCombomealCommentPhoto" id="FfwyCombomealCommentPhotoResult">
+        <result property="photoId"    column="photo_id"    />
+        <result property="photoPath"    column="photo_path"    />
+        <result property="combomealCommentId"    column="combomeal_comment_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyCombomealCommentPhotoVo">
+        select photo_id, photo_path, combomeal_comment_id, create_time, update_time from ffwy_combomeal_comment_photo
+    </sql>
+
+    <select id="selectFfwyCombomealCommentPhotoList" parameterType="FfwyCombomealCommentPhoto" resultMap="FfwyCombomealCommentPhotoResult">
+        <include refid="selectFfwyCombomealCommentPhotoVo"/>
+        <where>  
+            <if test="photoPath != null  and photoPath != ''"> and photo_path = #{photoPath}</if>
+            <if test="combomealCommentId != null "> and combomeal_comment_id = #{combomealCommentId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyCombomealCommentPhotoById" parameterType="Long" resultMap="FfwyCombomealCommentPhotoResult">
+        <include refid="selectFfwyCombomealCommentPhotoVo"/>
+        where photo_id = #{photoId}
+    </select>
+
+    <select id="selectCommentPhotoList" parameterType="Long" resultType="java.lang.String">
+        SELECT photo_path from ffwy_combomeal_comment_photo
+        where combomeal_comment_id = #{combomealCommentId}
+    </select>
+
+    <select id="selectCommentPhoto"  resultType="com.ruoyi.system.domain.combomeal.FfwyCombomealCommentPhoto">
+        SELECT photo_path as photoPath from ffwy_combomeal_comment_photo
+        where combomeal_comment_id = #{combomealCommentId}
+    </select>
+        
+    <insert id="insertFfwyCombomealCommentPhoto" parameterType="FfwyCombomealCommentPhoto" useGeneratedKeys="true" keyProperty="photoId">
+        insert into ffwy_combomeal_comment_photo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="photoPath != null">photo_path,</if>
+            <if test="combomealCommentId != null">combomeal_comment_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="photoPath != null">#{photoPath},</if>
+            <if test="combomealCommentId != null">#{combomealCommentId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyCombomealCommentPhoto" parameterType="FfwyCombomealCommentPhoto">
+        update ffwy_combomeal_comment_photo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="photoPath != null">photo_path = #{photoPath},</if>
+            <if test="combomealCommentId != null">combomeal_comment_id = #{combomealCommentId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where photo_id = #{photoId}
+    </update>
+
+    <delete id="deleteFfwyCombomealCommentPhotoById" parameterType="Long">
+        delete from ffwy_combomeal_comment_photo where photo_id = #{photoId}
+    </delete>
+
+    <delete id="deleteFfwyCombomealCommentPhotoByIds" parameterType="String">
+        delete from ffwy_combomeal_comment_photo where photo_id in 
+        <foreach item="photoId" collection="array" open="(" separator="," close=")">
+            #{photoId}
+        </foreach>
+    </delete>
+</mapper>

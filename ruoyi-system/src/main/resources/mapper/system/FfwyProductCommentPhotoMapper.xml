@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.product.FfwyProductCommentPhotoMapper">
+    
+    <resultMap type="FfwyProductCommentPhoto" id="FfwyProductCommentPhotoResult">
+        <result property="productCommentPhotoId"    column="product_comment_photo_id"    />
+        <result property="productCommentId"    column="product_comment_id"    />
+        <result property="productCommentPhoto"    column="product_comment_photo"    />
+        <result property="sort"    column="sort"    />
+    </resultMap>
+
+    <sql id="selectFfwyProductCommentPhotoVo">
+        select product_comment_photo_id, product_comment_id, product_comment_photo, sort from ffwy_product_comment_photo
+    </sql>
+
+    <select id="selectFfwyProductCommentPhotoList" parameterType="FfwyProductCommentPhoto" resultMap="FfwyProductCommentPhotoResult">
+        <include refid="selectFfwyProductCommentPhotoVo"/>
+        <where>  
+            <if test="productCommentId != null "> and product_comment_id = #{productCommentId}</if>
+            <if test="productCommentPhoto != null  and productCommentPhoto != ''"> and product_comment_photo = #{productCommentPhoto}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyProductCommentPhotoById" parameterType="Long" resultMap="FfwyProductCommentPhotoResult">
+        <include refid="selectFfwyProductCommentPhotoVo"/>
+        where product_comment_photo_id = #{productCommentPhotoId}
+    </select>
+        
+    <insert id="insertFfwyProductCommentPhoto" parameterType="FfwyProductCommentPhoto" useGeneratedKeys="true" keyProperty="productCommentPhotoId">
+        insert into ffwy_product_comment_photo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productCommentId != null">product_comment_id,</if>
+            <if test="productCommentPhoto != null">product_comment_photo,</if>
+            <if test="sort != null">sort,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productCommentId != null">#{productCommentId},</if>
+            <if test="productCommentPhoto != null">#{productCommentPhoto},</if>
+            <if test="sort != null">#{sort},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyProductCommentPhoto" parameterType="FfwyProductCommentPhoto">
+        update ffwy_product_comment_photo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productCommentId != null">product_comment_id = #{productCommentId},</if>
+            <if test="productCommentPhoto != null">product_comment_photo = #{productCommentPhoto},</if>
+            <if test="sort != null">sort = #{sort},</if>
+        </trim>
+        where product_comment_photo_id = #{productCommentPhotoId}
+    </update>
+
+    <delete id="deleteFfwyProductCommentPhotoById" parameterType="Long">
+        delete from ffwy_product_comment_photo where product_comment_photo_id = #{productCommentPhotoId}
+    </delete>
+
+    <delete id="deleteFfwyProductCommentPhotoByIds" parameterType="String">
+        delete from ffwy_product_comment_photo where product_comment_photo_id in 
+        <foreach item="productCommentPhotoId" collection="array" open="(" separator="," close=")">
+            #{productCommentPhotoId}
+        </foreach>
+    </delete>
+
+
+    <select id="selectFfwyProductCommentPhoto" parameterType="FfwyProductCommentPhoto" resultMap="FfwyProductCommentPhotoResult">
+        <include refid="selectFfwyProductCommentPhotoVo"/>
+        <where>
+            <if test="productCommentId != null "> and product_comment_id = #{productCommentId}</if>
+        </where>
+    </select>
+</mapper>

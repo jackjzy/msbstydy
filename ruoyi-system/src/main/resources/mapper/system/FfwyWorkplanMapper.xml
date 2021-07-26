@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyWorkplanMapper">
+    
+    <resultMap type="FfwyWorkplan" id="FfwyWorkplanResult">
+        <result property="workplanId"    column="workplan_id"    />
+        <result property="phaseId"    column="phase_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="combomealId"    column="combomeal_id"    />
+        <result property="beginTime"    column="begin_time"    />
+        <result property="finishTime"    column="finish_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyWorkplanVo">
+        select workplan_id, phase_id, user_id, combomeal_id, begin_time, finish_time from ffwy_workplan
+    </sql>
+
+    <select id="selectFfwyWorkplanList" parameterType="FfwyWorkplan" resultMap="FfwyWorkplanResult">
+        <include refid="selectFfwyWorkplanVo"/>
+        <where>  
+            <if test="phaseId != null "> and phase_id = #{phaseId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="combomealId != null "> and combomeal_id = #{combomealId}</if>
+            <if test="beginTime != null "> and begin_time = #{beginTime}</if>
+            <if test="finishTime != null "> and finish_time = #{finishTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyWorkplanById" parameterType="Integer" resultMap="FfwyWorkplanResult">
+        <include refid="selectFfwyWorkplanVo"/>
+        where workplan_id = #{workplanId}
+    </select>
+        
+    <insert id="insertFfwyWorkplan" parameterType="FfwyWorkplan" useGeneratedKeys="true" keyProperty="workplanId">
+        insert into ffwy_workplan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="phaseId != null">phase_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="combomealId != null">combomeal_id,</if>
+            <if test="beginTime != null">begin_time,</if>
+            <if test="finishTime != null">finish_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="phaseId != null">#{phaseId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="combomealId != null">#{combomealId},</if>
+            <if test="beginTime != null">#{beginTime},</if>
+            <if test="finishTime != null">#{finishTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyWorkplan" parameterType="FfwyWorkplan">
+        update ffwy_workplan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="phaseId != null">phase_id = #{phaseId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="combomealId != null">combomeal_id = #{combomealId},</if>
+            <if test="beginTime != null">begin_time = #{beginTime},</if>
+            <if test="finishTime != null">finish_time = #{finishTime},</if>
+        </trim>
+        where workplan_id = #{workplanId}
+    </update>
+
+    <delete id="deleteFfwyWorkplanById" parameterType="Integer">
+        delete from ffwy_workplan where workplan_id = #{workplanId}
+    </delete>
+
+    <delete id="deleteFfwyWorkplanByIds" parameterType="String">
+        delete from ffwy_workplan where workplan_id in 
+        <foreach item="workplanId" collection="array" open="(" separator="," close=")">
+            #{workplanId}
+        </foreach>
+    </delete>
+    <select id="selectFfwyWorkplan" resultMap="FfwyWorkplanResult">
+        <include refid="selectFfwyWorkplanVo"/>
+    </select>
+    <select id="selectByuserid" parameterType="Integer" resultMap="FfwyWorkplanResult">
+        select * from ffwy_workplan where user_id = #{userId}
+    </select>
+    
+    <update id="myupdateFfwyWorkplan" parameterType="FfwyWorkplan">
+        update ffwy_workplan set user_id = null where workplan_id = #{workplanId}
+    </update>
+</mapper>

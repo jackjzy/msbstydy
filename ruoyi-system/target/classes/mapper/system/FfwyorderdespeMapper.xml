@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyorderdespeMapper">
+    
+    <resultMap type="FfwyorderdespeVo" id="FfwyorderdespeVoResult">
+        <result property="orderId"    column="order_id"    />
+        <result property="orderNumber"    column="order_number"    />
+        <result property="orderStatus"    column="order_status"    />
+        <result property="productPhoto"    column="product_photo"    />
+        <result property="productSkuName"    column="product_sku_name"    />
+        <result property="productSkuSpec"    column="product_sku_spec"    />
+        <result property="number"    column="number"    />
+        <result property="zongj"    column="price_sum"    />
+        <result property="price"    column="price"    />
+        <result property="afterSaleid" column="after_saleid"/>
+        <result property="afterStatus" column="after_status"/>
+        <result property="orderDetailsId"  column="order_details_id"/>
+    </resultMap>
+    
+    <select id="selectFfwyorderdetailsByseales" parameterType="Long" resultMap="FfwyorderdespeVoResult">
+        SELECT a.after_saleid,a.order_details_id,a.order_number,a.after_status
+         FROM ffwy_after_sale a
+        <where>
+            a.user_id = #{userId}
+        </where>
+        ORDER BY a.create_time DESC
+    </select>
+
+    <select id="selectFfwyorderdetails" parameterType="Long" resultMap="FfwyorderdespeVoResult">
+        SELECT order_id, order_status,product_photo,product_sku_name,product_sku_spec,number,price,(number*price) as zongj FROM
+        ffwy_order_details
+        <where>
+            <if test="orderNumber != null  and orderNumber != ''"> and order_number = #{orderNumber}</if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.video.FfwyStoreVideoMapper">
+    
+    <resultMap type="FfwyStoreVideo" id="FfwyStoreVideoResult">
+        <result property="storeVideoId"    column="store_video_id"    />
+        <result property="videoId"    column="video_id"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectFfwyStoreVideoVo">
+        select store_video_id, video_id, user_id from ffwy_store_video
+    </sql>
+
+    <select id="selectFfwyStoreVideoList" parameterType="FfwyStoreVideo" resultMap="FfwyStoreVideoResult">
+        <include refid="selectFfwyStoreVideoVo"/>
+        <where>  
+            <if test="videoId != null "> and video_id = #{videoId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyStoreVideoById" parameterType="Long" resultMap="FfwyStoreVideoResult">
+        <include refid="selectFfwyStoreVideoVo"/>
+        where store_video_id = #{storeVideoId}
+    </select>
+        
+    <insert id="insertFfwyStoreVideo" parameterType="FfwyStoreVideo" useGeneratedKeys="true" keyProperty="storeVideoId">
+        insert into ffwy_store_video
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="videoId != null">video_id,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="videoId != null">#{videoId},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyStoreVideo" parameterType="FfwyStoreVideo">
+        update ffwy_store_video
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="videoId != null">video_id = #{videoId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where store_video_id = #{storeVideoId}
+    </update>
+
+    <delete id="deleteFfwyStoreVideoById" parameterType="Long">
+        delete from ffwy_store_video where store_video_id = #{storeVideoId}
+    </delete>
+
+    <delete id="deleteFfwyStoreVideoByIds" parameterType="String">
+        delete from ffwy_store_video where store_video_id in 
+        <foreach item="storeVideoId" collection="array" open="(" separator="," close=")">
+            #{storeVideoId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteFfwyStoreVideo" >
+        delete from ffwy_store_video where video_id = #{videoId}   and user_id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.combomeal.FfwyCombomealWiringMapper">
+    
+    <resultMap type="FfwyCombomealWiring" id="FfwyCombomealWiringResult">
+        <result property="productId"    column="product_id"    />
+        <result property="productName"    column="product_name"    />
+        <result property="combomealId"    column="combomeal_id"    />
+    </resultMap>
+
+    <sql id="selectFfwyCombomealWiringVo">
+        select product_id, product_name, combomeal_id from ffwy_combomeal_wiring
+    </sql>
+
+    <select id="selectFfwyCombomealWiringList" parameterType="FfwyCombomealWiring" resultMap="FfwyCombomealWiringResult">
+        <include refid="selectFfwyCombomealWiringVo"/>
+        <where>  
+            <if test="productId != null  and productId != ''"> and product_id = #{productId}</if>
+            <if test="productName != null  and productName != ''"> and product_name like concat('%', #{productName}, '%')</if>
+            <if test="combomealId != null "> and combomeal_id = #{combomealId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyCombomealWiringById" parameterType="String" resultMap="FfwyCombomealWiringResult">
+        <include refid="selectFfwyCombomealWiringVo"/>
+        where product_id = #{productId}
+    </select>
+        
+    <insert id="insertFfwyCombomealWiring" parameterType="FfwyCombomealWiring">
+        insert into ffwy_combomeal_wiring
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productId != null">product_id,</if>
+            <if test="productName != null">product_name,</if>
+            <if test="combomealId != null">combomeal_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productId != null">#{productId},</if>
+            <if test="productName != null">#{productName},</if>
+            <if test="combomealId != null">#{combomealId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyCombomealWiring" parameterType="FfwyCombomealWiring">
+        update ffwy_combomeal_wiring
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productName != null">product_name = #{productName},</if>
+            <if test="combomealId != null">combomeal_id = #{combomealId},</if>
+        </trim>
+        where product_id = #{productId}
+    </update>
+
+    <delete id="deleteFfwyCombomealWiringcId" parameterType="Long">
+        delete from ffwy_combomeal_wiring where combomeal_id = #{combomealId}
+    </delete>
+
+    <delete id="deleteFfwyCombomealWiringById" parameterType="String">
+        delete from ffwy_combomeal_wiring where product_id = #{productId}
+    </delete>
+
+    <delete id="deleteFfwyCombomealWiringByIds" parameterType="String">
+        delete from ffwy_combomeal_wiring where product_id in 
+        <foreach item="productId" collection="array" open="(" separator="," close=")">
+            #{productId}
+        </foreach>
+    </delete>
+</mapper>

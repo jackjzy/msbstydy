@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.product.FfwyProductCategoryMapper">
+
+    <resultMap type="FfwyProductCategory" id="FfwyProductCategoryResult">
+        <result property="categoryId" column="category_id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="catLevel" column="cat_level"/>
+    </resultMap>
+
+    <sql id="selectFfwyProductCategoryVo">
+        select category_id, parent_id, category_name, create_time, update_time, cat_level from ffwy_product_category
+    </sql>
+
+    <select id="selectFfwyProductCategoryList" parameterType="FfwyProductCategory"
+            resultMap="FfwyProductCategoryResult">
+        <include refid="selectFfwyProductCategoryVo"/>
+        <where>
+            cat_level = 1
+            <if test="categoryId != null ">and category_id = #{categoryId}</if>
+            <if test="parentId != null ">and parent_id = #{parentId}</if>
+            <if test="categoryName != null  and categoryName != ''">and category_name like concat('%', #{categoryName},
+                '%')
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectFfwyProductCategoryById" parameterType="Long" resultMap="FfwyProductCategoryResult">
+        <include refid="selectFfwyProductCategoryVo"/>
+        where category_id = #{categoryId}
+    </select>
+    <select id="selectFfwyProductCategoryByName" parameterType="String" resultMap="FfwyProductCategoryResult">
+        <include refid="selectFfwyProductCategoryVo"/>
+        where category_name = #{categoryName}
+    </select>
+
+    <select id="selectFfwyProductCategoryByParentId" parameterType="Long" resultMap="FfwyProductCategoryResult">
+        select count(*) from ffwy_product_category
+        where parent_id = #{parentId}
+    </select>
+
+    <insert id="insertFfwyProductCategory" parameterType="FfwyProductCategory">
+        insert into ffwy_product_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="parentId != null">parent_id,</if>
+            <if test="categoryName != null">category_name,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="catLevel != null">cat_level,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="parentId != null">#{parentId},</if>
+            <if test="categoryName != null">#{categoryName},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="catLevel != null">#{catLevel},</if>
+        </trim>
+    </insert>
+
+    <update id="updateFfwyProductCategory" parameterType="FfwyProductCategory">
+        update ffwy_product_category
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="categoryName != null">category_name = #{categoryName},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="catLevel != null">cat_level = #{catLevel},</if>
+        </trim>
+        where category_id = #{categoryId}
+    </update>
+
+    <delete id="deleteFfwyProductCategoryById" parameterType="Long">
+        delete from ffwy_product_category where category_id = #{categoryId}
+    </delete>
+
+    <delete id="deleteFfwyProductCategoryByIds" parameterType="String">
+        delete from ffwy_product_category where category_id in
+        <foreach item="categoryId" collection="array" open="(" separator="," close=")">
+            #{categoryId}
+        </foreach>
+    </delete>
+
+    <!--    <select id="selectFfwyProductCategoryAll" parameterType="FfwyProductCategory" resultMap="FfwyProductCategoryResult">
+           SELECT
+        category_id,
+        parent_id,
+        category_name
+    FROM
+        `ffwy_product_category` <where> parent_id = #{parentId} </where>
+        </select>-->
+
+    <!--    <select id="selectFfwyCombomealByList" parameterType="String" resultMap="FfwyProductCategoryResult">
+            select
+            category_id,
+            parent_id,
+            category_name
+            from
+            ffwy_product_category
+            <where>
+             parent_id in
+            <foreach item="item" collection="array" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            </where>
+        </select>-->
+
+    <!--  <select id="selectFfwyProductCategoryname" parameterType="FfwyProductCategory" resultMap="FfwyProductCategoryResult">
+          select
+      c.category_id,
+          c.parent_id,
+          c.category_name
+  from
+      ffwy_product_category as p
+  inner join ffwy_product_category as c on c.parent_id=p.category_id
+  <where>
+      p.category_name = '家电产品'
+  </where>
+      </select>-->
+
+    <select id="selectFfwyfindByproductcat" resultMap="FfwyProductCategoryResult">
+        SELECT
+        category_id,
+        category_name
+        FROM
+        ffwy_product_category
+        where cat_level = '1'
+    </select>
+
+    <select id="selectByperentid" parameterType="FfwyProductCategory" resultMap="FfwyProductCategoryResult">
+        SELECT
+        category_id,
+        parent_id,
+        category_name
+        FROM
+        ffwy_product_category
+        <where>
+            parent_id = #{parentId}
+        </where>
+    </select>
+
+
+    <select id="selectFfwyfindBysoft" resultMap="FfwyProductCategoryResult">
+        SELECT
+        category_id,
+        parent_id,
+        category_name
+        FROM
+        ffwy_product_category
+        <where>
+            category_name = '软装产品'
+        </where>
+    </select>
+
+    <select id="selectFfwyfindByarticles" resultMap="FfwyProductCategoryResult">
+        SELECT
+        category_id,
+        parent_id,
+        category_name
+        FROM
+        ffwy_product_category
+        <where>
+            category_name = '生活日用品'
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.aftersale.FfwyAfterAddrMapper">
+    
+    <resultMap type="FfwyAfterAddr" id="FfwyAfterAddrResult">
+        <result property="afterAddrId"    column="after_addr_id"    />
+        <result property="afterSaleid"    column="after_saleid"    />
+        <result property="logisticsNumber"    column="logistics_number"    />
+        <result property="logisticsName"    column="logistics_name"    />
+        <result property="userPhone"    column="user_phone"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyAfterAddrVo">
+        select after_addr_id, after_saleid, logistics_number, logistics_name, user_phone, create_time, update_time from ffwy_after_addr
+    </sql>
+
+    <select id="selectFfwyAfterAddrList" parameterType="FfwyAfterAddr" resultMap="FfwyAfterAddrResult">
+        <include refid="selectFfwyAfterAddrVo"/>
+        <where>  
+            <if test="afterSaleid != null "> and after_saleid = #{afterSaleid}</if>
+            <if test="logisticsNumber != null  and logisticsNumber != ''"> and logistics_number = #{logisticsNumber}</if>
+            <if test="logisticsName != null  and logisticsName != ''"> and logistics_name like concat('%', #{logisticsName}, '%')</if>
+            <if test="userPhone != null  and userPhone != ''"> and user_phone = #{userPhone}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyAfterAddrById" parameterType="Long" resultMap="FfwyAfterAddrResult">
+        <include refid="selectFfwyAfterAddrVo"/>
+        where after_addr_id = #{afterAddrId}
+    </select>
+        
+    <insert id="insertFfwyAfterAddr" parameterType="FfwyAfterAddr">
+        insert into ffwy_after_addr
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="afterAddrId != null">after_addr_id,</if>
+            <if test="afterSaleid != null">after_saleid,</if>
+            <if test="logisticsNumber != null">logistics_number,</if>
+            <if test="logisticsName != null">logistics_name,</if>
+            <if test="userPhone != null">user_phone,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="afterAddrId != null">#{afterAddrId},</if>
+            <if test="afterSaleid != null">#{afterSaleid},</if>
+            <if test="logisticsNumber != null">#{logisticsNumber},</if>
+            <if test="logisticsName != null">#{logisticsName},</if>
+            <if test="userPhone != null">#{userPhone},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyAfterAddr" parameterType="FfwyAfterAddr">
+        update ffwy_after_addr
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="afterSaleid != null">after_saleid = #{afterSaleid},</if>
+            <if test="logisticsNumber != null">logistics_number = #{logisticsNumber},</if>
+            <if test="logisticsName != null">logistics_name = #{logisticsName},</if>
+            <if test="userPhone != null">user_phone = #{userPhone},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where after_addr_id = #{afterAddrId}
+    </update>
+
+    <delete id="deleteFfwyAfterAddrById" parameterType="Long">
+        delete from ffwy_after_addr where after_addr_id = #{afterAddrId}
+    </delete>
+
+    <delete id="deleteFfwyAfterAddrByIds" parameterType="String">
+        delete from ffwy_after_addr where after_addr_id in 
+        <foreach item="afterAddrId" collection="array" open="(" separator="," close=")">
+            #{afterAddrId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.product.FfwyProductMapper">
+    <resultMap type="FfwyProduct" id="FfwyProductResult">
+        <result property="productId" column="product_id"/>
+        <result property="productPhotoid" column="product_photoid"/>
+        <result property="productName" column="product_name"/>
+        <result property="originalPrice" column="original_price"/>
+        <result property="currentPrice" column="current_price"/>
+        <result property="sales" column="sales"/>
+        <result property="freight" column="freight"/>
+        <result property="productStatus" column="product_status"/>
+        <result property="stock" column="stock"/>
+        <result property="stockUnit" column="stock_unit"/>
+        <result property="productCategoryId" column="product_category_id"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="specuiflcationsId" column="specuiflcations_id"/>
+        <result property="promise" column="promise"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="createBy" column="create_by"/>
+        <result property="userId" column="user_id"/>
+        <result property="photo" column="photo"/>
+        <result property="styleId" column="style_id"/>
+        <result property="countNum" column="countNum"/>
+        <result property="userCount" column="userCount"/>
+    </resultMap>
+
+    <sql id="selectFfwyProductVo">
+
+                select product_id, product_photoid, product_name, original_price, current_price, sales, freight, product_status, stock, stock_unit, product_category_id, shop_id, specuiflcations_id, promise, create_time, update_time, update_by, create_by, user_id, photo,style_id  from ffwy_product
+
+    </sql>
+
+    <sql id="SELECT_STORE_PRODUCT">
+
+                select fp.product_id, product_photoid, product_name, original_price, current_price,
+                    sales, freight, product_status, stock, stock_unit, product_category_id, shop_id,
+                     specuiflcations_id, promise, create_time, update_time, update_by, create_by, fp.user_id,
+                      photo,style_id
+                    from ffwy_store_product fsp LEFT JOIN ffwy_product fp on fsp.product_id =fp.product_id
+
+    </sql>
+
+    <select id="selectFfwyProductList" parameterType="FfwyProduct" resultMap="FfwyProductResult">
+        <include refid="selectFfwyProductVo"/>
+        <where>
+            <if test="productId != null ">
+                and product_id = #{productId}
+            </if>
+            <if test="productPhotoid != null ">
+                and product_photoid = #{productPhotoid}
+            </if>
+            <if test="productName != null  and productName != ''">
+                and product_name like concat('%', #{productName}, '%')
+            </if>
+            <if test="originalPrice != null ">
+                and original_price = #{originalPrice}
+            </if>
+            <if test="sales != null ">
+                and sales = #{sales}
+            </if>
+            <if test="freight != null ">
+                and freight = #{freight}
+            </if>
+                and product_status = 1
+            <if test="stock != null ">
+                and stock = #{stock}
+            </if>
+            <if test="stockUnit != null  and stockUnit != ''">
+                and stock_unit = #{stockUnit}
+            </if>
+            <if test="photo != null  and photo != ''">
+                and photo = #{photo}
+            </if>
+            <if test="productCategoryId != null ">
+                and product_category_id = #{productCategoryId}
+            </if>
+            <if test="shopId != null ">
+                and shop_id = #{shopId}
+            </if>
+            <if test="specuiflcationsId != null ">
+                and specuiflcations_id = #{specuiflcationsId}
+            </if>
+            <if test="promise != null  and promise != ''">
+                and promise = #{promise}
+            </if>
+            <if test="userId != null ">
+                and user_id = #{userId}
+            </if>
+            <if test="beginPrice != null  and endPrice != null">
+                and current_price between #{beginPrice} and #{endPrice}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectProductToList" parameterType="ProductTo" resultMap="FfwyProductResult">
+        <include refid="selectFfwyProductVo"/>
+        <where>
+            <if test="productId != null ">
+                and product_id = #{productId}
+            </if>
+            <if test="productName != null  and productName != ''">
+                and product_name like concat('%', #{productName}, '%')
+            </if>
+            <if test="productStatus != null  and productStatus != ''">
+                and product_status = #{productStatus}
+            </if>
+            <if test="beginPrice != null  and endPrice != null">
+                and current_price between #{beginPrice} and #{endPrice}
+            </if>
+            <if test="beginTime != null  and endTime != null">
+                and create_time between #{beginTime} and #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectFfwyProductCategoryList" parameterType="FfwyProduct" resultMap="FfwyProductResult">
+        select fp.product_id, fp.product_photoid, fp.product_name, fp.original_price, fp.current_price, fp.sales,
+        fp.freight, fp.product_status, fp.stock,fp.photo,
+        fp.stock_unit, fp.product_category_id, fp.shop_id, fp.specuiflcations_id, fp.promise, fp.create_time,
+        fp.update_time, fp.update_by, fp.create_by, fp.user_id from ffwy_product
+        fp INNER JOIN ffwy_product_category fpc
+        on fp.product_category_id=fpc.category_id
+        <where>
+            fp.product_status=1
+            <if test="productCategoryId != null ">
+                and fp.product_category_id = #{productCategoryId}
+            </if>
+
+        </where>
+        ORDER BY fp.product_id DESC
+    </select>
+
+    <select id="selectFfwyProductListLong" parameterType="Long" resultMap="FfwyProductResult">
+        select product_id, product_photoid,
+        product_name, original_price, current_price, sales, freight, product_status,
+        stock, stock_unit, product_category_id, shop_id, specuiflcations_id, promise,
+        create_time, update_time, update_by, create_by, user_id, photo,style_id from ffwy_product
+        <where>
+            <if test="productCategoryId != null ">
+                and product_category_id = #{productCategoryId}
+            </if><if test="productId != null ">
+                and product_id = #{productId}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectFfwyProductById" parameterType="Long" resultMap="FfwyProductResult">
+        <include refid="selectFfwyProductVo"/>
+        where product_id = #{productId}
+    </select>
+
+    <select id="selectStoreProductList" parameterType="Long" resultMap="FfwyProductResult">
+        <include refid="SELECT_STORE_PRODUCT"/>
+        where fsp.user_id=#{userId}
+    </select>
+
+    <select id="selectStroeProductById" parameterType="FfwyProduct" resultMap="FfwyProductResult">
+        select fp.product_id userCount
+        from ffwy_store_product fsp LEFT JOIN ffwy_product fp on fsp.product_id =fp.product_id
+        where fsp.user_id=#{userId} and fsp.product_id = #{productId}
+        GROUP  BY fsp.product_id
+    </select>
+
+
+    <select id="selectStroeProduct" parameterType="FfwyProduct" resultMap="FfwyProductResult">
+          select COUNT(product_id) countNum from ffwy_store_product
+        where product_id=#{productId} and user_id=#{userId}
+    </select>
+    <select id="selectFfwyProductCategoryCountList" parameterType="FfwyProduct" resultMap="FfwyProductResult">
+            select COUNT(product_id) countNum from ffwy_product
+        where product_category_id=#{productCategoryId} and product_status=1
+    </select>
+
+<!--    查询销售数量-->
+    <select id="selectProductCouont" parameterType="Long" resultMap="FfwyProductResult">
+        SELECT count(*)-1 as sales FROM ffwy_product fp LEFT JOIN ffwy_product_sku fps
+        on  fp.product_id = fps.product_id
+        LEFT JOIN ffwy_order_details fod
+        on fod.product_sku_id = fps.sku_id and fod.is_del = 0 and fod.order_status = 6
+        where fp.product_id = #{productId}
+        GROUP BY fp.product_id
+    </select>
+
+    <select id="selectFfwyProductByShopId" parameterType="Long" resultMap="FfwyProductResult">
+        <include refid="selectFfwyProductVo"/>
+        where shop_id = #{shopId}
+    </select>
+
+
+    <select id="selectFfwyfindByproductcatej" parameterType="Long" resultMap="FfwyProductResult">
+        <include refid="selectFfwyProductVo"/>
+        where product_category_id = #{productCategoryId} and product_status = 1
+    </select>
+
+    <select id="selectFfwyfindByproductcatName" parameterType="Long" resultMap="FfwyProductResult">
+        <include refid="selectFfwyProductVo"/>
+        where product_id = #{productId}
+    </select>
+
+    <select id="productCategoryId" parameterType="Long" resultMap="FfwyProductResult">
+
+                select count(*) from product_category_id
+                where product_category_id = #{productCategoryId}
+
+    </select>
+
+    <insert id="insertStroeProduct">
+
+                INSERT INTO ffwy_store_product( product_id, user_id) VALUES (#{productId}, #{userId});
+
+    </insert>
+    <insert id="insertFfwyProduct" parameterType="FfwyProduct">
+        insert into ffwy_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="productPhotoid != null">
+                product_photoid,
+            </if>
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="originalPrice != null">
+                original_price,
+            </if>
+            <if test="currentPrice != null">
+                current_price,
+            </if>
+            <if test="sales != null">
+                sales,
+            </if>
+            <if test="freight != null">
+                freight,
+            </if>
+            <if test="productStatus != null">
+                product_status,
+            </if>
+            <if test="stock != null">
+                stock,
+            </if>
+            <if test="stockUnit != null">
+                stock_unit,
+            </if>
+            <if test="productCategoryId != null">
+                product_category_id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="specuiflcationsId != null">
+                specuiflcations_id,
+            </if>
+            <if test="promise != null">
+                promise,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="photo != null">
+                photo,
+            </if>
+            <if test="styleId != null">
+                style_id,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productId != null">
+                #{productId},
+            </if>
+            <if test="productPhotoid != null">
+                #{productPhotoid},
+            </if>
+            <if test="productName != null">
+                #{productName},
+            </if>
+            <if test="originalPrice != null">
+                #{originalPrice},
+            </if>
+            <if test="currentPrice != null">
+                #{currentPrice},
+            </if>
+            <if test="sales != null">
+                #{sales},
+            </if>
+            <if test="freight != null">
+                #{freight},
+            </if>
+            <if test="productStatus != null">
+                #{productStatus},
+            </if>
+            <if test="stock != null">
+                #{stock},
+            </if>
+            <if test="stockUnit != null">
+                #{stockUnit},
+            </if>
+            <if test="productCategoryId != null">
+                #{productCategoryId},
+            </if>
+            <if test="shopId != null">
+                #{shopId},
+            </if>
+            <if test="specuiflcationsId != null">
+                #{specuiflcationsId},
+            </if>
+            <if test="promise != null">
+                #{promise},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy},
+            </if>
+            <if test="createBy != null">
+                #{createBy},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="photo != null">
+                #{photo},
+            </if>
+            <if test="styleId != null">
+                #{styleId},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateFfwyProduct" parameterType="FfwyProduct">
+        update ffwy_product
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productPhotoid != null">
+                product_photoid = #{productPhotoid},
+            </if>
+            <if test="productName != null">
+                product_name = #{productName},
+            </if>
+            <if test="originalPrice != null">
+                original_price = #{originalPrice},
+            </if>
+            <if test="currentPrice != null">
+                current_price = #{currentPrice},
+            </if>
+            <if test="sales != null">
+                sales = #{sales},
+            </if>
+            <if test="freight != null">
+                freight = #{freight},
+            </if>
+            <if test="productStatus != null">
+                product_status = #{productStatus},
+            </if>
+            <if test="stock != null">
+                stock = #{stock},
+            </if>
+            <if test="stockUnit != null">
+                stock_unit = #{stockUnit},
+            </if>
+            <if test="productCategoryId != null">
+                product_category_id = #{productCategoryId},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId},
+            </if>
+            <if test="specuiflcationsId != null">
+                specuiflcations_id = #{specuiflcationsId},
+            </if>
+            <if test="promise != null">
+                promise = #{promise},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="photo != null">
+                photo = #{photo},
+            </if>
+        </trim>
+        where product_id = #{productId}
+    </update>
+
+    <delete id="deleteFfwyProductById" parameterType="Long">
+
+                delete from ffwy_product where product_id = #{productId}
+
+    </delete>
+
+    <delete id="deleteFfwyProductByIds" parameterType="String">
+        delete from ffwy_product where product_id in
+        <foreach item="productId" collection="array" open="(" separator="," close=")">
+            #{productId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteStroeProduct">
+
+                delete from ffwy_store_product
+                where product_id = #{productId} and user_id=#{userId}
+
+    </delete>
+</mapper>

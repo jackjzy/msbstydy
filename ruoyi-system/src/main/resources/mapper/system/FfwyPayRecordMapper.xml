@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyPayRecordMapper">
+    
+    <resultMap type="FfwyPayRecord" id="FfwyPayRecordResult">
+        <result property="recordId"    column="record_id"    />
+        <result property="payTyep"    column="pay_tyep"    />
+        <result property="payMoney"    column="pay_money"    />
+        <result property="productMsg"    column="product_msg"    />
+        <result property="userId" column="user_id"></result>
+        <result property="createTime"    column="create_time"    />
+
+        <result property="contentData"    column="content_data"    />
+        <result property="requestData"    column="request_data"    />
+        <result property="responseData"    column="response_data"    />
+
+        <result property="cellBackData"    column="cell_back_data"    />
+        <result property="cellBackQueryId"    column="cell_back_queryId"    />
+
+        <result property="orderNumber"    column="order_number"    />
+        <result property="payOrderType"    column="pay_order_type"    />
+        <result property="payStatus"    column="pay_status"    />
+        <result property="cteateOrderTime" column="create_order_time"></result>
+
+    </resultMap>
+
+    <sql id="selectFfwyPayRecordVo">
+        select record_id, pay_tyep, pay_money, product_msg, create_time ,
+        content_data,request_data,response_data,cell_back_data,cell_back_queryId,order_number,
+        pay_order_type,pay_status,create_order_time
+        from ffwy_pay_record
+    </sql>
+
+    <select id="selectFfwyPayRecordList" parameterType="FfwyPayRecord" resultMap="FfwyPayRecordResult">
+        <include refid="selectFfwyPayRecordVo"/>
+        <where>  
+            <if test="payTyep != null  and payTyep != ''"> and pay_tyep = #{payTyep}</if>
+            <if test="payMoney != null  and payMoney != ''"> and pay_money = #{payMoney}</if>
+            <if test="productMsg != null  and productMsg != ''"> and product_msg = #{productMsg}</if>
+            <if test="orderNumber != null  and orderNumber != ''"> and order_number = #{orderNumber}</if>
+            <if test="userId !=null"> and user_id =#{userId}</if>
+
+        </where>
+        ORDER BY record_id desc
+    </select>
+    
+    <select id="selectFfwyPayRecordById" parameterType="Long" resultMap="FfwyPayRecordResult">
+        <include refid="selectFfwyPayRecordVo"/>
+        where record_id = #{recordId}
+    </select>
+
+    <select id="selectFfwyPayRecordByOrderNumber" parameterType="String" resultMap="FfwyPayRecordResult">
+        <include refid="selectFfwyPayRecordVo"/>
+        where order_number = #{orderNumber}
+    </select>
+        
+    <insert id="insertFfwyPayRecord" parameterType="FfwyPayRecord" useGeneratedKeys="true" keyProperty="recordId">
+        insert into ffwy_pay_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payTyep != null">pay_tyep,</if>
+            <if test="payMoney != null">pay_money,</if>
+            <if test="userId != null"> user_id,</if>
+            <if test="productMsg != null">product_msg,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="cteateOrderTime != null">create_order_time,</if>
+            <if test="contentData != null">content_data,</if>
+            <if test="requestData != null">request_data,</if>
+            <if test="responseData != null">response_data,</if>
+            <if test="orderNumber != null">order_number,</if>
+            <if test="payOrderType != null">pay_order_type,</if>
+            <if test="payStatus != null">pay_status,</if>
+            <if test="cellBackData != null">cell_back_data,</if>
+            <if test="cellBackQueryId != null">cell_back_queryId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="payTyep != null">#{payTyep},</if>
+            <if test="payMoney != null">#{payMoney},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="productMsg != null">#{productMsg},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="cteateOrderTime != null">#{cteateOrderTime},</if>
+            <if test="contentData != null">#{contentData},</if>
+            <if test="requestData != null">#{requestData},</if>
+            <if test="responseData != null">#{responseData},</if>
+            <if test="orderNumber != null">#{orderNumber},</if>
+            <if test="payOrderType != null">#{payOrderType},</if>
+            <if test="payStatus != null">#{payStatus},</if>
+            <if test="cellBackData != null">#{cellBackData},</if>
+            <if test="cellBackQueryId != null">#{cellBackQueryId},</if>
+
+         </trim>
+    </insert>
+
+    <update id="updateFfwyPayRecord" parameterType="FfwyPayRecord">
+        update ffwy_pay_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="payTyep != null">pay_tyep = #{payTyep},</if>
+            <if test="payMoney != null">pay_money = #{payMoney},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="productMsg != null">product_msg = #{productMsg},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="cteateOrderTime != null">create_order_time = #{cteateOrderTime},</if>
+            <if test="contentData != null">content_data = #{contentData},</if>
+            <if test="requestData != null">request_data = #{requestData},</if>
+            <if test="responseData != null">response_data = #{responseData},</if>
+
+            <if test="cellBackData != null">cell_back_data = #{cellBackData},</if>
+            <if test="cellBackQueryId != null">cell_back_queryId = #{cellBackQueryId},</if>
+
+            <if test="orderNumber != null">order_number = #{orderNumber},</if>
+            <if test="payOrderType != null">pay_order_type = #{payOrderType},</if>
+            <if test="payStatus != null">pay_status = #{payStatus},</if>
+        </trim>
+        where record_id = #{recordId}
+    </update>
+
+    <delete id="deleteFfwyPayRecordById" parameterType="Long">
+        delete from ffwy_pay_record where record_id = #{recordId}
+    </delete>
+
+    <delete id="deleteFfwyPayRecordByIds" parameterType="String">
+        delete from ffwy_pay_record where record_id in 
+        <foreach item="recordId" collection="array" open="(" separator="," close=")">
+            #{recordId}
+        </foreach>
+    </delete>
+</mapper>

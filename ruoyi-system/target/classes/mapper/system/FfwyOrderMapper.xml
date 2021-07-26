@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.order.FfwyOrderMapper">
+    <resultMap type="FfwyOrder" id="FfwyOrderResult">
+        <result property="orderId" column="order_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="addrId" column="addr_id"/>
+        <result property="orderNumber" column="order_number"/>
+        <result property="createTime" column="create_time"/>
+        <result property="statusId" column="status_id"/>
+        <result property="money" column="money"/>
+        <result property="paymentId" column="payment_id"/>
+        <result property="paymentTime" column="payment_time"/>
+        <result property="shipmentsTime" column="shipments_time"/>
+        <result property="finishTime" column="finish_time"/>
+        <result property="userName" column="user_name"/>
+        <result property="phone" column="phone"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="combomealId" column="combomeal_id"/>
+        <result property="working" column="working"/>
+        <result property="orderType" column="order_type"/>
+        <result property="productName" column="product_name"/>
+        <result property="expireTime" column="expire_time"/>
+        <result property="payment" column="payment"/>
+        <result property="shipments" column="shipments"/>
+        <result property="receiving" column="receiving"/>
+        <result property="evaluate" column="evaluate"/>
+        <result property="after" column="after"/>
+        <result property="price" column="price"/>
+        <result property="number" column="number"/>
+        <result property="skuSpec" column="sku_spec"/>
+        <result property="photo" column="photo"/>
+        <result property="message" column="message"/>
+        <result property="skuDefaultImg" column="sku_default_img"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="freight" column="freight"/>
+        <result property="isDel" column="is_del"/>
+    </resultMap>
+
+    <sql id="selectFfwyOrderVo">
+
+
+                    select freight,order_id, user_id, addr_id, order_number,
+                    create_time,price,is_del,
+                     status_id, money, payment_id, payment_time, shipments_time, finish_time, user_name, phone, shop_id, combomeal_id, working, order_type,product_name,expire_time,message from ffwy_order
+
+
+    </sql>
+
+    <select id="selectFfwyOrderList" parameterType="FfwyOrder"
+            resultMap="FfwyOrderResult">
+        <include refid="selectFfwyOrderVo"/>
+        <where>
+            <if test="orderId != null ">
+                and order_id = #{orderId}
+            </if>
+            <if test="userId != null ">
+                and user_id = #{userId}
+            </if>
+            <if test="addrId != null ">
+                and addr_id = #{addrId}
+            </if>
+            <if test="orderNumber != null  and orderNumber != ''">
+                and order_number = #{orderNumber}
+            </if>
+            <if test="statusId != null ">
+                and status_id = #{statusId}
+            </if>
+            <if test="money != null ">
+                and money = #{money}
+            </if>
+            <if test="paymentId != null ">
+                and payment_id = #{paymentId}
+            </if>
+            <if test="paymentTime != null ">
+                and payment_time = #{paymentTime}
+            </if>
+            <if test="createTime != null ">
+                and create_time = #{createTime}
+            </if>
+            <if test="shipmentsTime != null ">
+                and shipments_time = #{shipmentsTime}
+            </if>
+            <if test="finishTime != null ">
+                and finish_time = #{finishTime}
+            </if>
+            <if test="userName != null  and userName != ''">
+                and user_name like concat('%', #{userName}, '%')
+            </if>
+            <if test="phone != null  and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="shopId != null ">
+                and shop_id = #{shopId}
+            </if>
+            <if test="combomealId != null ">
+                and combomeal_id = #{combomealId}
+            </if>
+            <if test="working != null ">
+                and working = #{working}
+            </if>
+            <if test="orderType != null ">
+                and order_type = #{orderType}
+            </if>
+            <if test="beginTime != null  and endTime != null">
+                and create_time between #{beginTime} and #{endTime}
+            </if>
+            <if test="beginPrice != null  and endPrice != null">
+                and money between #{beginPrice} and #{endPrice}
+            </if>
+            <if test="searchField!=null and searchField!=''">
+                AND
+                CONCAT(order_number,product_name) LIKE CONCAT ('%',
+                #{searchField},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectFfwyOrderById" resultMap="FfwyOrderResult">
+        <include refid="selectFfwyOrderVo"/>
+        <where>
+            order_id = #{orderId}
+        </where>
+    </select>
+
+    <select id="selectFfwyOrderByOrderNumber" resultMap="FfwyOrderResult">
+        <include refid="selectFfwyOrderVo"/>
+        <where>
+            order_number = #{orderNumber}
+            <if test="shopId != null ">
+                and shop_id = #{shopId}
+            </if>
+        </where>
+    </select>
+    <select id="selectFfwyOrderStatusList" resultMap="FfwyOrderResult"
+            parameterType="FfwyOrder">
+
+
+                           SELECT SUM(k.payment) as payment ,SUM(k.shipments) as
+                   shipments,SUM(k.receiving) as receiving,SUM(k.evaluate) as evaluate,SUM(k.after) as after FROM
+                    ( select COUNT(status_id) as payment,0 as shipments,0 as receiving,0 as evaluate, 0 as after
+                     from ffwy_order  WHERE user_id=4   and status_id=1
+                     UNION
+                      select 0 as payment,COUNT(status_id) as shipments,0 as receiving,0 as evaluate, 0 as after
+                     from ffwy_order
+                        WHERE user_id=#{userId}   and status_id=2
+                        UNION
+                              select 0 as payment,0 as shipments,COUNT(status_id) as receiving,0 as evaluate, 0 as after
+                     from ffwy_order
+                        WHERE user_id=#{userId}   and status_id=4
+                    UNION
+                                      select 0 as payment,0 as shipments,0 as receiving,COUNT(status_id) as evaluate, 0 as after
+                     from ffwy_order
+                        WHERE user_id=#{userId}   and status_id=3
+                            UNION
+                                      select 0 as payment,0 as shipments,0 as receiving,0 as evaluate, COUNT(status_id) as after
+                     from ffwy_order
+                        WHERE user_id=#{userId}   and status_id=8
+                    ) as  k
+
+
+    </select>
+
+
+    <insert id="insertFfwyOrder" parameterType="FfwyOrder"
+            useGeneratedKeys="true" keyProperty="orderId">
+        insert into ffwy_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="addrId != null">
+                addr_id,
+            </if>
+            <if test="orderNumber != null">
+                order_number,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="statusId != null">
+                status_id,
+            </if>
+            <if test="money != null">
+                money,
+            </if>
+            <if test="paymentId != null">
+                payment_id,
+            </if>
+            <if test="paymentTime != null">
+                payment_time,
+            </if>
+            <if test="shipmentsTime != null">
+                shipments_time,
+            </if>
+            <if test="finishTime != null">
+                finish_time,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="combomealId != null">
+                combomeal_id,
+            </if>
+            <if test="working != null">
+                working,
+            </if>
+            <if test="orderType != null">
+                order_type,
+            </if>
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="expireTime != null">
+                expire_time,
+            </if>
+            <if test="message != null">
+                message,
+            </if>
+            <if test="freight != null">
+                freight,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="addrId != null">
+                #{addrId},
+            </if>
+            <if test="orderNumber != null">
+                #{orderNumber},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="statusId != null">
+                #{statusId},
+            </if>
+            <if test="money != null">
+                #{money},
+            </if>
+            <if test="paymentId != null">
+                #{paymentId},
+            </if>
+            <if test="paymentTime != null">
+                #{paymentTime},
+            </if>
+            <if test="shipmentsTime != null">
+                #{shipmentsTime},
+            </if>
+            <if test="finishTime != null">
+                #{finishTime},
+            </if>
+            <if test="userName != null">
+                #{userName},
+            </if>
+            <if test="phone != null">
+                #{phone},
+            </if>
+            <if test="shopId != null">
+                #{shopId},
+            </if>
+            <if test="combomealId != null">
+                #{combomealId},
+            </if>
+            <if test="working != null">
+                #{working},
+            </if>
+            <if test="orderType != null">
+                #{orderType},
+            </if>
+            <if test="productName != null">
+                #{productName},
+            </if>
+            <if test="expireTime != null">
+                #{expireTime},
+            </if>
+            <if test="message != null">
+                #{message},
+            </if>
+            <if test="freight != null">
+                #{freight},
+            </if>
+            <if test="price != null">
+                #{price},
+            </if>
+            <if test="isDel != null">
+                #{isDel},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateFfwyOrder" parameterType="FfwyOrder">
+        update ffwy_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="addrId != null">
+                addr_id = #{addrId},
+            </if>
+            <if test="orderNumber != null">
+                order_number = #{orderNumber},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="statusId != null">
+                status_id = #{statusId},
+            </if>
+            <if test="money != null">
+                money = #{money},
+            </if>
+            <if test="paymentId != null">
+                payment_id = #{paymentId},
+            </if>
+            <if test="paymentTime != null">
+                payment_time = #{paymentTime},
+            </if>
+            <if test="shipmentsTime != null">
+                shipments_time = #{shipmentsTime},
+            </if>
+            <if test="finishTime != null">
+                finish_time = #{finishTime},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId},
+            </if>
+            <if test="combomealId != null">
+                combomeal_id = #{combomealId},
+            </if>
+            <if test="working != null">
+                working = #{working},
+            </if>
+            <if test="orderType != null">
+                order_type = #{orderType},
+            </if>
+        </trim>
+        where order_id = #{orderId}
+    </update>
+
+    <update id="deleteFfwyOrderById" parameterType="FfwyOrder">
+        update ffwy_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="isDel != null">
+            is_del = 1,
+        </if>
+        </trim>
+        where order_id = #{orderId}
+    </update>
+
+
+
+    <select id="selectFfwyOrderType"
+            resultType="String">
+        select
+        status_id from ffwy_order
+        <where>
+            <if test="orderId != null ">
+                and order_id = #{orderId}
+            </if>
+        </where>
+    </select>
+    <delete id="deleteFfwyOrderByIds" parameterType="String">
+        delete from ffwy_order where order_id in
+        <foreach item="orderId" collection="array" open="(" separator=","
+                 close=")">
+            #{orderId}
+        </foreach>
+    </delete>
+
+    <select id="selectFfwyOrderUnpaidevaluatedList" resultMap="FfwyOrderResult">
+        <include refid="selectFfwyOrderVo"/>
+        <where>
+            <if test="orderNumber != null ">
+                and order_number = #{orderNumber}
+            </if>
+        </where>
+    </select>
+    <select id="selectFfwyOrderCombomaealUnlockStock"
+            resultMap="FfwyOrderResult">
+        <include refid="selectFfwyOrderVo"/>
+        <where>
+            <if test="orderNumber != null ">
+                and order_number = #{orderNumber}
+            </if>
+        </where>
+    </select>
+    <select id="selectFfwyAddOrderList" parameterType="FfwyOrder"
+            resultMap="FfwyOrderResult">
+
+
+
+
+
+                                            select fo.addr_id, fo.order_number, fo.create_time, fo.status_id, fo.money,
+                                                fo.payment_id, fo.payment_time, fo.shipments_time, fo.finish_time, fo.user_name, fo.phone, fo.shop_id, fo.combomeal_id,
+                                                fo.working, fo.order_type,fo.product_name,fo.expire_time,fca.consignee_address,fo.message,fp.patment_type
+                                                from ffwy_order as fo
+                                          INNER JOIN  ffwy_consignee_addr as fca
+                                          on 	fo.addr_id=fca.consignee_addrid
+                                            INNER JOIN ffwy_payment as fp
+                                            on fo.payment_id=fp.payment_id
+                                         WHERE fo.order_id=#{orderId} and  fo.status_id=#{statusId}
+
+
+
+
+
+    </select>
+
+    <select id="publishEvaluate" resultMap="FfwyOrderResult">
+
+
+
+
+
+                                               SELECT fod.product_photo   FROM ffwy_order_details  fod
+                                        INNER JOIN ffwy_order fo on fod.order_id=fo.order_id
+                                        WHERE fo.user_id=#{userId} and fo.status_id=3 and fo.order_id=#{orderId}
+                                        GROUP  BY fod.order_details_id
+
+
+
+
+
+    </select>
+
+    <select id="selectFfwyOrderListAll" parameterType="FfwyOrder"
+            resultMap="FfwyOrderResult">
+        select fod.order_number order_number,fo.status_id
+        status_id,fo.order_id,fo.user_id,
+        fo.money,fod.create_time,fod.order_status
+        from ffwy_order fo INNER JOIN ffwy_order_details fod on
+        fo.order_id=fod.order_id
+        <where>
+            fo.is_del=0 and fod.is_del=0
+            <if test="orderNumber != null ">
+                and fod.order_number = #{order_number}
+            </if>
+            <if test="orderStatus != null ">
+                and fod.order_status = #{orderStatus}
+            </if>
+            <if test="userId != null ">
+                and fo.user_id = #{userId}
+            </if>
+            <if test="orderId != null ">
+                and fo.order_id = #{orderId}
+            </if>
+            GROUP BY fo.order_id DESC
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.combomeal.FfwyCombomealPhotoMapper">
+    
+    <resultMap type="FfwyCombomealPhoto" id="FfwyCombomealPhotoResult">
+        <result property="photoId"    column="photo_id"    />
+        <result property="combomealId"    column="combomeal_id"    />
+        <result property="photoPath"    column="photo_path"    />
+        <result property="titles"    column="titles"    />
+        <result property="timeing"    column="timeing"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="photoType"    column="photo_type"    />
+        <result property="sort"    column="sort"    />
+    </resultMap>
+
+    <sql id="selectFfwyCombomealPhotoVo">
+        select photo_id, combomeal_id, photo_path, titles, timeing, status, create_time,photo_type ,sort from ffwy_combomeal_photo
+    </sql>
+
+    <select id="selectFfwyCombomealPhotoList" parameterType="FfwyCombomealPhoto" resultMap="FfwyCombomealPhotoResult">
+        <include refid="selectFfwyCombomealPhotoVo"/>
+        <where>  
+            <if test="combomealId != null "> and combomeal_id = #{combomealId}</if>
+            <if test="photoPath != null  and photoPath != ''"> and photo_path = #{photoPath}</if>
+            <if test="titles != null  and titles != ''"> and titles = #{titles}</if>
+            <if test="timeing != null "> and timeing = #{timeing}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="photoType != null  and photoType != ''"> and photo_type = #{photoType}</if>
+            <if test="sort != null"> and sort = #{sort}</if>
+            <if test="beginTime != null and beginTime != ''">
+            and beginTime &gt; #{createTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and endTime &lt; #{createTime}
+            </if>
+        </where>
+        order by timeing
+    </select>
+    
+    <select id="selectFfwyCombomealPhotoById" parameterType="Long" resultMap="FfwyCombomealPhotoResult">
+        <include refid="selectFfwyCombomealPhotoVo"/>
+        where photo_id = #{photoId}
+    </select>
+        
+    <insert id="insertFfwyCombomealPhoto" parameterType="FfwyCombomealPhoto">
+        insert into ffwy_combomeal_photo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="photoId != null">photo_id,</if>
+            <if test="combomealId != null">combomeal_id,</if>
+            <if test="photoPath != null">photo_path,</if>
+            <if test="titles != null">titles,</if>
+            <if test="timeing != null">timeing,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="photoType != null">photo_type,</if>
+            <if test="sort != null">sort,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="photoId != null">#{photoId},</if>
+            <if test="combomealId != null">#{combomealId},</if>
+            <if test="photoPath != null">#{photoPath},</if>
+            <if test="titles != null">#{titles},</if>
+            <if test="timeing != null">#{timeing},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="photoType != null">#{photoType},</if>
+         </trim>
+    </insert>
+    
+    <insert id="insertFfwyCombomealPhotos" parameterType="java.util.List">
+        insert into ffwy_combomeal_photo(combomeal_id,photo_path,titles,timeing,status,create_time,photo_type)
+        values
+        <foreach collection="list" index="index" item="FfwyCombomealPhoto" separator=",">
+            (#{FfwyCombomealPhoto.combomealId},#{FfwyCombomealPhoto.photoPath},#{FfwyCombomealPhoto.titles},#{FfwyCombomealPhoto.timeing},#{FfwyCombomealPhoto.status},NOW(),#{FfwyCombomealPhoto.photoType})
+        </foreach>
+    </insert>
+
+    <update id="updateFfwyCombomealPhoto" parameterType="FfwyCombomealPhoto">
+        update ffwy_combomeal_photo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="combomealId != null">combomeal_id = #{combomealId},</if>
+            <if test="photoPath != null">photo_path = #{photoPath},</if>
+            <if test="titles != null">titles = #{titles},</if>
+            <if test="timeing != null">timeing = #{timeing},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="photoType != null">photo_type = #{photoType},</if>
+        </trim>
+        where photo_id = #{photoId}
+    </update>
+
+    <delete id="deleteFfwyCombomealPhotoById" parameterType="Long">
+        delete from ffwy_combomeal_photo where photo_id = #{photoId}
+    </delete>
+
+    <delete id="deleteFfwyCombomealPhotocIds">
+        delete from ffwy_combomeal_photo where combomeal_id = #{combomealId} and Photo_type =#{photoType}
+    </delete>
+
+    <delete id="deleteFfwyPhotos" parameterType="String">
+        DELETE FROM ffwy_combomeal_photo WHERE photo_path = #{path}
+    </delete>
+
+    <delete id="deleteFfwyCombomealPhotoByIds" parameterType="String">
+        delete from ffwy_combomeal_photo where photo_id in 
+        <foreach item="photoId" collection="array" open="(" separator="," close=")">
+            #{photoId}
+        </foreach>
+    </delete>
+</mapper>

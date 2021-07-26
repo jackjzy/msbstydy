@@ -1,0 +1,164 @@
+alipay:
+    config:
+        url: https://openapi.alipay.com/gateway.do
+        appId: 2021002152641027
+        privateKey: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDiLNTrI4Be/j3gIM5YVjCMMMJcPiudvyKtJVOiMCHDS4l/UeM6pLaHc2Cq55vRzo+yVfPlzpKsY+Shf1AVIN2C37pu9yDKNtGuEYHDmIUkCiyLG8UZLuaMwW4lHf5fv0e/zzqiTvecFmSMiipKaTf3691LFD1V6Z+zoJeBUPvxTCM4EPwrDKwCI/oq8NdbBxSJ5bUEeacNzsx7woJOhp9jtiDB2Qai2vYTyl+fFTVvWDusfyaFZWQEa1KqVUeyUaw+9m2TEkY9oIJtQHqr3V95qerYvFAK10x04g+KGVaHKDl/1SeCf0FKFW+n2ieH6N7/cItLcHmyeWghxNlYBUbXAgMBAAECggEAAd+7N+OIacEThCrhasv0BQVWZutA80KlJ+gaREq/zN1wWzSzfEXnGUI0d9YJbXiXqjOaHLpUbsc5GrlyUWp/S1lNMyQrCmHf5OBSQeuelsjay6BERswjruDfZ8FS3To5fvZZlwSueoWY+a0fYpRymUREBh45z99qqlNXTgP8wmgKGdDYYuWImcOJHoR9h1sCOn2zHAy62GtUtI6ijKifre5nxgx9lS9KqIuERUM1KXtq8XR154j3g3SwryFy6K41/JqR6mKuSRQIj7aTKznyYR5ISYNuM2s0SAQYOViBgo1fqgT3mx/FSqtQo3nnD6P7ez1pl7ABwVtPHY3YTJ1doQKBgQDzZ7NGPG88W0MD8aGikOSmx1cCLUhp1Uj5Dxqnfy0tLroFxnd35Smbo8bfu1VtwLEoLIBjE7bAetUZrA1zw8BvaPHh1a6UlBjpEGqnzkyLyd77dipMo2Rciu728rhIvpP6VFQtU8Z75pj/wl3uOFeL9RTBQwCngEbynb5rFtscZwKBgQDt4ORzlCIm6FjEOX5UcyInRxHzjE6Ez8bT8twizdp3IZ17aoUXJQApAwZqTos/k/pSvCaq7jT7B16GZXdtF/+3B7rBCQMzbQh55QV/Ckym3iee3M9v6Oh4iC5i36OY1dWtThgE+6CH5GDyln9FUATF+H5IzqMAOi52/p9AToX8EQKBgC9gO9Cr6qrAyKZ33ZIayaZ8nj7aOYH/9ZgkjHeVlWF5+tMs8gvwGs0kb40UlWgrXVAIeWTPbX7BacD5cBTcQRRuRMZEJRreSIr0mw3WZae/vxsKwOjx1JL+p8yBKcVe8saCq2+3IqbzF0yQtF+tr7yaE1QaioIPwb9vXKTTagp5AoGBAJKhxHDyaTLumnkqr5LC/dSUXJ5yaJw5r+hKliPmHLq+v+KpwKyJpFWjhbrV+8QPJYkGbheDiqkK29ughEN9PaXHX/lJ4u06UrVA1WiAIsvhuS6WElB7k4FpAJ72GFRHy9VuhCPeMBBUWOZwmrdRIgAes0mSBqxHMQks32G2haThAoGBAKausKZOnCwWkJq6n6Yv0AjV89FpZnxdb+svI1/zI+e+WdW4qcwb/XKdcBb1WYpMlCe4JtFWYSRSV8ei/M3g9vszyaFo+2z1iaLHf+UF0vhTrrXtHyrQ/xhxMCOZE/rRFRwEqLPsa2P1qp+HCKvCATE+lXdtqHNORouE085gurtr
+        pubKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgXA/T4ZIpwXJHFuz4AXj3XU3TVhfIgvyccnJGrVirWuidl9n34FnoB6E3unuzSKK8x0mQjZ1z5r+Rggcd70x15UPdKadOdTgelpSUXqx88hG/8l0k94hnXUJCRiDZQZ23767ULMnmQ5dtt/OIL/5L8cc85ILnbpgIdLrL8mbAbfO1Pmb3fKBhxo58Pd4OfvuGVRLh0zSLKjy40t2QrTznCTABk9zLEqdD3GQfM7fIDxYcIZzSqdrA2eppTQHdXBCBMeAlmTtjvRywM3a0vYVdnTNgVtr/GMnxHQ5PCh8tZYp2MicB/6786IKXp9luIbG+hYuaoMnIKIW3hnSRNrx4QIDAQAB
+        charset: UTF-8
+        signType: RSA2
+        notifyUrl: http://23139f2z38.51mypc.cn/app/callBack/aliPay
+        format: json
+
+wxpay:
+    appId: # appid
+    mchId: # 商户号
+    mchKey: # 秘钥
+    notifyUrl: http://127.0.0.1:8080/wxPay/wxPayNotice #微信支付回调地址
+
+sass:
+ #   host: https://openapi.esign.cn #正式环境域名
+    host: https://smlopenapi.esign.cn #沙箱环境域名
+    projectId: 7438866430
+    projectScert: b9f3eb85f1aab0b2df793b09dd2eb45e
+    idNumberOrg: 91110105MA0038GH6Y
+cos:
+    bucketName: ffwy-1305725175
+    secretKey: tc9RUIsAHA3gHelhjc3HxOn1qlW5RjcH
+    secretId: AKIDGKABwTCphzvcMqA2pPjmbQ0MdnhUuLXU
+    prefixUrl: https://ffwy-1305725175.cos.ap-beijing.myqcloud.com/
+#正式目前欠费,先用下面这个
+#cos:
+#    bucketName: ffwy-1300383620
+#    secretKey: ZtHQ5oHo5tqXCbfldS2Lj3A881viJ5Z0
+#    secretId: AKIDXsypcBn58C0by6CYsxiFFzMVNVNzoTKw
+#    prefixUrl: https://ffwy-1300383620.cos.ap-beijing.myqcloud.com/
+
+message:
+    #  短信 SdkAppId，在 短信控制台 添加应用后生成的实际 SdkAppId，示例如1400006666。
+    sdkAppId : 1400520231
+    #  短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，例如：腾讯云，签名信息可登录 短信控制台 查看。 注：国内短信为必填参数。
+    signName : 北京嗅美科技有限公司
+
+#配置环信
+#EN:
+#    appKey: 1105210510094844#feifanzhuangxiu
+#    clientId: YXA6kG5LV7aOTFir27ZsPjCZrA
+#    clientSecret: YXA6bR9QBU2Z6tKJiEQk-3t-Cgq-Tqw
+#配置环信
+EN:
+    appKey: 1105210510094844#decoration
+    clientId: YXA6hkjfGA3aRQqhNwSH564xxg
+    clientSecret: YXA6dhPXBkOpQv9HzzbUkMTO_Wsso-k
+    orgName: 1105210510094844
+    appName: decoration
+    apiUrl: http://a31.easemob.com
+    endNum: 3
+
+
+
+# 数据源配置
+spring:
+    #修改视频流的大小
+    servlet:
+        multipart:
+            max-file-size: 1024MB
+            max-request-size: 1024MB
+    # redis 配置
+    redis:
+        host: 152.136.100.173
+        port: 6379
+        # 数据库索引
+        database: 0
+        # 密码
+        password:
+        #    password: QianTaiKeJi20151qaz!QAZ
+        # 连接超时时间
+        timeout: 20s
+
+        lettuce:
+            pool:
+                # 连接池中的最小空闲连接
+                min-idle: 0
+                # 连接池中的最大空闲连接
+                max-idle: 8
+                # 连接池的最大数据库连接数
+                max-active: 8
+                # #连接池最大阻塞等待时间（使用负值表示没有限制）
+                max-wait: -1ms
+        #es配置
+    elasticsearch:
+        rest:
+            uris: 152.136.100.173:9200
+        # RabbitMQ配置
+    rabbitmq:
+        #    host: 152.136.100.173
+        host: 152.136.100.173
+        port: 5672
+
+        virtual-host: / # 虚拟主机配置
+        publisher-returns: true  # 开启发送端消息抵达Queue确认
+        publisher-confirms: true
+        template:
+            mandatory: true  # 只要消息抵达Queue，就会异步发送优先回调returnfirm
+        listener:
+            simple:
+                acknowledge-mode: manual  # 手动ack消息，不使用默认的消费端确认
+                concurrency: 1 #指定最小的消费者数量
+                max-concurrency: 1 #指定最大的消费者数量
+    #数据库配置
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        druid:
+            # 主库数据源
+            master:
+#                url: jdbc:mysql://www.wemem.com:3306/ffwy_decorate?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT&autoReconnect=true
+                url: jdbc:mysql://www.wemem.com:3306/ffwy_decorate?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+                username: wmoa
+                password: wmoa2019@
+            # 从库数据源
+            slave:
+                # 从数据源开关/默认关闭
+                enabled: false
+                url:
+                username:
+                password:
+            # 初始连接数
+            initialSize: 5
+            # 最小连接池数量
+            minIdle: 10
+            # 最大连接池数量
+            maxActive: 20
+            # 配置获取连接等待超时的时间
+            maxWait: 60000
+            # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+            timeBetweenEvictionRunsMillis: 60000
+            # 配置一个连接在池中最小生存的时间，单位是毫秒
+            minEvictableIdleTimeMillis: 300000
+            # 配置一个连接在池中最大生存的时间，单位是毫秒
+            maxEvictableIdleTimeMillis: 900000
+            # 配置检测连接是否有效
+            validationQuery: SELECT 1 FROM DUAL
+            testWhileIdle: true
+            testOnBorrow: false
+            testOnReturn: false
+            webStatFilter:
+                enabled: true
+            statViewServlet:
+                enabled: true
+                # 设置白名单，不填则允许所有访问
+                allow:
+                url-pattern: /druid/*
+                # 控制台管理用户名和密码
+                login-username: systemmanagement
+                login-password: 123456
+            filter:
+                stat:
+                    enabled: true
+                    # 慢SQL记录
+                    log-slow-sql: true
+                    slow-sql-millis: 1000
+                    merge-sql: true
+                wall:
+                    config:
+                        multi-statement-allow: true

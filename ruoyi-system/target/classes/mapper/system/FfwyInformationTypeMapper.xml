@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FfwyInformationTypeMapper">
+    
+    <resultMap type="FfwyInformationType" id="FfwyInformationTypeResult">
+        <result property="typeId"    column="type_id"    />
+        <result property="typeName"    column="type_name"    />
+    </resultMap>
+
+    <sql id="selectFfwyInformationTypeVo">
+        select type_id, type_name from ffwy_information_type
+    </sql>
+
+    <select id="selectFfwyInformationTypeList" parameterType="FfwyInformationType" resultMap="FfwyInformationTypeResult">
+        <include refid="selectFfwyInformationTypeVo"/>
+        <where>  
+            <if test="typeName != null  and typeName != ''"> and type_name like concat('%', #{typeName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyInformationTypeById" parameterType="Long" resultMap="FfwyInformationTypeResult">
+        <include refid="selectFfwyInformationTypeVo"/>
+        where type_id = #{typeId}
+    </select>
+        
+    <insert id="insertFfwyInformationType" parameterType="FfwyInformationType">
+        insert into ffwy_information_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typeId != null">type_id,</if>
+            <if test="typeName != null">type_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="typeId != null">#{typeId},</if>
+            <if test="typeName != null">#{typeName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyInformationType" parameterType="FfwyInformationType">
+        update ffwy_information_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="typeName != null">type_name = #{typeName},</if>
+        </trim>
+        where type_id = #{typeId}
+    </update>
+
+    <delete id="deleteFfwyInformationTypeById" parameterType="Long">
+        delete from ffwy_information_type where type_id = #{typeId}
+    </delete>
+
+    <delete id="deleteFfwyInformationTypeByIds" parameterType="String">
+        delete from ffwy_information_type where type_id in 
+        <foreach item="typeId" collection="array" open="(" separator="," close=")">
+            #{typeId}
+        </foreach>
+    </delete>
+</mapper>

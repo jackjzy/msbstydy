@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.back.mapper.FfwyAboutMapper">
+    
+    <resultMap type="FfwyAbout" id="FfwyAboutResult">
+        <result property="appId"    column="app_id"    />
+        <result property="appName"    column="app_name"    />
+        <result property="appPhone"    column="app_phone"    />
+        <result property="appEmail"    column="app_email"    />
+        <result property="appLogo"    column="app_logo"    />
+        <result property="appMsg"    column="app_msg"    />
+        <result property="appCopyright"    column="app_copyright"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectFfwyAboutVo">
+        select app_id, app_name, app_phone, app_email, app_logo, app_msg, app_copyright, create_time, update_time from ffwy_about
+    </sql>
+
+    <select id="selectFfwyAboutList" parameterType="FfwyAbout" resultMap="FfwyAboutResult">
+        <include refid="selectFfwyAboutVo"/>
+        <where>  
+            <if test="appName != null  and appName != ''"> and app_name like concat('%', #{appName}, '%')</if>
+            <if test="appPhone != null  and appPhone != ''"> and app_phone = #{appPhone}</if>
+            <if test="appEmail != null  and appEmail != ''"> and app_email = #{appEmail}</if>
+            <if test="appLogo != null  and appLogo != ''"> and app_logo = #{appLogo}</if>
+            <if test="appMsg != null  and appMsg != ''"> and app_msg = #{appMsg}</if>
+            <if test="appCopyright != null  and appCopyright != ''"> and app_copyright = #{appCopyright}</if>
+        </where>
+    </select>
+    
+    <select id="selectFfwyAboutById" parameterType="Long" resultMap="FfwyAboutResult">
+        <include refid="selectFfwyAboutVo"/>
+        where app_id = #{appId}
+    </select>
+        
+    <insert id="insertFfwyAbout" parameterType="FfwyAbout" useGeneratedKeys="true" keyProperty="appId">
+        insert into ffwy_about
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appName != null">app_name,</if>
+            <if test="appPhone != null">app_phone,</if>
+            <if test="appEmail != null">app_email,</if>
+            <if test="appLogo != null">app_logo,</if>
+            <if test="appMsg != null">app_msg,</if>
+            <if test="appCopyright != null">app_copyright,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="appName != null">#{appName},</if>
+            <if test="appPhone != null">#{appPhone},</if>
+            <if test="appEmail != null">#{appEmail},</if>
+            <if test="appLogo != null">#{appLogo},</if>
+            <if test="appMsg != null">#{appMsg},</if>
+            <if test="appCopyright != null">#{appCopyright},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyAbout" parameterType="FfwyAbout">
+        update ffwy_about
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="appName != null">app_name = #{appName},</if>
+            <if test="appPhone != null">app_phone = #{appPhone},</if>
+            <if test="appEmail != null">app_email = #{appEmail},</if>
+            <if test="appLogo != null">app_logo = #{appLogo},</if>
+            <if test="appMsg != null">app_msg = #{appMsg},</if>
+            <if test="appCopyright != null">app_copyright = #{appCopyright},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where app_id = #{appId}
+    </update>
+
+    <delete id="deleteFfwyAboutById" parameterType="Long">
+        delete from ffwy_about where app_id = #{appId}
+    </delete>
+
+    <delete id="deleteFfwyAboutByIds" parameterType="String">
+        delete from ffwy_about where app_id in 
+        <foreach item="appId" collection="array" open="(" separator="," close=")">
+            #{appId}
+        </foreach>
+    </delete>
+</mapper>

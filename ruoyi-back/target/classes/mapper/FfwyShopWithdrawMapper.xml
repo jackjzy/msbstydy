@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.back.mapper.FfwyShopWithdrawMapper">
+
+    <resultMap type="FfwyShopWithdraw" id="FfwyShopWithdrawResult">
+        <result property="withdrawId"    column="withdraw_id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="bankCard"    column="bank_card"    />
+        <result property="withdrawNum"    column="withdraw_num"    />
+        <result property="transferAccount"    column="transfer_account"    />
+        <result property="applyStatus"    column="apply_status"    />
+        <result property="refuseReason"    column="refuse_reason"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectFfwyShopWithdrawVo">
+        select
+            a.withdraw_id
+            , a.shop_id
+            , a.bank_card
+            , a.withdraw_num
+            , a.transfer_account
+            , a.apply_status
+            , a.refuse_reason
+            , a.create_time
+            , a.create_by
+            , a.update_time
+            , a.update_by
+            ,s.shop_name as "shopName"
+        from ffwy_shop_withdraw a
+        left join ffwy_shop s on s.shop_id = a.shop_id
+    </sql>
+
+    <select id="selectFfwyShopWithdrawList" parameterType="FfwyShopWithdraw" resultMap="FfwyShopWithdrawResult">
+        <include refid="selectFfwyShopWithdrawVo"/>
+        <where>
+            <if test="shopId != null "> and a.shop_id like concat('%', #{shopId}, '%')</if>
+            <if test="bankCard != null  and bankCard != ''"> and a.bank_card = #{bankCard}</if>
+            <if test="withdrawNum != null "> and a.withdraw_num = #{withdrawNum}</if>
+            <if test="transferAccount != null  and transferAccount != ''"> and a.transfer_account = #{transferAccount}</if>
+            <if test="applyStatus != null  and applyStatus != ''"> and a.apply_status = #{applyStatus}</if>
+            <if test="shopName != null  and shopName != ''"> and s.shop_name = #{shopName}</if>
+            <if test="beginTime != null ">
+                and a.create_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null ">
+                and a.create_time &lt;= #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectFfwyShopWithdrawById" parameterType="Long" resultMap="FfwyShopWithdrawResult">
+        <include refid="selectFfwyShopWithdrawVo"/>
+        where a.withdraw_id = #{withdrawId}
+    </select>
+
+    <insert id="insertFfwyShopWithdraw" parameterType="FfwyShopWithdraw">
+        insert into ffwy_shop_withdraw
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="shopId != null">shop_id,</if>
+            <if test="bankCard != null">bank_card,</if>
+            <if test="withdrawNum != null">withdraw_num,</if>
+            <if test="transferAccount != null">transfer_account,</if>
+            <if test="applyStatus != null">apply_status,</if>
+            <if test="refuseReason != null">refuse_reason,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+            <if test="shopId != null">#{shopId},</if>
+            <if test="bankCard != null">#{bankCard},</if>
+            <if test="withdrawNum != null">#{withdrawNum},</if>
+            <if test="transferAccount != null">#{transferAccount},</if>
+            <if test="applyStatus != null">#{applyStatus},</if>
+            <if test="refuseReason != null">#{refuseReason},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFfwyShopWithdraw" parameterType="FfwyShopWithdraw">
+        update ffwy_shop_withdraw
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null">shop_id = #{shopId},</if>
+            <if test="bankCard != null">bank_card = #{bankCard},</if>
+            <if test="withdrawNum != null">withdraw_num = #{withdrawNum},</if>
+            <if test="transferAccount != null">transfer_account = #{transferAccount},</if>
+            <if test="applyStatus != null">apply_status = #{applyStatus},</if>
+            <if test="refuseReason != null">refuse_reason = #{refuseReason},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where withdraw_id = #{withdrawId}
+    </update>
+
+    <delete id="deleteFfwyShopWithdrawById" parameterType="Long">
+        delete from ffwy_shop_withdraw where withdraw_id = #{withdrawId}
+    </delete>
+
+    <delete id="deleteFfwyShopWithdrawByIds" parameterType="String">
+        delete from ffwy_shop_withdraw where withdraw_id in
+        <foreach item="withdrawId" collection="array" open="(" separator="," close=")">
+            #{withdrawId}
+        </foreach>
+    </delete>
+</mapper>
